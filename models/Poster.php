@@ -11,7 +11,7 @@
  *
  * @package Posters
  */
-class Posters extends Omeka_Record_AbstractRecord
+class Poster extends Omeka_Record_AbstractRecord
 {
     public $title;
     public $description;

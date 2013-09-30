@@ -11,7 +11,7 @@
  *
  * @package PosterItems
  */
-class PosterItems extend Omeka_Record_AbstractRecord
+class PosterItems extends Omeka_Record_AbstractRecord
 {
     public $annotation;
     public $poster_id;

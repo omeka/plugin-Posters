@@ -6,7 +6,8 @@
  * @copyright Center for History and New Media, 2010
  * @package Posters
  */
-
+define('POSTER_PAGE_PATH','posters/');
+define('POSTER_PAGE_TITLE', 'Posters');
  /**
   * Posters plugin class
   *
@@ -25,6 +26,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     // Define Filters
     protected $_filters = array(
         'admin_navigation_main',
+         'guest_user_widgets'  
     );
 
     /**
@@ -51,6 +53,9 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
                 `ordernum` INT NOT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;"
         );
+        
+        set_option('poster_page_path', POSTER_PAGE_PATH);
+        set_option('poster_page_title',POSTER_PAGE_TITLE);
     } 
 
     /**
@@ -69,7 +74,8 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     }
     public function hookConfigForm()
     {
-        echo "<div='form'>admin config form</div>";
+        include 'forms/config_form.php';
+       
     }
     public function filterAdminNavigationMain($nav)
     {
@@ -79,5 +85,16 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
             //'resource' => 'browse',
         );
         return $nav;
+    }
+    
+    public function filterGuestUserWidgets($widgets)
+    {   $widget = array('label' => __('Posters'));
+        $browse = url('posters/index/browse');
+        $html = "<ul>"
+              . "<li><a href='{$browse}'>".__("Browse Posters")."</a></li>"              
+              . "</ul>";
+        $widget['content'] = $html;
+        $widgets[] = $widget;
+        return $widgets;
     }
 }

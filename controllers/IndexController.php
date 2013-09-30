@@ -13,9 +13,16 @@
  */
 class Posters_IndexController extends Omeka_Controller_AbstractActionController
 {
+    public function init()
+    {
+         $this->_helper->db->setDefaultModelName('Poster');
+    }
     public function indexAction()
     {
-        //$this->_helper->redirector('browse');
-        //return;
+        $this->_helper->redirector('browse','index');
+    }
+    
+    public function browseAction() {
+        parent::browseAction();
     }
 }
