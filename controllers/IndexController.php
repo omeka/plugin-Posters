@@ -1,2 +1,21 @@
 <?php
+/**
+ * Poster Builder 
+ *
+ * @copyright Copyright 2008-2013 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ */
 
+/**
+ * Poster index controller class
+ *
+ * @package Posters
+ */
+class Posters_IndexController extends Omeka_Controller_AbstractActionController
+{
+    public function indexAction()
+    {
+        //$this->_helper->redirector('browse');
+        //return;
+    }
+}
