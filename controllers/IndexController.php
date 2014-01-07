@@ -30,8 +30,10 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
         parent::editAction();
     }
     public function addAction() {
-        parent::addAction();
-        $this->view->form = $this->_getForm(array('poster' => 'poster-form'));
+        //parent::addAction();
+        
+        $this->view->form = $this->_getForm(array('id' => 'poster-form'));
+        
     }
     
     protected function _getForm($options)
@@ -52,7 +54,7 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
             )
          );
         
-        
+        $form->addElement('submit','submit', array('label'=> __('Save poster')));
         return $form;
     }
 }

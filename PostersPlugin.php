@@ -8,6 +8,13 @@
  */
 define('POSTER_PAGE_PATH','posters/');
 define('POSTER_PAGE_TITLE', 'Posters');
+define('POSTER_DISCLAIMER','This page contains user generated content 
+                            and does not necessarily reflect the 
+                            opinions of this website.
+                            For more information please refer to our 
+                            terms of service and conditions.
+                            If you would like to report the content
+                            of this as objectionable, Please contact us.');
  /**
   * Posters plugin class
   *
@@ -56,6 +63,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         
         set_option('poster_page_path', POSTER_PAGE_PATH);
         set_option('poster_page_title',POSTER_PAGE_TITLE);
+        set_option('poster_disclaimer', POSTER_DISCLAIMER);
     } 
 
     /**
@@ -64,13 +72,20 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     public function hookUninstall()
     {
         $db = get_db();
-        $db->query("DROP TABLE IF EXISTS `{P$db->prefix}posters`");
-        $db->query("DROP TABLE IF EXISTS `{$db->prefix}posters_items`");        
+        $db->query("DROP TABLE IF EXISTS `{$db->prefix}posters`");
+        $db->query("DROP TABLE IF EXISTS `{$db->prefix}posters_items`"); 
+        
+        delete_option('poster_page_path');
+        delete_option('poster_page_title');
+        delete_option('poster_disclaimer');
     }
 
-    public function hookConfig()
+    public function hookConfig($args)
     {
-
+        $post = $args['post'];
+        set_option('poster_page_path', $post['poster_page_path']);
+        set_option('poster_page_title',$post['poster_page_title']);
+        set_option('poster_disclaimer', $post['poster_disclaimer']);
     }
     public function hookConfigForm()
     {
