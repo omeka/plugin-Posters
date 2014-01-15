@@ -105,7 +105,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     public function filterGuestUserWidgets($widgets)
     {   $widget = array('label' => __('Posters'));
         $browse = url('posters/index/browse');
-        $create = url('posters/index/add');
+        $create = url('posters/index/new');
         $html = "<ul>"
               . "<li><a href='{$browse}'>".__("Browse Posters")."</a></li>"
               . "<li><a href='{$create}'>".__("New Poster")."</li>"            

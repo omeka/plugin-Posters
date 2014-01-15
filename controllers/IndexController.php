@@ -13,9 +13,12 @@
  */
 class Posters_IndexController extends Omeka_Controller_AbstractActionController
 {
+    const UNTITLED_POSTER = 'Untitled';
+
     public function init()
     {
-         $this->_helper->db->setDefaultModelName('Poster');
+       $this->_helper->db->setDefaultModelName('Poster');
+       $this->_currentUser = Zend_Registry::get('bootstrap')->getResource('CurrentUser');
     }
     public function indexAction()
     {
@@ -27,34 +30,37 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
     }
     
     public function editAction() {
-        parent::editAction();
+       //get the poster object
+        $poster = $this->_helper->db->findById(null, 'Poster');
+       
+        //retrieve public items 
+        $items = "list of public items";
+        $this->view->assign(compact('poster','items'));
     }
     public function addAction() {
-        //parent::addAction();
-        
-        $this->view->form = $this->_getForm(array('id' => 'poster-form'));
-        
+         
     }
-    
-    protected function _getForm($options)
-    {
-        $form = new Omeka_Form($options);
-        $form->addElement('text','comment-title',
+    public function newAction(){
+
+        $poster = new Poster();
+        $poster->title = self::UNTITLED_POSTER;
+        $poster->user_id = 1;//$this->_currentUser->id;
+        $poster->description = '';
+        $poster->date_created = date('Y-m-d H:i:s', time());
+        $poster->save();
+        echo "HERE!!!"; 
+        //Set the new poster id for discard
+        $_SESSION['new_poster_id'] = $poster->id;
+         
+
+        return $this->_helper->redirector->gotoRoute(
             array(
-                'label' => __("Title of Poster"),
-                'class' => 'textinput',
-                'required' => true
-            )
+                'module' => 'posters',
+                'action' => 'edit',
+                'id'     => $poster->id
+            ),
+            'default'
         );
-        
-        $form->addElement('textarea', 'comment',
-            array(
-                'label' => __('Comment'),
-                'class' => 'textinput'
-            )
-         );
-        
-        $form->addElement('submit','submit', array('label'=> __('Save poster')));
-        return $form;
+
     }
 }
