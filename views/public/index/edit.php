@@ -12,7 +12,7 @@
                     <label for="poster-title">Title of Poster:</label>
                     <?php echo $this->formText('title', $poster->title, array('id'=>'poster-title')); ?>
                 </div>
-                 <?php print_r($items->id); ?>
+                
                 <div class="poster-field">
                     <label for="poster-description">Description:</label>
                     <?php echo $this->formTextarea('description', $poster->description, 

@@ -12,7 +12,7 @@ class Table_Poster extends Omeka_Db_Table
         return $this->fetchObjects($select);
     }
     
-    public function findBy($params)
+    public function findBy($params, $limit = null, $page = null)
     {
         $select = $this->getSelectForFindBy($params);
 
