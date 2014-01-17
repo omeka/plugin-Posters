@@ -26,26 +26,8 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
     }
     
     public function browseAction() {
-        //clear the new poster id for discard
-        unset($_SESSION['new_poster_id']);
-        $db = $this->_helper->db->getDb();
-        $requestParams = $this->getRequest()->getParams();
-        $requestParams['page'] = '1';
-        
-        //Make sure we're on the first page if 'page' isn't set.
-        $requestParams['page'] = (int)$requestParams['page'] or $requestParams['page'] = 1;
 
-        $posters = $db->getTable('Poster');//->findBy($requestParams);
-        //var_dump($posters); 
-        $posterCount = $this->_helper->db->getTable('Poster')->count($requestParams);
-        $posterPerPage = 10;//Table_Poster::POSTER_PER_PAGE;
-        
-        /*$this->view->posters = $posters;
-        $this->view->posterCount = $posterCount;
-        $this->view->posterPerPage = 10;
-        $this->view->page = $requestParams['page'];*/
-
-        $this->view->assign(compact('posters','posterCount','posterPerPage','requestParams'));
+        parent::browseAction();
     }
     
     public function editAction() {
@@ -56,8 +38,13 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
         $items = "list of public items";
         $this->view->assign(compact('poster','items'));
     }
-    public function addAction() {
-         
+    public function showAction() {
+        $params = $this->getRequest()->getParams();
+        var_dump($params);
+        $posterTable = $this->_helper->db->getTable('Poster');
+        
+        var_dump($posterTable->findByUserId(current_user())); 
+        //$this->view->poster = $poster;
     }
     public function newAction(){
 
