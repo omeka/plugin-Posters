@@ -18,7 +18,7 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
     public function init()
     {
        $this->_helper->db->setDefaultModelName('Poster');
-       $this->_currentUser = Zend_Registry::get('bootstrap')->getResource('CurrentUser');
+       $this->_currentUser = current_user();
     }
     public function indexAction()
     {
@@ -33,24 +33,23 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
     public function editAction() {
        //get the poster object
         $poster = $this->_helper->db->findById(null, 'Poster');
-       
+        //$this->_verifyAccess($poster,'edit');
         //retrieve public items 
         $items = "list of public items";
         $this->view->assign(compact('poster','items'));
     }
     public function showAction() {
         $params = $this->getRequest()->getParams();
-        var_dump($params);
-        $posterTable = $this->_helper->db->getTable('Poster');
-        
-        var_dump($posterTable->findByUserId(current_user())); 
-        //$this->view->poster = $poster;
+     
+        $poster = $this->_helper->db->findById(null, 'Poster');        
+         
+        $this->view->poster = $poster;
     }
     public function newAction(){
 
         $poster = new Poster();
         $poster->title = self::UNTITLED_POSTER;
-        $poster->user_id = 1;//$this->_currentUser->id;
+        $poster->user_id = $this->_currentUser->id;
         $poster->description = '';
         $poster->date_created = date('Y-m-d H:i:s', time());
         $poster->save();
@@ -91,8 +90,45 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
                 ),
                 'default'
             );
-        /*} else {
-            $this->_helper->redirector->gotoRoute(array(), $_SERVER['HTTP_REFERER']);
-        }*/
+    }
+    
+    public function deleteAction()
+    {
+        parent::deleteAction();
+    }
+    
+    public function discardAction()
+    {
+        if (isset($_SESSION['new_poster_id'])) {
+            // if the poster was just created and 
+            // not yet saved by the edit  form,
+            // then delete it.
+            $poster = $this->_helper->db->findById($_SESSION['new_poster_id'], 'Poster');
+            //check to make sure the poster belongs to the logged in user
+          $this->_verifyAccess($poster, 'delete');
+            //delete the poster
+            $poster->delete();
+            //Clear the new Poster id for discard
+            unset($_SESSION['new_poster_id']);
+        }
+        
+        if(is_admin_theme()) {
+            $this->_helper->redirector->gotoRoute(array('action' => 'browse'), 'default');
+        } else {
+            $this->_helper->redirector->gotoUrl('guest-user/user/me');
+        }
+       
+    }
+    
+    protected function _verifyAccess($poster, $action)
+    {
+        /*
+         * Blog access for users who didn't make the poster,
+         * or people who don't have permission.
+         */
+        if($poster->user_id != $this->_currentUser->id 
+                and !$this->_helper->acl->isAllowed($action. 'Any')) {
+            throw new Omeka_Controller_Exception_403;
+        }
     }
 }

@@ -1,6 +1,14 @@
 <?php
-$pageTitle = html_escape(get_option('poster_page_title'));
-echo head(array('title' => $pageTitle)); ?>
+$pageTitle = 'Poster: &quot;' . html_escape($poster->title) . '&quot;';
+echo head(array('title' => $pageTitle)); 
+?>
 
-<?php var_dump($posters); ?>
-<?echo foot(); ?>
+<div id="primary">
+    <h1><?php echo $pageTitle; ?></h1>
+    <div id="poster">
+        <div id="poster-info">
+            <?php echo $poster->description; ?>
+        </div>
+    </div>
+</div>
+<?php echo foot(); ?>

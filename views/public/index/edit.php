@@ -56,11 +56,45 @@
 
                     <div id="poster-help">
                             <p><a href="<?php echo html_escape(url(array('action'=>'help'), 'default')); ?>" class="poster-help-link">Help</a></p>
-                        </div>
-
-                </div>
-            
+                    </div>
+                </div>            
             </form>
+            
+            
+            <div id="attachment-panel" title="<?php echo html_escape(__('Attach an Item')); ?>">
+    <div id="item-form">
+        <button type="button" id="revert-selected-item"><?php echo __('Revert to Selected Item'); ?></button>
+        <button type="button" id="show-or-hide-search" class="show-form blue">
+            <span class="show-search-label"><?php echo __('Show Search Form'); ?></span>
+            <span class="hide-search-label"><?php echo __('Hide Search Form'); ?></span>
+        </button>
+        <a href="<?php echo url('exhibit-builder/items/browse'); ?>" id="view-all-items" class="green button"><?php echo __('View All Items'); ?></a>
+        <div id="page-search-form" class="container-twelve">
+        <?php
+            $action = url(array('module' => 'exhibit-builder',
+                'controller' => 'items', 'action' => 'browse'), 'default', array(), true);
+            echo items_search_form(array('id' => 'search'), $action);
+        ?>
+        </div>
+        <div id="item-select"></div>
+    </div>
+    <div id="attachment-options">
+        <button type="button" id="change-selected-item"><?php echo __('Change Selected Item'); ?></button>
+        <div class="options">
+            <div id="attachment-item-options"></div>
+            <div class="item-caption">
+                <p class="direction"><?php echo __('Provide a caption.'); ?></p>
+                <div class="inputs">
+                    <?php echo $this->formTextarea('caption', '', array('rows' => 3, 'id' => 'attachment-caption')); ?>
+                </div>
+            </div>
+        </div>
+        <div id="attachment-save">
+            <button type="submit" id="apply-attachment"><?php echo __('Apply'); ?></button>
+        </div>
+    </div>
+    <div id="attachment-panel-loading"><span class="spinner"></span></div>
+</div>
         </div>
     </div>
 </div>

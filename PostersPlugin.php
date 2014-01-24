@@ -29,6 +29,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         'uninstall',
         'config',
         'config_form',
+        'define_acl',
     );
     // Define Filters
     protected $_filters = array(
@@ -113,5 +114,14 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         $widget['content'] = $html;
         $widgets[] = $widget;
         return $widgets;
+    }
+    
+    public function hookDefineAcl($args)
+    {
+        $acl = $args['acl'];
+        
+        $acl->addResource('Posters_Poster');
+        $acl->allow(null, 'Posters_Poster', array('edit', 'add', 'delete'));
+        
     }
 }
