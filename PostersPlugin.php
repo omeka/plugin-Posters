@@ -8,13 +8,7 @@
  */
 define('POSTER_PAGE_PATH','posters/');
 define('POSTER_PAGE_TITLE', 'Posters');
-define('POSTER_DISCLAIMER','This page contains user generated content 
-                            and does not necessarily reflect the 
-                            opinions of this website.
-                            For more information please refer to our 
-                            terms of service and conditions.
-                            If you would like to report the content
-                            of this as objectionable, Please contact us.');
+define('POSTER_DISCLAIMER','This page contains user generated content and does not necessarily reflect the opinions of this website. For more information please refer to our terms of service and conditions. If you would like to report the content of this as objectionable, Please contact us.');
  /**
   * Posters plugin class
   *
@@ -30,6 +24,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         'config',
         'config_form',
         'define_acl',
+        'define_routes',
     );
     // Define Filters
     protected $_filters = array(
@@ -98,15 +93,17 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         $nav[] = array(
             'label'    => __('Posters'),
             'uri'      => url('posters'),
-            //'resource' => 'browse',
+           // 'resource' => 'edit',
         );
         return $nav;
     }
     
     public function filterGuestUserWidgets($widgets)
-    {   $widget = array('label' => __('Posters'));
-        $browse = url('posters/index/browse');
-        $create = url('posters/index/new');
+    { 
+        $bp = get_option('poster_page_path');
+        $widget = array('label' => __('Posters'));
+        $browse = url("{$bp}/browse");
+        $create = url("{$bp}/new");
         $html = "<ul>"
               . "<li><a href='{$browse}'>".__("Browse Posters")."</a></li>"
               . "<li><a href='{$create}'>".__("New Poster")."</li>"            
@@ -123,5 +120,47 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         $acl->addResource('Posters_Poster');
         $acl->allow(null, 'Posters_Poster', array('edit', 'add', 'delete'));
         
+    }
+    public function hookDefineRoutes($args)
+    {
+        if (is_admin_theme()) {
+            return;
+        }
+
+       $bp = get_option('poster_page_path');
+       $router = $args['router'];
+       //browse
+       $router->addRoute(
+           $bp,
+           new Zend_Controller_Router_Route(
+               "$bp/:action/:id/*",
+               array(
+                   'module' => 'posters',
+                   'controller' => 'posters',
+                   'action'     => 'index',
+                   'id'         => '\d+'
+               )));
+//       $router->addRoute(
+//           "{$bp}_show",
+//           new Zend_Controller_Router_Route(
+//               "$bp/:action/id/d+",
+//               array(
+//                   'module' => 'posters',
+//                   'controller' => 'posters',
+//                   'action'     => 'show',
+//                   'id'         => '/d+',
+//               )));
+//       $router->addRoute(
+//           $bp,
+//           new Zend_Controller_Router_Route(
+//               "$bp/:action/id/d+",
+//               array(
+//                   'module' => 'posters',
+//                   'controller' => 'posters',
+//                   'action'     => 'edit',
+//                   'id'         => '/d+',
+//               )));
+//
+
     }
 }
