@@ -12,5 +12,4 @@ class Table_Poster extends Omeka_Db_Table
         return $this->fetchObjects($select);
     }
     
-
-}
+   }

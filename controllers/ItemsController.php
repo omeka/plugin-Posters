@@ -21,10 +21,10 @@ class Posters_ItemsController extends Omeka_Controller_AbstractActionController
         }
 
         //Must be logged in to view items specific to certain users
-        if ($this->_getParam('user') && !$this->_helper->acl->isAllowed('browse', 'users')) {
+        /*if ($this->_getParam('user') && !$this->_helper->acl->isAllowed('browse', 'users')) {
             $this->_helper->flashMessenger('May not browse by specific users');
             $this->_setParam('user',null);
-        }
+        }*/
 
         parent::browseAction();
     }

@@ -35,7 +35,8 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $poster = $this->_helper->db->findById(null, 'Poster');
         //$this->_verifyAccess($poster,'edit');
         //retrieve public items 
-        $items = "list of public items";
+        $items = $this->_helper->db->getTable()->findByUserId($this->_currentUser->id);
+        //var_dump($items); exit;
         $this->view->assign(compact('poster','items'));
     }
     public function showAction() {
@@ -95,7 +96,10 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     
     public function deleteAction()
     {
-        parent::deleteAction();
+        echo "Delete Action"; exit;
+    }
+    public function helpAction(){
+
     }
     
     public function discardAction()

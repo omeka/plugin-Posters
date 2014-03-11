@@ -18,7 +18,7 @@ echo head(array('title' => $pageTitle)); ?>
                        <th>Title</th>
                        <th>Date Created</th>
                        <th>Description</th>
-                       <th></th>
+                       <th>Created By</th>
                    </tr>
                </thead>
                <tbody>
@@ -27,16 +27,23 @@ echo head(array('title' => $pageTitle)); ?>
                        <tr><td><a href="<?php echo html_escape(url(array('action' => 'show', 'id' => $poster->id),'default')); ?>" 
                                   class="view-poster-link"><?php echo html_escape($poster->title); ?></a>
                                <ul class="action-links group">
-                                   <?php if(is_allowed($poster, 'delete')): ?>
+                                   <?php if(is_allowed('Posters_Poster', 'delete')): ?>
                                    <li> 
-                                       <a href="<?php echo html_escape(url(array('action'=>'delete','id' => $poster->id), 'default')); ?>">Delete</a>
+                                    <a href="<?php echo html_escape(
+                                                    url(
+                                                       array(
+                                                            'action' => 'delete', 
+                                                            'id' => $poster->id),
+                                                   'default')); ?>
+                                     ">Delete</a>
+                                       <?php  //echo link_to('Index','delete', __('Delete'), array('action'=>'delete'));  ?>
                                    </li>
                                    <?php endif; ?>
                                </ul>
                            </td>
                        <td><?php echo html_escape($poster->date_created); ?></td>
                        <td><?php echo html_escape(snippet($poster->description, 0, 50)); ?></td>
-                       <td>Delete</td>
+                       <td><?php echo html_escape($poster->user_id); ?></td>
                        </tr>
                        <?php endforeach;?>
                    
