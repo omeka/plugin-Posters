@@ -16,7 +16,7 @@ queue_js_file('vendor/tiny_mce/tiny_mce');
     <h1><?php echo $pageTitle; ?></h1>
     <div id="poster">
 	    <div id="poster-info">
-            <form action="<?php echo html_escape(url(array('action'=>'save', 'id'=>$poster->id), 'default')); ?>" method="post" accept-charset="utf-8" id="poster-form">
+            <form action="<?php echo html_escape(url(array('action'=>'save', 'id'=>$poster->id), 'posters')); ?>" method="post" accept-charset="utf-8" id="poster-form">
                 <div class="field">
                     <label for="title">Title of Poster:</label>
                     <?php echo $this->formText('title', $poster->title, array('id'=>'title')); ?>
@@ -55,7 +55,8 @@ queue_js_file('vendor/tiny_mce/tiny_mce');
                 </div>
         
                 <div id="submit-poster">
-                    <input type="submit" name="save_poster" value="Save Poster" /> or 
+                <?php echo $this->formSubmit('save_poster',__('Save Poster'), array('class' => 'submit big green button')); ?>
+                    <!--input type="submit" name="save_poster" value="Save Poster" /--> or 
                     <?php if (is_admin_theme()): ?>
                         <a href="<?php echo html_escape(url(array('action'=>'discard'), 'default')); ?>">Discard Changes and Return to Poster Administration</a>
                     <?php else: ?>
@@ -70,12 +71,10 @@ queue_js_file('vendor/tiny_mce/tiny_mce');
                 </div>
             
             </form>
-
             <!-- Hidden div for modal pop-up -->
             <div id="additem-modal">
             <?php if (true): //count($items)):?>
-                 <?php foreach(loop('items') as $item):?>
-                    <?php var_dump($item); ?>
+                 <?php foreach(get_records('Item', array('public' => true)) as $item):?>
                     <div class="additem-item">
                         <div class="additem-image">
                             <?php //var_dump($items); //echo my_omeka_poster_icon_html(); ?>
@@ -83,11 +82,11 @@ queue_js_file('vendor/tiny_mce/tiny_mce');
                         <div class="additem-details">
                             <dl>
                                 <dt>Title:</dt>
-                                <dd><?php //echo metadata($item, array('Dublin Core', 'Title')); ?></dd>
+                                <dd><?php echo metadata($item, array('Dublin Core', 'Title')); ?></dd>
                                 <dt>Description:</dt>
-                                <dd><?php //echo metadata($item, array('Dublin Core', 'Description',array('snippet'=>150))); ?></dd>
+                                <dd><?php echo metadata($item, array('Dublin Core', 'Description')); ?></dd>
                                 <dt>Creator:</dt>
-                                <dd><?php //echo metadata($item,array('Dublin Core', 'Creator')); ?></dd>
+                                <dd><?php echo metadata($item,array('Dublin Core', 'Creator')); ?></dd>
                                 <?php if ($item->annotation): ?>
                                 <dt>My Notes:</dt>
                                 <dd><?php echo $item->annotation; ?></dd>
