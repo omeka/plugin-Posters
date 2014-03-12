@@ -81,22 +81,25 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $poster->description = $params['description'];
         $poster->updateItems($params);
         $poster->save();
-
+        
+        $bp = get_option('poster_page_path');
         //$this->flashSuccess("\"$poster->title\" was successfully saved.");
 
         /*if(is_admin_theme()) {*/
             $this->_helper->redirector->gotoRoute(
                 array(
+                    'controller' => 'posters',
                     'module' => 'posters',
                     'action' => 'browse'
                 ),
-                'default'
+                "$bp"
             );
     }
     
     public function deleteAction()
     {
-        echo "Delete Action"; exit;
+        $posterId = $this->getRequest->getPost(); 
+        var_dump($posterId); exit;
     }
     public function helpAction(){
 

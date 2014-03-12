@@ -32,11 +32,10 @@ echo head(array('title' => $pageTitle)); ?>
                                     <a href="<?php echo html_escape(
                                                     url(
                                                        array(
-                                                            'action' => 'delete', 
+                                                            'action' => 'delete-confirm', 
                                                             'id' => $poster->id),
                                                    'default')); ?>
                                      ">Delete</a>
-                                       <?php  //echo link_to('Index','delete', __('Delete'), array('action'=>'delete'));  ?>
                                    </li>
                                    <?php endif; ?>
                                </ul>
