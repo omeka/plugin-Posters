@@ -13,7 +13,7 @@ echo pagination_links(
 ?>
 
 <div id="item-list">
-    <?php echo item_search_filters()); ?>
+    <?php echo item_search_filters(); ?>
     <?php if (!has_loop_records('items')): ?>
         <p><?php echo __('There are no items to choose from. Please refine your search'); ?></p>
     <?php endif; ?>

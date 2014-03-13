@@ -39,6 +39,11 @@ Omeka.Poster = {
         // Click handler.
         jQuery('#poster-additem button').click(function () {
             modalDiv.dialog({modal: true, width: "572", height: "500", title: "Add an Item"}); 
+            // make item listing selectable
+            $('#additem-modal').on('click','.additem-item', function(event) {
+               $('additem-modal div.item-selected').removeClass('item-selected');
+               $(this).addClass('item-selected');
+            });
         });
         
         jQuery('.additem-form').submit(function (event) {

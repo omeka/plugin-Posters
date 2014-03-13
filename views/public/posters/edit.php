@@ -3,7 +3,8 @@
 //queue_js_file(array('tiny_mce/tiny_mce', 'poster'));
 queue_js_file('poster');
 queue_js_file('vendor/tiny_mce/tiny_mce');
-    queue_css_file('jquery-ui');
+queue_css_file('jquery-ui');
+queue_css_file('poster');
    echo  head(array('title'=>$pageTitle));
 ?>
 <script type="text/javascript">
@@ -71,10 +72,47 @@ queue_js_file('vendor/tiny_mce/tiny_mce');
                 </div>
             
             </form>
-            <!-- Hidden div for modal pop-up -->
+            <!-- pop-up -->
             <div id="additem-modal">
-            <?php if (true): //count($items)):?>
-                 <?php foreach(get_records('Item', array('public' => true)) as $item):?>
+            <?php echo item_search_filters(); 
+                $items = get_records('Item', array('public' => true));
+            ?>
+            <?php if (count($items) === 0): ?>
+                <p><?php echo __('There are no items to choose from'); ?> </p>
+             <?php endif; ?>
+             <?php foreach ($items as $item): ?>
+                 <div class="additem-item" data-item-id="<?php echo $item->id; ?>">
+                    <?php 
+                        if (metadata($item, 'has files')) {
+                            foreach($item->Files as $displayFile) {
+                                if ($displayFile->hasThumbnail()) {
+                                    echo '<div class="item-file">'
+                                        . file_image('square_thumbnail', array(), $displayFile)
+                                        . '</div>';
+                                    break;
+                                }
+                            }
+                        }
+                        $private = '';
+                        if (!metadata($item, 'public')) {
+                            $private = ' ' . __('(Private)'); 
+                        }
+                        echo '<h4 class="title">'
+                            .metadata($item, array('Dublin Core', 'Title'))
+                            .$private
+                            .'</h4>'
+                            .'<button type="button" class="select-item">'
+                            . __('Select Item')
+                            .'</button>';
+                    ?>
+                </div>
+             <?php endforeach; ?>
+            </div>
+            <!-- end pop-up -->
+            <!-- Hidden div for modal pop-up  Old>
+            <div id="additem-modal">
+            <?php //if (true): //count($items)):?>
+                 <?php //foreach(get_records('Item', array('public' => true)) as $item):?>
                     <div class="additem-item">
                         <div class="additem-image">
                             <?php //var_dump($items); //echo my_omeka_poster_icon_html(); ?>
@@ -82,30 +120,30 @@ queue_js_file('vendor/tiny_mce/tiny_mce');
                         <div class="additem-details">
                             <dl>
                                 <dt>Title:</dt>
-                                <dd><?php echo metadata($item, array('Dublin Core', 'Title')); ?></dd>
+                                <dd><?php //echo metadata($item, array('Dublin Core', 'Title')); ?></dd>
                                 <dt>Description:</dt>
-                                <dd><?php echo metadata($item, array('Dublin Core', 'Description')); ?></dd>
+                                <dd><?php //echo metadata($item, array('Dublin Core', 'Description')); ?></dd>
                                 <dt>Creator:</dt>
-                                <dd><?php echo metadata($item,array('Dublin Core', 'Creator')); ?></dd>
-                                <?php if ($item->annotation): ?>
+                                <dd><?php //echo metadata($item,array('Dublin Core', 'Creator')); ?></dd>
+                                <?php //if ($item->annotation): ?>
                                 <dt>My Notes:</dt>
-                                <dd><?php echo $item->annotation; ?></dd>
-                                <?php endif ?>
+                                <dd><?php //echo $item->annotation; ?></dd>
+                                <?php //endif ?>
                             </dl>
                         </div>
                         <br />
-                        <form action="<?php echo html_escape(url(array('action'=>'add-poster-item'), 'default')); ?>" method="post" accept-charset="utf-8" class="additem-form">
+                        <form action="<?php //echo html_escape(url(array('action'=>'add-poster-item'), 'default')); ?>" method="post" accept-charset="utf-8" class="additem-form">
                     	    <div>
                     	        <input type="submit" name="submit" value="Add this Item" class="additem-submit"/>
-                    	        <input type="hidden" name="item-id" value="<?php echo html_escape($item->id); ?>" class="additem-item-id"/>
+                    	        <input type="hidden" name="item-id" value="<?php //echo html_escape($item->id); ?>" class="additem-item-id"/>
                 	        </div>
                 	    </form>
                     </div>
-                <?php endforeach; //endwhile; ?>
-            <?php else: ?>
+                <?php //endforeach; //endwhile; ?>
+            <?php //else: ?>
                 <p>You must tag or take notes on items before you can add those items to a poster.</p>
-            <?php endif; ?>
-            </div> <!-- end modal popup div -->
+            <?php //endif; ?>
+            </div> < end modal popup div -->
         </div> <!-- end poster-info div -->
     </div> <!-- end poster div -->
 </div> <!-- end primary div -->

@@ -4,10 +4,11 @@ echo head(array('title' => $pageTitle));
 
 ?>
 <div id="primary">
+<?php $posters = $this->posters; ?>
 <?php foreach($posters as $poster): ?>
     <div class="poster">
         <h3 class="poster-title">
-            <a href="<?php echo html_escape(url(array('action' => 'show','id'=>$poster->id), 'default')); ?>"
+            <a href="<?php echo html_escape(url(array('action' => 'show','id'=>$poster->id), get_option('poster_page_path'))); ?>"
             class="view-poster-link"><?php echo html_escape($poster->title); ?></a>
         </h3>
         <ul class="poster-meta">
