@@ -73,7 +73,7 @@ queue_css_file('poster');
             
             </form>
             <!-- pop-up -->
-            <div id="additem-modal">
+            <div id="additem-modal" >
             <?php echo item_search_filters(); 
                 $items = get_records('Item', array('public' => true));
             ?>
@@ -109,41 +109,6 @@ queue_css_file('poster');
              <?php endforeach; ?>
             </div>
             <!-- end pop-up -->
-            <!-- Hidden div for modal pop-up  Old>
-            <div id="additem-modal">
-            <?php //if (true): //count($items)):?>
-                 <?php //foreach(get_records('Item', array('public' => true)) as $item):?>
-                    <div class="additem-item">
-                        <div class="additem-image">
-                            <?php //var_dump($items); //echo my_omeka_poster_icon_html(); ?>
-                        </div>
-                        <div class="additem-details">
-                            <dl>
-                                <dt>Title:</dt>
-                                <dd><?php //echo metadata($item, array('Dublin Core', 'Title')); ?></dd>
-                                <dt>Description:</dt>
-                                <dd><?php //echo metadata($item, array('Dublin Core', 'Description')); ?></dd>
-                                <dt>Creator:</dt>
-                                <dd><?php //echo metadata($item,array('Dublin Core', 'Creator')); ?></dd>
-                                <?php //if ($item->annotation): ?>
-                                <dt>My Notes:</dt>
-                                <dd><?php //echo $item->annotation; ?></dd>
-                                <?php //endif ?>
-                            </dl>
-                        </div>
-                        <br />
-                        <form action="<?php //echo html_escape(url(array('action'=>'add-poster-item'), 'default')); ?>" method="post" accept-charset="utf-8" class="additem-form">
-                    	    <div>
-                    	        <input type="submit" name="submit" value="Add this Item" class="additem-submit"/>
-                    	        <input type="hidden" name="item-id" value="<?php //echo html_escape($item->id); ?>" class="additem-item-id"/>
-                	        </div>
-                	    </form>
-                    </div>
-                <?php //endforeach; //endwhile; ?>
-            <?php //else: ?>
-                <p>You must tag or take notes on items before you can add those items to a poster.</p>
-            <?php //endif; ?>
-            </div> < end modal popup div -->
         </div> <!-- end poster-info div -->
     </div> <!-- end poster div -->
 </div> <!-- end primary div -->

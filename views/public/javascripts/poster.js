@@ -37,17 +37,19 @@ Omeka.Poster = {
         
         // var modalDiv = jQuery('#myomeka-additem-modal');
         // Click handler.
+        jQuery('#additem-modal').hide();
         jQuery('#poster-additem button').click(function () {
-            modalDiv.dialog({modal: true, width: "572", height: "500", title: "Add an Item"}); 
+            modalDiv.dialog({modal: true, width: "572", height: "500", title: "Add an Item"});
+            $('#additem-modal').removeClass('.modal-hidden');
             // make item listing selectable
             $('#additem-modal').on('click','.additem-item', function(event) {
-               $('additem-modal div.item-selected').removeClass('item-selected');
-               $(this).addClass('item-selected');
+               $('#additem-modal div.item-selected').removeClass('.item-selected');
+               $(this).addClass('.item-selected');
             });
         });
         
         jQuery('.additem-form').submit(function (event) {
-        	var form = jQuery(this), submitButtons = jQuery('.myomeka-additem-submit');
+        	var form = jQuery(this), submitButtons = jQuery('.additem-submit');
             event.preventDefault();
             submitButtons.attr('disabled', 'disabled');
             Omeka.Poster.mceExecCommand('mceRemoveControl');
