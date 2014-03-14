@@ -34,7 +34,8 @@ queue_css_file('poster');
                 <?php endif; ?>
                 
                 <div id="poster-canvas">
-                <?php //var_dump($items);
+<?php //var_dump($items);
+                    echo $_REQUEST['item_id'];
                     if (count($poster->Items)):
                         foreach ($poster->Items as $posterItem):
                             $noteObj = my_omeka_get_note_for_item($posterItem);
@@ -74,6 +75,7 @@ queue_css_file('poster');
             </form>
             <!-- pop-up -->
             <div id="additem-modal" >
+            <?php echo pagination_links(array('url' => url(array('controller' => get_option('poster_page_path'), 'action' => 'items', 'page' => null)))); ?>
             <?php echo item_search_filters(); 
                 $items = get_records('Item', array('public' => true));
             ?>
@@ -104,7 +106,13 @@ queue_css_file('poster');
                             .'<button type="button" class="select-item">'
                             . __('Select Item')
                             .'</button>';
-                    ?>
+                        ?>
+                       <form action="<?php //echo html_escape(url(array('action'=>'add-poster-item'), get_option('poster_page_path'))); ?>" method="post" accept-charset="utf-8" class="additem-form">
+                            <div>
+                                <input type="submit" name="submit" value="Add this Item" class="additem-submit"/>
+                                <input type="hidden" name="item-id" value="<?php echo html_escape($item->id); ?>" class="additem-item-id"/>
+                            </div>
+                        </form>
                 </div>
              <?php endforeach; ?>
             </div>

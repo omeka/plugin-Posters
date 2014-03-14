@@ -1,39 +1,39 @@
 <?php set_current_item($posterItem); ?>
-<div class="myomeka-poster-spot">
+<div class="poster-spot">
 
-	<div class="myomeka-item-header">
-    	<h3 class="myomeka-item-title"><?php echo item('Dublin Core', 'Title'); ?></h3>
-    	<div class="myomeka-controls">
-            <a href="#" class="myomeka-move-top myomeka-poster-control">
+	<div class="poster-item-header">
+    	<h3 class="poster--item-title"><?php echo item('Dublin Core', 'Title'); ?></h3>
+    	<div class="poster-controls">
+            <a href="#" class="poster-move-top poster-control">
                 <img src="<?php echo html_escape(img('arrow_up_up.png')); ?>"  title="Move to the top" alt="Move to the top"/></a>
-            <a href="#" class="myomeka-move-up myomeka-poster-control">
+            <a href="#" class="poster-move-up poster-control">
                 <img src="<?php echo html_escape(img('arrow_up.png')); ?>"  title="Move up" alt="Move up"/></a>
-            <a href="#" class="myomeka-move-down myomeka-poster-control">
+            <a href="#" class="poster-move-down poster-control">
                 <img src="<?php echo html_escape(img('arrow_down.png')); ?>"  title="Move down" alt="Move down"/></a>
-            <a href="#" class="myomeka-move-bottom myomeka-poster-control">
+            <a href="#" class="poster-move-bottom poster-control">
                 <img src="<?php echo html_escape(img('arrow_down_down.png')); ?>"  title="Move to the bottom" alt="Move to the bottom" /></a>
-        	<a href="#" class="myomeka-delete myomeka-poster-control">
+        	<a href="#" class="poster-delete poster-control">
         		    <img src="<?php echo html_escape(img('delete.gif')); ?>" title="Remove this item" alt="Remove this item"/>Delete</a>
         </div>    	
     </div>
     
-    <div class="myomeka-item-thumbnail">
+    <div class="poster-item-thumbnail">
         <?php echo my_omeka_poster_icon_html(); ?>
     </div>
 
-    <div class="myomeka-item-annotation">
+    <div class="poster-item-annotation">
         <h4>My Annotation:</h4>
-        <?php echo __v()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
-            array(  'id'=>'myomeka-annotation-' . mt_rand(0, 999999999),
+        <?php echo $this->get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
+            array(  'id'=>'poster-annotation-' . mt_rand(0, 999999999),
                     'rows'=>'6',
                     'cols'=>'10')); ?>
     </div>
     <?php if ($noteText): ?>
-        <div class="myomeka-notes">
+        <div class="poster-notes">
             <h4>My Notes</h4>
-            <?php echo nls2p(html_escape($noteText)); ?>
+            <?php echo html_escape($noteText); ?>
         </div>
     <?php endif; ?>
     
-    <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="myomeka-hidden-item-id" />
+    <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="poster-hidden-item-id" />
 </div>

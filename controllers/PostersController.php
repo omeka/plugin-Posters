@@ -128,6 +128,7 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         }
        
     }
+
     
     protected function _verifyAccess($poster, $action)
     {

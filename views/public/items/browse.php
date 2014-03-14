@@ -3,7 +3,7 @@ echo pagination_links(
     array(
         'url' => url(
             array(
-                'controller' => 'posters', 
+                'controller' => 'Item', 
                 'action' => 'items', 
                 'page' => null
             )
