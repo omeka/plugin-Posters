@@ -1,8 +1,8 @@
-<?php set_current_item($posterItem); ?>
+<?php $item = get_record('Item',$posterItem); ?>
 <div class="poster-spot">
 
 	<div class="poster-item-header">
-    	<h3 class="poster--item-title"><?php echo item('Dublin Core', 'Title'); ?></h3>
+    	<h3 class="poster--item-title"><?php echo metadata('Item', array('Dublin Core', 'Title')); ?></h3>
     	<div class="poster-controls">
             <a href="#" class="poster-move-top poster-control">
                 <img src="<?php echo html_escape(img('arrow_up_up.png')); ?>"  title="Move to the top" alt="Move to the top"/></a>

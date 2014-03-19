@@ -1,6 +1,3 @@
-//if (!Omeka) {
-//    var Omeka = {}
-//}
 var Omeka = Omeka || {}; 
 Omeka.Poster = 
 {
@@ -38,10 +35,16 @@ Omeka.Poster =
         
         // var modalDiv = jQuery('#myomeka-additem-modal');
         // Click handler.
-        jQuery('#additem-modal').hide();
+       modalDiv.hide();
         jQuery('#poster-additem button').click(function () {
             modalDiv.dialog({modal: true, width: "572", height: "500", title: "Add an Item"});
         });
+        // have the select button appear upon selection of the item
+        jQuery('.additem-item').click(function () {
+            jQuery('.additem-item').removeClass('item-selected');
+            jQuery(this).addClass('item-selected');
+        });
+
         
         jQuery('.additem-form').submit(function (event) {
         	var form = jQuery(this), submitButtons = jQuery('.additem-submit');

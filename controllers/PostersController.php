@@ -141,4 +141,13 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
             throw new Omeka_Controller_Exception_403;
         }
     }
+    public function addPosterItemAction()
+    {
+        $params = $this->getRequest()->getParams();
+        $itemId = $params['item-id'];
+
+        $posterItem = $this->_helper->db->getTable('Item')->find((int) $itemId);
+        $this->view->posterItem = $posterItem;
+        $this->render('spot');
+    }
 }
