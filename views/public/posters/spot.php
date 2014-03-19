@@ -1,8 +1,9 @@
-<?php $item = get_record('Item',$posterItem); ?>
+<?php $item = get_record('Item',$posterItem);
+?>
 <div class="poster-spot">
 
 	<div class="poster-item-header">
-    	<h3 class="poster--item-title"><?php echo metadata('Item', array('Dublin Core', 'Title')); ?></h3>
+    	<h3 class="poster--item-title"><?php echo metadata($item , array('Dublin Core', 'Title')); ?></h3>
     	<div class="poster-controls">
             <a href="#" class="poster-move-top poster-control">
                 <img src="<?php echo html_escape(img('arrow_up_up.png')); ?>"  title="Move to the top" alt="Move to the top"/></a>
@@ -18,15 +19,24 @@
     </div>
     
     <div class="poster-item-thumbnail">
-        <?php echo my_omeka_poster_icon_html(); ?>
+        <?php if (metadata($item, 'has files')){
+             foreach ($item->Files as $displayFile){
+                 if($displayFile->hasThumbnail()){
+                    echo "<div class='item-file'>"
+                        .file_image('square_thumbnail', array(), $displayFile)
+                        .'</div>';
+                    break;
+                 }
+             }
+            } ?>
     </div>
 
     <div class="poster-item-annotation">
         <h4>My Annotation:</h4>
-        <?php echo $this->get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
-            array(  'id'=>'poster-annotation-' . mt_rand(0, 999999999),
-                    'rows'=>'6',
-                    'cols'=>'10')); ?>
+        <?php //echo $this->get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
+            //array(  'id'=>'poster-annotation-' . mt_rand(0, 999999999),
+            //        'rows'=>'6',
+            //        'cols'=>'10')); ?>
     </div>
     <?php if ($noteText): ?>
         <div class="poster-notes">

@@ -32,7 +32,12 @@ echo head(array('title'=>$pageTitle));
 			<h2 id="poster-disclaimer-title">Disclaimer</h2>
 			<?php echo html_escape($disclaimer); ?>
 		</div>
-		<?php endif; ?>
+        <?php endif; ?>
+        <?php if ($this->currentUser): ?>
+            <div class="edit-link">
+                <a href="<?php echo html_escape(url(array('action' => 'edit','id' => $poster->id), get_option('poster_page_path'))); ?>" class="edit-poster-link">Edit</a>
+            </div>
+        <?php endif; ?>
 	</div>
 </div> <!-- end primary div -->
 <?php echo foot(); ?>

@@ -101,9 +101,9 @@ queue_css_file('poster');
                             .metadata($item, array('Dublin Core', 'Title'))
                             .$private
                             .'</h4>'
-                            .'<form action="'.html_escape(url(array('action' => 'add-poster-item'), get_option('poster_page_path'))).'" method="post" accept-charset="utf-8" class="additem-form">'
+                            .'<form action="'.html_escape(url(array('action' => 'add-poster-item','item-id' => $item->id), get_option('poster_page_path'))).'" method="post" accept-charset="utf-8" class="additem-form">'
                             .'<input  type="submit" class="select-item" value="Add this Item" class="additem-submit">'
-                            .'<imput type="hidden" name="item-id" value="'.html_escape($item->id).'" class="additem-item-id"/>'
+                            //.'<imput type="hidden" name="item-id" value="'.html_escape($item->id).'" class="additem-item-id"/>'
                             .'</form>';
                         ?>
                        <!--form action="<?php //echo html_escape(url(array('action'=>'add-poster-item'), get_option('poster_page_path'))); ?>" method="post" accept-charset="utf-8" class="additem-form">

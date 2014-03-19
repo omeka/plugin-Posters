@@ -44,7 +44,7 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $params = $this->getRequest()->getParams();
         //var_dump($params); exit;
         $poster = $this->_helper->db->findById(null, 'Poster');        
-         
+        $this->view->currentUser = $this->_currentUser;
         $this->view->poster = $poster;
     }
     public function newAction(){
@@ -145,7 +145,8 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     {
         $params = $this->getRequest()->getParams();
         $itemId = $params['item-id'];
-
+        //var_dump($itemId); 
+        //var_dump($params); exit;
         $posterItem = $this->_helper->db->getTable('Item')->find((int) $itemId);
         $this->view->posterItem = $posterItem;
         $this->render('spot');
