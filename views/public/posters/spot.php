@@ -33,17 +33,19 @@
 
     <div class="poster-item-annotation">
         <h4>My Annotation:</h4>
-        <?php //echo $this->get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
-            //array(  'id'=>'poster-annotation-' . mt_rand(0, 999999999),
-            //        'rows'=>'6',
-            //        'cols'=>'10')); ?>
+        <?php echo get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
+            array(  'id'=>'poster-annotation-' . mt_rand(0, 999999999),
+                   'rows'=>'6',
+                    'cols'=>'10')); ?>
     </div>
-    <?php if ($noteText): ?>
-        <div class="poster-notes">
+    <?php //if ($noteText): ?>
+        <!--div class="poster-notes">
             <h4>My Notes</h4>
-            <?php echo html_escape($noteText); ?>
-        </div>
-    <?php endif; ?>
+            <?php //echo html_escape($noteText); ?>
+        </div-->
+    <?php //endif; ?>
     
-    <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="poster-hidden-item-id" />
+    <!-- input type="hidden" name="posterItems[<?php //echo html_escape($posterItem->id); ?>]" value="<?php //echo html_escape($posterItem->order); ?>" class="poster-hidden-item-id" /-->
+    <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="hidden-item-id" />
+    
 </div>

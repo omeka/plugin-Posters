@@ -6,6 +6,7 @@
  * @copyright Center for History and New Media, 2010
  * @package Posters
  */
+require_once dirname(__FILE__) . '/helpers/PosterFunctions.php';
 define('POSTER_PAGE_PATH','posters/');
 define('POSTER_PAGE_TITLE', 'Posters');
 define('POSTER_DISCLAIMER','This page contains user generated content and does not necessarily reflect the opinions of this website. For more information please refer to our terms of service and conditions. If you would like to report the content of this as objectionable, Please contact us.');
@@ -48,7 +49,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
             ) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         );
 
-        $db->query("CREATE TABLE IF NOT EXISTS {$db->prefix}posters_items (
+        $db->query("CREATE TABLE IF NOT EXISTS {$db->prefix}poster_items (
                 `id` BIGINT UNSIGNED NOT NULL auto_increment PRIMARY KEY,
                 `annotation` TEXT,
                 `poster_id` BIGINT UNSIGNED NOT NULL,

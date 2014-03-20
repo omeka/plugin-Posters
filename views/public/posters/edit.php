@@ -37,7 +37,7 @@ queue_css_file('poster');
                 <?php if (count($poster->Items)):
                         foreach ($poster->Items as $posterItem):
                             $noteObj = my_omeka_get_note_for_item($posterItem);
-                            common('spot', array('posterItem'=>$posterItem, 'noteText'=>$noteObj->note), 'poster');
+                            common('spot', array('posterItem'=>$posterItem, 'noteText'=>$noteObj->note),get_option('poster_page_path') );
                         endforeach;
                     endif;
                 ?>
