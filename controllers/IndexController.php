@@ -31,7 +31,8 @@ class Posters_IndexController extends Omeka_Controller_AbstractActionController
     public function deleteAction()
     {   
         $poster = $this->getRequest()->getParams();
-        $posterOb = $this->_helper->db->findBy($poster->id, 'Poster');
+        //var_dump($poster); exit;
+        $posterOb = $this->_helper->db->findBy($poster, 'Poster');
     
         return parent::deleteAction();
         //echo "Index Controller, Delete Action"; exit;

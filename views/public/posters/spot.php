@@ -1,4 +1,5 @@
 <?php $item = get_record('Item',$posterItem);
+//var_dump($posterItem);
 ?>
 <div class="poster-spot">
 

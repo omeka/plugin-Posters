@@ -14,10 +14,25 @@
 class Poster extends Omeka_Record_AbstractRecord
 {
     public $title;
-    public $description;
+    public $description = '';
     public $user_id;
     public $date_created;
     public $date_modified;
+
+    protected $_related = array(
+        'Items' => 'getItems', 
+        'user' => 'getUser'
+    );
+    
+    public function getItems()
+    {
+        return $this->getPosterItems($this->id);
+    }
+
+    public function getUser()
+    {
+        return $this->_helper->db->getTable('User')->find($this->user_id);
+    }
 
     public function updateItems(&$params)
     { 
@@ -54,10 +69,16 @@ class Poster extends Omeka_Record_AbstractRecord
     }
     public function getPosterItems($posterId)
     {
-        if (is_numeric($posterId){
+        if (is_numeric($posterId)){
             $db = get_db();
             $items = $db->getTable('Item')->fetchObjects(" select i.*, pi.annotation, p.user_id
-                                                           FROM {$db->prefix
+                FROM {$db->prefix}poster_items pi
+                JOIN {$db->prefix}items i on i.id = pi.item_id
+                JOIN {$db->prefix}posters p on pi.poster_id = p.id
+                WHERE pi.poster_id = $posterId
+                ORDER BY ordernum");
+
+            return $items;
         }
     }
 }

@@ -29,20 +29,21 @@ queue_css_file('poster');
                 </div>
 
                 <h2>Poster Items</h2>
-                <?php var_dump($poster->Items); if (!count($poster->Items)): ?>
+                <?php if (!count($poster->Items)): ?>
                     <p id="poster-no-items-yet">You have not added any items to this poster yet.</p>
                 <?php endif; ?>
                 
                 <div id="poster-canvas">
-                <?php if (count($poster->Items)):
-                        foreach ($poster->Items as $posterItem):
-                            $noteObj = my_omeka_get_note_for_item($posterItem);
-                            common('spot', array('posterItem'=>$posterItem, 'noteText'=>$noteObj->note),get_option('poster_page_path') );
+                <?php //var_dump($poster->Items); ?>
+                <?php if (count($poster->Items) > 0):
+                         foreach ($poster->Items as $posterItem):
+                            //var_dump($posterItem); 
+                            $noteObj = '';// poster_get_note_for_item($posterItem);
+                            common('spot', array('posterItem'=>$poster, 'noteText'=>$noteObj),get_option('poster_page_path') );
                         endforeach;
                     endif;
                 ?>
                 </div>
-        
                 <div id="poster-additem">
                    
                     <?php if (count($items)): ?>

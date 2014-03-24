@@ -136,11 +136,23 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
            new Zend_Controller_Router_Route(
                "$bp/:action/:id/*",
                array(
-                   'module' => 'posters',
+                   'module'     => 'posters',
                    'controller' => 'posters',
                    'action'     => 'index',
                    'id'         => '\d+'
                )));
+      // $router->addRoute(
+      //      $bp,
+      //      new Zend_Controller_Router_Route(
+      //          "$bp/items/:action",
+      //          array(
+      //              'module'     => 'posters',
+      //              'controller' => 'items',
+      //              'action'     => 'browse',
+      //              'id'         => '\d+'
+      //          )
+      //      )
+      // );
 //       $router->addRoute(
 //           "{$bp}_show",
 //           new Zend_Controller_Router_Route(

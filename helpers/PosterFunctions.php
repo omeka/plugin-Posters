@@ -14,5 +14,5 @@ function poster_get_note_for_item($item)
 {
     $user = current_user();
 
-    //return get_db()->getTable('
+    return ''; 
 }
