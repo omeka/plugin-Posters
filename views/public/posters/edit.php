@@ -34,14 +34,13 @@ queue_css_file('poster');
                 <?php endif; ?>
                 
                 <div id="poster-canvas">
-                <?php //var_dump($poster->Items); ?>
-                <?php if (count($poster->Items) > 0):
-                         foreach ($poster->Items as $posterItem):
-                            //var_dump($posterItem); 
-                            $noteObj = '';// poster_get_note_for_item($posterItem);
-                            common('spot', array('posterItem'=>$poster, 'noteText'=>$noteObj),get_option('poster_page_path') );
-                        endforeach;
-                    endif;
+                <?php if (count($poster->Items) > 0){
+                    foreach ($poster->Items as $posterItem){
+                        $noteObj = '';
+                        include_once('spot.php');//look into this.
+                        //common('spot', array('posterItem'=>$posterItem),'posters' );
+                    }
+                }
                 ?>
                 </div>
                 <div id="poster-additem">

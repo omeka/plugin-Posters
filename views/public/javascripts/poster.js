@@ -23,7 +23,6 @@ Omeka.Poster =
         jQuery('#poster-form').submit(function () {
             var index = 1;
             var length1 = jQuery('.poster-item-annotation').length();
-            alert(length1);
             jQuery('.poster-item-annotation').each(function () {
                 jQuery(this).find('textarea')
                     .attr('name', 'annotation-' + index)
