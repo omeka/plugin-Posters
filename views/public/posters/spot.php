@@ -38,14 +38,7 @@
                    'rows'=>'6',
                     'cols'=>'10')); ?>
     </div>
-    <?php //if ($noteText): ?>
-        <!--div class="poster-notes">
-            <h4>My Notes</h4>
-            <?php //echo html_escape($noteText); ?>
-        </div-->
-    <?php //endif; ?>
-    
-    <!-- input type="hidden" name="posterItems[<?php //echo html_escape($posterItem->id); ?>]" value="<?php //echo html_escape($posterItem->order); ?>" class="poster-hidden-item-id" /-->
+
     <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="hidden-item-id" />
     
 </div>

@@ -13,16 +13,26 @@ echo head(array('title'=>$pageTitle));
 		<?php echo $poster->description; ?>
 		</div>
 
-		<?php //set_items_for_loop($poster->Items); ?>
-		<?php //while ($item = loop_items()): ?>
-		<div class="poster-item">
-	        <h2><?php //echo link_to_item(); ?></h2>
-			<?php //if (item_has_thumbnail()) echo link_to_item(item_thumbnail()); ?>
-			<div class="poster-item-annotation">
-		        <?php //echo $item->annotation; ?>
-			</div>
-		</div>
-		<?php //endwhile; ?>
+        <?php //set_items_for_loop($poster->Items); ?>
+        <div class="poster-items">
+        <?php foreach($poster->Items as $posterItem): ?>
+        <?php $item = get_record('Item', $posterItem);
+            if(metadata($item, 'has files')){
+                foreach($item->Files as $itemFile) {
+                    if($itemFile->hasThumbnail()){
+                        echo "<div class='item-file'>"
+                            .file_image('square_thumbnail', array(), $itemFile)
+                            ."</div>"
+                            ."<div class='poster-item-annotation'>"
+                            .$posterItem->annotation
+                            ."</div>";
+                        break;
+                    }
+                }
+            }
+?>
+        <?php endforeach; ?>
+         </div>
 
 		<?php 
          $disclaimer = get_option('poster_disclaimer');

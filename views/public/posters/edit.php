@@ -34,10 +34,10 @@ queue_css_file('poster');
                 <?php endif; ?>
                 
                 <div id="poster-canvas">
-                <?php if (count($poster->Items) > 0){
+                <?php if (count($poster->Items)){
                     foreach ($poster->Items as $posterItem){
                         $noteObj = '';
-                        include_once('spot.php');//look into this.
+                        include('spot.php');//look into this.
                         //common('spot', array('posterItem'=>$posterItem),'posters' );
                     }
                 }
@@ -55,8 +55,8 @@ queue_css_file('poster');
                 </div>
         
                 <div id="submit-poster">
-                <?php echo $this->formSubmit('save_poster',__('Save Poster'), array('class' => 'submit big green button')); ?>
-                    <!--input type="submit" name="save_poster" value="Save Poster" /--> or 
+                <?php //echo $this->formSubmit('save_poster',__('Save Poster'), array('class' => 'submit big green button')); ?>
+                    <input type="submit" name="save_poster" value="Save Poster" > or 
                     <?php if (is_admin_theme()): ?>
                         <a href="<?php echo html_escape(url(array('action'=>'discard'), 'default')); ?>">Discard Changes and Return to Poster Administration</a>
                     <?php else: ?>
@@ -103,15 +103,8 @@ queue_css_file('poster');
                             .'</h4>'
                             .'<form action="'.html_escape(url(array('action' => 'add-poster-item','item-id' => $item->id), get_option('poster_page_path'))).'" method="post" accept-charset="utf-8" class="additem-form">'
                             .'<input  type="submit" class="select-item" value="Add this Item" class="additem-submit">'
-                            //.'<imput type="hidden" name="item-id" value="'.html_escape($item->id).'" class="additem-item-id"/>'
                             .'</form>';
                         ?>
-                       <!--form action="<?php //echo html_escape(url(array('action'=>'add-poster-item'), get_option('poster_page_path'))); ?>" method="post" accept-charset="utf-8" class="additem-form">
-                            <div>
-                                <input type="submit" name="submit" value="Add this Item" class="additem-submit"/>
-                                <input type="hidden" name="item-id" value="<?php //echo html_escape($item->id); ?>" class="additem-item-id"/>
-                            </div>
-                        </form-->
                 </div>
              <?php endforeach; ?>
             </div>

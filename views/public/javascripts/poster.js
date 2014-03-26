@@ -20,9 +20,8 @@ Omeka.Poster =
 
         // Code to run when the save poster form is submitted
         // Walks the items and indexes them
-        jQuery('#poster-form').submit(function () {
+          jQuery('#poster-form').submit(function () {
             var index = 1;
-            var length1 = jQuery('.poster-item-annotation').length();
             jQuery('.poster-item-annotation').each(function () {
                 jQuery(this).find('textarea')
                     .attr('name', 'annotation-' + index)
@@ -32,7 +31,7 @@ Omeka.Poster =
                 index++;
             });
             jQuery('#itemCount').val(index - 1);
-        });
+         });
         
         // var modalDiv = jQuery('#myomeka-additem-modal');
         // Click handler.

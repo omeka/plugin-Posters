@@ -55,7 +55,7 @@ class Poster extends Omeka_Record_AbstractRecord
     {
         //delete entries from the poster_items table
         $db = get_db();
-        $poster_items = $db->getTable('PosterItem')
+        $poster_items = $db->getTable('PosterItems')
             ->fetchObjects("SELECT * FROM {$db->prefix}poster_items p WHERE p.poster_id = $this->id");
 
         foreach($poster_items as $poster_item) {
