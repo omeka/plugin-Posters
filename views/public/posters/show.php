@@ -21,7 +21,7 @@ echo head(array('title'=>$pageTitle));
                 foreach($item->Files as $itemFile) {
                     if($itemFile->hasThumbnail()){
                         echo "<div class='item-file'>"
-                            .file_image('square_thumbnail', array(), $itemFile)
+                            .link_to_item(file_image('square_thumbnail', array(),  $itemFile), array('class' =>'item-thumbnail'), 'show', $posterItem)
                             ."</div>"
                             ."<div class='poster-item-annotation'>"
                             .$posterItem->annotation
