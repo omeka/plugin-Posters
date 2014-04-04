@@ -99,8 +99,12 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     
     public function deleteAction()
     {
-        $posterId = $this->getRequest->getPost(); 
-        var_dump($posterId); exit;
+        //var_dump($this->getRequest()->getParams()); exit;
+        $poster = $this->_helper->db->findById(null, 'Poster');
+
+        $poster->delete();
+
+        $this->_helper->redirector->gotoUrl(get_option('poster_page_path').'/browse');
     }
     public function helpAction(){
 

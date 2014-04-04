@@ -6,7 +6,7 @@ Omeka.Poster =
     //Everything that takes place when the form loads
     init: function () {
 		var modalDiv = jQuery('#additem-modal');
-    
+        modalDiv.load('items/browse #content'); 
         // WYSIWYG Editor
         tinyMCE.init({
             mode: "textareas",
@@ -16,6 +16,22 @@ Omeka.Poster =
             theme_advanced_buttons2 : "",
             theme_advanced_buttons3 : "",
             theme_advanced_toolbar_align : "left"
+        });
+        //Hide some buttons
+        jQuery('#revert-selected-item').hide();
+        jQuery('.hide-search-label').hide();
+        jQuery('#search').hide();
+
+        jQuery('span.show-search-label').click(function () {
+            jQuery('#search').show();
+            jQuery('.hide-search-label').show();
+            jQuery(this).hide();
+        });
+
+        jQuery('.hide-search-label').click(function(){
+            jQuery('#search').hide();
+            jQuery('.show-search-label').show();
+            jQuery(this).hide();
         });
 
         // Code to run when the save poster form is submitted
@@ -32,7 +48,7 @@ Omeka.Poster =
             });
             jQuery('#itemCount').val(index - 1);
          });
-        
+       
         // var modalDiv = jQuery('#myomeka-additem-modal');
         // Click handler.
        modalDiv.hide();

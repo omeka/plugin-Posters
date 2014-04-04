@@ -72,42 +72,27 @@ queue_css_file('poster');
             
             </form>
             <!-- pop-up -->
-            <div id="additem-modal" >
-            <?php echo pagination_links(array('url' => url(array('controller' => get_option('poster_page_path'), 'action' => 'items', 'page' => null)))); ?>
-            <?php echo item_search_filters(); 
-                $items = get_records('Item', array('public' => true));
+<div id="additem-modal" >
+    <div id="item-form">
+        <button type="button" id="revert-selected-item"><?php echo __('Revert to Selected Item'); ?></button>
+        <button type="button" id="show-or-hide-search" class="show-form blue">
+            <span class="show-search-label"><?php echo __('Show Search Form'); ?></span>
+            <span class="hide-search-label"><?php echo __('Hide Search Form'); ?></span>
+        </button>
+        <a href="<?php echo url(get_option('poster_page_path') . '/items/browse'); ?>" id="view-all-items" class="green button"><?php echo __('View All Items'); ?></a>
+        <div id="page-search-form" class="container-twelve">
+            <?php 
+                $action = url(array(
+                        'module' => 'posters',
+                        'controller' => 'items',
+                        'action' =>'browse'),
+                'default', array(), true);
+                echo items_search_form(array('id' => 'search'), $action);
             ?>
-            <?php if (count($items) === 0): ?>
-                <p><?php echo __('There are no items to choose from'); ?> </p>
-             <?php endif; ?>
-             <?php foreach ($items as $item): ?>
-                 <div class="additem-item" data-item-id="<?php echo $item->id; ?>">
-                    <?php 
-                        if (metadata($item, 'has files')) {
-                            foreach($item->Files as $displayFile) {
-                                if ($displayFile->hasThumbnail()) {
-                                    echo '<div class="item-file">'
-                                        . file_image('square_thumbnail', array(), $displayFile)
-                                        . '</div>';
-                                    break;
-                                }
-                            }
-                        }
-                        $private = '';
-                        if (!metadata($item, 'public')) {
-                            $private = ' ' . __('(Private)'); 
-                        }
-                        echo '<h4 class="title">'
-                            .metadata($item, array('Dublin Core', 'Title'))
-                            .$private
-                            .'</h4>'
-                            .'<form action="'.html_escape(url(array('action' => 'add-poster-item','item-id' => $item->id), get_option('poster_page_path'))).'" method="post" accept-charset="utf-8" class="additem-form">'
-                            .'<input  type="submit" class="select-item" value="Add this Item" class="additem-submit">'
-                            .'</form>';
-                        ?>
-                </div>
-             <?php endforeach; ?>
-            </div>
+        </div>
+        <div id="item-select"></div>
+    </div>
+</div>
             <!-- end pop-up -->
         </div> <!-- end poster-info div -->
     </div> <!-- end poster div -->
