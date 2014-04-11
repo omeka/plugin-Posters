@@ -97,4 +97,18 @@ queue_css_file('poster');
         </div> <!-- end poster-info div -->
     </div> <!-- end poster div -->
 </div> <!-- end primary div -->
+<script type="text/javascript" charset="utf-8">
+                //<![CDATA[
+   
+    jQuery(document).ready(function(){
+        //Omeka.wysiwyg();
+        Omeka.Poster.setUpItemsSelect(<?php echo js_escape(url('posters/attachment-item-options'));?>);
+        Omeka.Poster.setUpWysiwyg();
+        //jQuery(event.target).find('textarea').each(function (){
+          //  tinyMCE.execCommand('mceAddControl', false, this.id);
+        //});
+ 
+    });
+//]]>
+</script>            
 <?php echo foot(); ?>

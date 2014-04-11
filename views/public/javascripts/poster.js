@@ -1,171 +1,106 @@
-var Omeka = Omeka || {}; 
-Omeka.Poster = 
-{
-    itemCount: 0,
-    
-    //Everything that takes place when the form loads
-    init: function () {
-		var modalDiv = jQuery('#additem-modal');
-        modalDiv.load('items/browse #content'); 
-        // WYSIWYG Editor
-        tinyMCE.init({
-            mode: "textareas",
-            theme: "advanced",
-            theme_advanced_toolbar_location : "top",
-            theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect",
-            theme_advanced_buttons2 : "",
-            theme_advanced_buttons3 : "",
-            theme_advanced_toolbar_align : "left"
-        });
-        //Hide some buttons
-        jQuery('#revert-selected-item').hide();
-        jQuery('.hide-search-label').hide();
-        jQuery('#search').hide();
+var Omeka = Omeka || {};
+Omeka.Poster = {};
 
-        jQuery('span.show-search-label').click(function () {
-            jQuery('#search').show();
-            jQuery('.hide-search-label').show();
-            jQuery(this).hide();
-        });
-
-        jQuery('.hide-search-label').click(function(){
-            jQuery('#search').hide();
-            jQuery('.show-search-label').show();
-            jQuery(this).hide();
-        });
-
-        // Code to run when the save poster form is submitted
-        // Walks the items and indexes them
-          jQuery('#poster-form').submit(function () {
-            var index = 1;
-            jQuery('.poster-item-annotation').each(function () {
-                jQuery(this).find('textarea')
-                    .attr('name', 'annotation-' + index)
-                    .end()
-                    .siblings('.hidden-item-id')
-                    .attr('name', 'itemID-' + index);
-                index++;
-            });
-            jQuery('#itemCount').val(index - 1);
-         });
-       
-        // var modalDiv = jQuery('#myomeka-additem-modal');
-        // Click handler.
-       modalDiv.hide();
-        jQuery('#poster-additem button').click(function () {
-            modalDiv.dialog({modal: true, width: "572", height: "500", title: "Add an Item"});
-        });
-        // have the select button appear upon selection of the item
-        jQuery('.additem-item').click(function () {
-            jQuery('.additem-item').removeClass('item-selected');
-            jQuery(this).addClass('item-selected');
-        });
-
+(function ($) {
+    Omeka.Poster.setUpItemsSelect = function (itemOptionsUrl) {
+        /*
+         * Use Ajax to retrieve the list of items that can be attached.
+         */
+        var modalDiv = $('#additem-modal');
+        modalDiv.hide();
         
-        jQuery('.additem-form').submit(function (event) {
-        	var form = jQuery(this), submitButtons = jQuery('.additem-submit');
-            event.preventDefault();
-            submitButtons.attr('disabled', 'disabled');
-            Omeka.Poster.mceExecCommand('mceRemoveControl');
-            jQuery.get(form.attr('action'), form.serialize(), function (data) {
-                    
-            	jQuery('#poster-canvas').append(data);
-            	Omeka.Poster.hideExtraControls();
-            	Omeka.Poster.mceExecCommand('mceAddControl');
-                Omeka.Poster.bindControls();
-	            modalDiv.dialog('close');
-	            submitButtons.removeAttr('disabled');
+        //Click Handler
+        $('#poster-additem button').click(function(){
+            //show items in a popup
+            modalDiv.dialog({
+                modal: true,
+                width: "572",
+                height: "500",
+                title: "Add Item"
             });
-            jQuery('#poster-no-items-yet').hide();
+            //Hide unneccesarry buttons 
+           setSearchVisibility(false);
+             
+            
         });
-       
 
-        if (Omeka.Poster.itemCount > 0) {
-            // When the form loads, hide up and down controls that can't be used
-            // Should maybe grey them out instead
-            Omeka.Poster.hideExtraControls();
-
-            // Bind some actions to poster item controls
-            Omeka.Poster.bindControls();
+        function getItems(uri, params) {
+            modalDiv.addClass('loading');
+            $.ajax({
+                url: uri,
+                data: params,
+                method: 'GET',
+                success: function(data) {
+                    $('#item-select').html(data);
+                    $(document).trigger("omeka: loaditems");
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert('Error getting items: ', textStatus);
+                },
+                complete: function() {
+                    modalDiv.removeClass('loading');
+                }
+            });
         }
-    },
-
-    /**
-     * Wraps tinyMCE.execCommand
-     */
-    mceExecCommand: function (command) {
-        jQuery('#poster-canvas textarea').each(function () {
-            tinyMCE.execCommand(command, false, this.id);
-        });
-    },
-
-    /**
-     * Hides the move up and down options on the top and bottom items
-     */
-    hideExtraControls: function() {
-        jQuery('.poster-control').show();
-
-        jQuery('.poster-move-up').first().hide();
-        jQuery('.poster-move-top').first().hide();
-        jQuery('.poster-move-down').last().hide();
-        jQuery('.poster-move-bottom').last().hide();
-    },
-
-    /**
-     * Bind functions to items controls
-     */
-    bindControls: function(){
-        //Remove all previous bindings for controls
-        jQuery('.poster-control').unbind();
-
-        // Bind move up buttons
-        jQuery('.poster-move-up').click(function (event) {
-            var element = jQuery(this).parents('.poster-spot');
+        function setSearchVisibility(show){
+            var searchForm = $('#page-search-form');
+            var searchButton = $('#show-or-hide-search');
+           $('#revert-selected-item').hide();
+            if(typeof show === 'undefined'){
+                show = !searchForm.is(':visible');
+                $('#item-select').show();
+            }
+            if(show) {
+                searchForm.show();
+                //searchButton.addClass('hide-form').removeClass('show-form');
+                $('.show-search-label').hide();
+                $('.hide-search-label').show();
+                $('#item-select').hide();
+            } else {
+                searchForm.hide();
+                $('.show-search-label').show();
+                $('.hide-search-label').hide();
+                $('#item-select').show();
+                
+            }    
+        }
+        //initially load the paginated items
+       getItems($('#search').attr('action'));
+       
+       $('#search').submit(function(event){
             event.preventDefault();
-            Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.insertBefore(element.prev());
-            Omeka.Poster.hideExtraControls();
-            Omeka.Poster.mceExecCommand('mceAddControl');
-        });
-
-        // Bind move down buttons
-        jQuery('.poster-move-down').click(function (event) {
-            var element = jQuery(this).parents('.poster-spot');
+            getItems(this.action, $(this).serialize());
+            setSearchVisibility(false);
+       });
+       //make searcn and pagination use ajax to respond.
+       $('#item-form').on('click', '.pagination a, #view-all-items', function (event) {
             event.preventDefault();
-            Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.insertAfter(element.next());
-            Omeka.Poster.hideExtraControls();
-            Omeka.Poster.mceExecCommand('mceAddControl');
-        });
-
-        // Bind move top buttons
-        jQuery('.poster-move-top').click(function (event) {
-            var element = jQuery(this).parents('.poster-spot');
+            getItems(this.href);
+            setSearchVisibility(false);
+            
+       });
+       $('#item-select').on('submit', '.pagination form', function(event) {
             event.preventDefault();
-            Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.prependTo('#poster-canvas');
-            Omeka.Poster.hideExtraControls();
-            Omeka.Poster.mceExecCommand('mceAddControl');
-        });
-
-        // Bind move bottom buttons
-        jQuery('.poster-move-bottom').click(function (event) {
-            var element = jQuery(this).parents('.poster-spot');
+            getItems(this.action + '?' + $(this).serialize());
+            setSearchVisibility(false);
+       });
+       setSearchVisibility(false);
+       $('#show-or-hide-search').click(function (event) {
             event.preventDefault();
-            Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.appendTo('#poster-canvas');
-            Omeka.Poster.hideExtraControls();
-            Omeka.Poster.mceExecCommand('mceAddControl');
-        });
+            setSearchVisibility();
+       });
+       
+       //Make Items Selectable
+       $('#item-select').on('click', '.item-listing', function(event) {
+            $('#item-list div.item-selected').removeClass('item-selected');
+            $(this).addClass('item-selected');
+       });
+        
+    }
 
-        // Bind delete buttons
-        jQuery('.poster-delete').click(function (event) {
-            var element = jQuery(this).parents('.poster-spot');
-            event.preventDefault();
-            Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.remove();
-            Omeka.Poster.hideExtraControls();
-            Omeka.Poster.mceExecCommand('mceAddControl');
+    Omeka.Poster.setUpWysiwyg = function() {
+        $(event.target).find('textarea').each(function (){
+            tinyMCE.execCommand('mceAddControl', true, this.id);
         });
     }
-};
+})(jQuery);
