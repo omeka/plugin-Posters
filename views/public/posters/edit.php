@@ -38,7 +38,7 @@ queue_css_file('poster');
                     foreach ($poster->Items as $posterItem){
                         $noteObj = '';
                         include('spot.php');//look into this.
-                        //common('spot', array('posterItem'=>$posterItem),'posters' );
+                        common('spot', array('posterItem'=>$posterItem),'posters' );
                     }
                 }
                 ?>

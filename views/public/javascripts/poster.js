@@ -92,12 +92,53 @@ Omeka.Poster = {};
        
        //Make Items Selectable
        $('#item-select').on('click', '.item-listing', function(event) {
-            $('#item-list div.item-selected').removeClass('item-selected');
-            $(this).addClass('item-selected');
-       });
+              $('#item-list .item-selected').removeClass('item-selected');
+              $(this).addClass('item-selected');
+               
+              /*$('.select-item').on('click', function(event){
+                    var form = $('#poster-form');
+                    var submitButtons = $('.additem-submit');
+                    event.preventDefault();
+                    submitButtons.attr('disabled','disabled');
+                    $.get(form.attr('action'), form.serialize(), function(data) {
+                        //alert(data);
+                        $('#poster-canvas').append(data);
+                        modalDiv.dialog('close');
+                        submitButtons.removeAttr('disabled');
+                    });
+                    $('#poster-no-items-yet').hide();
+              });*/  
+               });
+         $('.additem-form').submit(function (event) {
+        	var form = $(this), submitButtons = $('.additem-submit');
+            event.preventDefault();
+            submitButtons.attr('disabled', 'disabled');
+            Omeka.Poster.mceExecCommand('mceRemoveControl');
+            $.get(form.attr('action'), form.serialize(), function (data) {
+                  alert(data);
+            	$('#poster-canvas').append(data);
+            	Omeka.Poster.hideExtraControls();
+            	Omeka.Poster.mceExecCommand('mceAddControl');
+                Omeka.Poster.bindControls();
+	            modalDiv.dialog('close');
+	            submitButtons.removeAttr('disabled');
+            });
+            $('#poster-no-items-yet').hide();
+        });  
+              
+    
+
+        //$('.select-item').on('click','.item-listing', function(){
+          //  alert('clicked');
+       // });
+
         
     }
-
+    Omeka.Poster.mceExecComman = function(command) {
+        $('#poster-canvas textarea').each(function(){
+            tinyMce.execCommand(command, false, this.id);
+        });
+    }
     Omeka.Poster.setUpWysiwyg = function() {
         $(event.target).find('textarea').each(function (){
             tinyMCE.execCommand('mceAddControl', true, this.id);

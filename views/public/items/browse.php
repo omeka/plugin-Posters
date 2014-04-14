@@ -31,7 +31,12 @@ echo pagination_links(
             <h4 class="title">
                 <?php echo metadata($item, array('Dublin Core', 'Title')); ?>
             </h4>
-            <button type="button" class="select-item">Select Item</button>
+            <form action="<?php html_escape(url(array('action' => 'add-poster-item'),'default')); ?>" method="post" accept-charset="utf-8" class="additem-form">
+                <div>
+                    <input type="submit" name="submit" value="Add this Item" class="additem-submit"/>
+                    <input type="hidden" name="item-id" value="<?php echo html_escape($item->id); ?>" class="additem-item-id" />
+                </div>
+            </form>
         </div>
     <?php endforeach; ?>
 </div>
