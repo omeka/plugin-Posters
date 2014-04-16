@@ -44,6 +44,6 @@
 </div>
     <script type="text/javascript">
              jQuery(document).ready(function(){
-                Omeka.Poster.setUpWysiwyg();
+                Omeka.Poster.wysiwyg('mceAddControl');
              });        
     </script>

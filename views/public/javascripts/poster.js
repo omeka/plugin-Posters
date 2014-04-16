@@ -10,7 +10,7 @@ Omeka.Poster = {};
         var modalDiv = $('#additem-modal');
         modalDiv.hide();
         
-        this.setUpWysiwyg();
+        this.wysiwyg('mceAddControl');
         //Click Handler
         $('#poster-additem button').click(function(){
             //show items in a popup
@@ -111,21 +111,97 @@ Omeka.Poster = {};
               $(this).addClass('item-selected');
         });
         $('#item-select').on('click', '.item-selected',function(event){
-            //event.preventDefault();
+            event.preventDefault();
             var d = itemOptionsUrl+'/'+$('#item-select .item-selected').data('itemId');
             //alert(itemOptionsUrl);
             $.get(d, function(data){
                 $('#poster-canvas').append(data);
+                hideExtraControls();
+                this.bindControls();
                 modalDiv.dialog('close');
             });
         });
-       //this.setUpWysiwyg(); 
-    }
-    Omeka.Poster.setUpWysiwyg = function() {
-        $('textarea').each(function (){
-            tinyMCE.execCommand('mceAddControl', true, this.id);
-        });
+        
+
+        if (Omeka.Poster.itemCount > 0) {
+            //When the form loads, hide up and down controls that can't be used
+            Omeka.Poster.hideExtraControls();
+            Omeka.Poster.bindControls();
+        }
+
     }
 
+    /*
+     * wraps tinyMCE.execCommand.
+     */
+    Omeka.Poster.wysiwyg = function(command) {
+        $('textarea').each(function (){
+            tinyMCE.execCommand(command, true, this.id);
+        });
+    }
+    /**
+     * Hides the move up and down options on the top and bottom items
+     */
+    Omeka.Poster.hideExtraControls = function(){
+        $('.poster-control').show();
+        $('.poster-move-up').first().hide();
+        $('.poster-move-top').first().hide();
+        $('.poster-move-down').last().hide();
+        $('.poster-move-bottom').last().hide();
+    }
+
+    /**
+     * bind functions to items controls
+     */
+
+    Omeka.Poster.bindControls = function(){
+        //Remove all previous binding for controls
+        $('.poster-control').unbind();
+
+        //Bind move up buttons
+        $('.poster-move-up').click(function (event) {
+            var element = $(this).parents('.poster-spot');
+            event.preventDefault();
+            Omeka.Poster.wysiwyg('mceRemoveControl');
+            element.insertBefore(element.prev());
+            Omeka.Poster.hideExtraControls();
+            Omeka.Poster.wysiwyg('mceAddControl');
+        });
+        $('.poster-move-down').click(function (event) {
+            var element = $(this).parents('.poster-spot');
+            event.preventDefault();
+            Omeka.Poster.wysiwyg('mceRemoveControl');
+            element.insertBefore(element.next());
+            Omeka.Poster.hideExtraControls();
+            Omeka.Poster.wysiwyg('mceAddControl');
+        });
+
+        $('.poster-move-top').click(function (event) {
+            var element = $(this).parents('.poster-spot');
+            event.preventDefault();
+            Omeka.Poster.wysiwyg('mceRemoveControl');
+            element.prependTo('#poster-canvas');
+            Omeka.Poster.hideExtraControls();
+            Omeka.Poster.wysiwyg('mceAddControl');
+        });
+        $('.poster-move-bottom').click(function (event) {
+            var element = $(this).parents('.poster-spot');
+            event.preventDefault();
+            Omeka.Poster.wysiwyg('mceRemoveControl');
+            element.apendTo('#poster-canvas');
+            Omeka.Poster.hideExtraControls();
+            Omeka.Poster.wysiwyg('mceAddControl');
+        });
+
+        $('.poster-delete').click(function (event) {
+            var element = $(this).parents('.poster-spot');
+            event.preventDefault();
+            Omeka.Poster.wysiwyg('mceRemoveControl');
+            element.remove();
+            Omeka.Poster.hideExtraControls();
+            Omeka.Poster.wysiwyg('mceAddControl');
+        });
+
+    }
 
 })(jQuery);

@@ -101,16 +101,8 @@ queue_css_file('poster');
                 //<![CDATA[
    
     jQuery(document).ready(function(){
-        //Omeka.wysiwyg();
         Omeka.Poster.setUpItemsSelect(<?php echo js_escape(url(get_option('poster_page_path').'/add-poster-item'));?>);
-        //Omeka.Poster.setUpWysiwyg();
-        //jQuery(event.target).find('textarea').each(function (){
-        //    tinyMCE.execCommand('mceAddControl', false, this.id);
-        //});
-        //jQuery(this).find('textarea').each(function(){
-        //    tinyMCE.execCommand('mceAddControl', false, this.id);
-        //});
- 
+         
     });
 //]]>
 </script>            
