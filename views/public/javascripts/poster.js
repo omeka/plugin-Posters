@@ -116,8 +116,8 @@ Omeka.Poster = {};
             //alert(itemOptionsUrl);
             $.get(d, function(data){
                 $('#poster-canvas').append(data);
-                hideExtraControls();
-                this.bindControls();
+                Omeka.Poster.hideExtraControls();
+                Omeka.Poster.bindControls();
                 modalDiv.dialog('close');
             });
         });
