@@ -42,3 +42,10 @@
     <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="hidden-item-id" />
     
 </div>
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function(){
+        jQuery(event).find('textarea').each(function(){
+            tinyMCE.execCommand('mceAddControl',false,this.id);
+        });
+    });
+</script>

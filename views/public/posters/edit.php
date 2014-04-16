@@ -38,7 +38,7 @@ queue_css_file('poster');
                     foreach ($poster->Items as $posterItem){
                         $noteObj = '';
                         include('spot.php');//look into this.
-                        common('spot', array('posterItem'=>$posterItem),'posters' );
+                        //common('spot', array('posterItem'=>$posterItem),'posters' );
                     }
                 }
                 ?>
@@ -102,11 +102,11 @@ queue_css_file('poster');
    
     jQuery(document).ready(function(){
         //Omeka.wysiwyg();
-        Omeka.Poster.setUpItemsSelect(<?php echo js_escape(url('posters/attachment-item-options'));?>);
-        Omeka.Poster.setUpWysiwyg();
-        //jQuery(event.target).find('textarea').each(function (){
-          //  tinyMCE.execCommand('mceAddControl', false, this.id);
-        //});
+        Omeka.Poster.setUpItemsSelect(<?php echo js_escape(url(get_option('poster_page_path').'/add-poster-item'));?>);
+        //Omeka.Poster.setUpWysiwyg();
+        jQuery(event.target).find('textarea').each(function (){
+            tinyMCE.execCommand('mceAddControl', false, this.id);
+        });
  
     });
 //]]>

@@ -148,7 +148,7 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     public function addPosterItemAction()
     {
         $params = $this->getRequest()->getParams();
-        $itemId = $params['item-id'];
+        $itemId = $params['id'];
         //var_dump($itemId); 
         //var_dump($params); exit;
         $posterItem = $this->_helper->db->getTable('Item')->find((int) $itemId);
