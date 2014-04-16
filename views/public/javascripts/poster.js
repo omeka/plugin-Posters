@@ -2,6 +2,7 @@ var Omeka = Omeka || {};
 Omeka.Poster = {};
 
 (function ($) {
+    itemCount: 0;
     Omeka.Poster.setUpItemsSelect = function (itemOptionsUrl) {
         /*
          * Use Ajax to retrieve the list of items that can be attached.
@@ -9,6 +10,7 @@ Omeka.Poster = {};
         var modalDiv = $('#additem-modal');
         modalDiv.hide();
         
+        this.setUpWysiwyg();
         //Click Handler
         $('#poster-additem button').click(function(){
             //show items in a popup
@@ -114,20 +116,13 @@ Omeka.Poster = {};
             //alert(itemOptionsUrl);
             $.get(d, function(data){
                 $('#poster-canvas').append(data);
-                Omeka.Poster.setUpWysiwyg();
                 modalDiv.dialog('close');
             });
         });
-
-        
-    }
-    Omeka.Poster.mceExecCommand = function(command) {
-        $('#poster-canvas textarea').each(function(){
-            tinyMce.execCommand(command, false, this.id);
-        });
+       //this.setUpWysiwyg(); 
     }
     Omeka.Poster.setUpWysiwyg = function() {
-        $(event.target).find('textarea').each(function (){
+        $('textarea').each(function (){
             tinyMCE.execCommand('mceAddControl', true, this.id);
         });
     }
