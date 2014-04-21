@@ -203,5 +203,5 @@ Omeka.Poster = {};
         });
 
     }
-
-})(jQuery);
+    
+  })(jQuery);

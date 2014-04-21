@@ -155,4 +155,5 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $this->view->posterItem = $posterItem;
         $this->render('spot');
     }
+
 }

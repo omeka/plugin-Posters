@@ -65,7 +65,7 @@ queue_css_file('poster');
                     <input type="hidden" name="itemCount" value="<?php echo count($poster->Items); ?>" id="itemCount"/>
 
                     <div id="help">
-                	    <p><a href="<?php echo html_escape(url(array('action'=>'help'), 'default')); ?>" class="help-link">Help</a></p>
+                	    <p><a href="<?php echo html_escape(url(array('action'=>'help'), get_option('poster_page_path'))); ?>" class="help-link">Help</a></p>
                 	</div>
 
                 </div>

@@ -774,3 +774,19 @@ input[type=submit].configure-button {
   to {
     transform: rotate(360deg); } 
 }
+/* Slider css */
+.poster-items {
+    margin: 10px 0;
+    width 580px;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+.poster-items li {
+    /*display: none;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+

@@ -1,6 +1,8 @@
 <?php
 
 $pageTitle = 'Poster: &quot;' . html_escape($poster->title) . '&quot;';
+echo queue_css_file('jquery.bxslider');
+echo queue_js_file('jquery.bxslider');
 echo head(array('title'=>$pageTitle));
 
 ?>
@@ -14,9 +16,10 @@ echo head(array('title'=>$pageTitle));
 		</div>
 
         <?php //set_items_for_loop($poster->Items); ?>
-        <div class="poster-items">
+        <ul class="poster-items">
         <?php foreach($poster->Items as $posterItem): ?>
-        <?php $item = get_record('Item', $posterItem);
+<?php $item = get_record('Item', $posterItem);
+            echo "<li>";
             if(metadata($item, 'has files')){
                 foreach($item->Files as $itemFile) {
                     if($itemFile->hasThumbnail()){
@@ -30,9 +33,10 @@ echo head(array('title'=>$pageTitle));
                     }
                 }
             }
+            echo "</li>"
 ?>
         <?php endforeach; ?>
-         </div>
+         </ul>
 
 		<?php 
          $disclaimer = get_option('poster_disclaimer');
@@ -50,4 +54,11 @@ echo head(array('title'=>$pageTitle));
         <?php endif; ?>
 	</div>
 </div> <!-- end primary div -->
+<script type="text/javascript"> 
+             jQuery('.poster-items').bxSlider({
+                auto: true,
+                autoControls: true,
+             });
+
+</script>
 <?php echo foot(); ?>
