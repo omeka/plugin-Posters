@@ -156,4 +156,34 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $this->render('spot');
     }
 
+    public function shareAction()
+    {
+        unset($_SESSION['new_poster_id']);
+        $poster = $this->_helper->db->findById(null, 'Poster');
+        $emailSent = false;
+       
+        if($this->getRequest()->isPost()){
+            $validator = new Zend_Validate_EmailAddress();
+            $emailTo = $this->getRequest()->getPost('email_to');
+            if(Zend_Validate::is($emailTo,'EmailAddress')){
+                $site_title = get_option('site_title');
+                $from = get_option('administrator_email');
+
+                $subject = $this->_currentUser->username . "shared a poster with you";
+
+                $body = $subject . " on $site_title. \n\n"
+                      . "Click here to view the poster:\n"
+                      . absolute_url(array('action' => 'show', 'id'=> $poster->id), get_option('poster_page_path'));
+                $header = "From: $from\n"
+                       . "X-Mailer: PHP/" . phpversion();
+
+                mail($emailTo, $subject, $body, $header);
+                $emailSent = true;
+            } else {
+                echo $this->flash("Invalid email address");
+            }
+        }
+        $this->view->assign(compact("poster", "emailSent", "emailTo"));
+    }
+
 }
