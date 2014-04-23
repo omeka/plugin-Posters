@@ -1,7 +1,8 @@
 <?php
+queue_css_file('poster');
+
 $pageTitle = html_escape(get_option('poster_page_title'));
 echo head(array('title' => $pageTitle));
-
 ?>
 <div id="primary">
 <?php $posters = $this->posters; ?>
@@ -19,6 +20,7 @@ echo head(array('title' => $pageTitle));
                                 'id' => $poster->id),
                         get_option('poster_page_path'))); ?>">Delete</a>
             <a href="<?php echo html_escape(url(array('action'=>'edit','id' => $poster->id), get_option('poster_page_path'))); ?>">edit</a>
+            <a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share Poster</a>
             </li>
         </ul>
     </div>

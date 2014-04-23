@@ -24,7 +24,7 @@ echo head(array('title' => $pageTitle)); ?>
                <tbody>
                    
                        <?php foreach($posters as $poster): ?>
-                       <tr><td><a href="<?php echo html_escape(url(array('action' => 'show', 'id' => $poster->id),'default')); ?>" 
+                       <tr><td><a href="<?php echo html_escape(url(array('controller' => 'poster', 'action' => 'show', 'id' => $poster->id))); ?>" 
                                   class="view-poster-link"><?php echo html_escape($poster->title); ?></a>
                                <ul class="action-links group">
                                    <?php if(is_allowed('Posters_Poster', 'delete')): ?>

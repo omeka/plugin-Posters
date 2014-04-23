@@ -1,54 +1,10 @@
-/* override for core's .undo-delete hiding */
-#page-list .undo-delete {
-    display: inline;
-}
-
-.page ul { margin-top: 15px; }
-
-/* Edit Page */
-
-/* Item/Attachment dialog */
-
-.item-dialog {
-    z-index: 1000;
-}
-
-#attachment-panel {
-    display: none;
-    padding: 10px 5px 40px;
-    position: relative;
-}
-
-#attachment-panel + div {
-    margin-top: 0;
-    padding: 5px 0;
-}
-
-#attachment-panel #attachment-options {
-    display: none;
-}
-
-#attachment-panel.editing-attachment #attachment-options {
-    display: block;
-    padding-top: 40px;
-}
-
-#attachment-panel.editing-attachment #item-form {
-    display: none;
-}
-
-#attachment-save {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #F8F6F0;
-    border-top: 1px solid #D6D5C2;
-    padding: 10px;
-    text-align: right;
-}
-
 /* Item select */
+#poster-additem {
+    margin-top: 10px;
+}
+ul.poster-meta {
+    list-style-type: none;
+}
 
 #item-select {
     padding: 0;
@@ -763,17 +719,17 @@ input[type=submit].configure-button {
 @-webkit-keyframes spin {
   to {
     -webkit-transform: rotate(360deg); } 
-}
+
 
 @-moz-keyframes spin {
   to {
     -moz-transform: rotate(360deg); } 
-}
+
 
 @keyframes spin {
   to {
     transform: rotate(360deg); } 
-}
+
 /* Slider css */
 .poster-items {
     margin: 10px 0;
@@ -788,5 +744,3 @@ input[type=submit].configure-button {
     top: 0;
     left: 0;
 }
-
-

@@ -169,7 +169,7 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
                 $site_title = get_option('site_title');
                 $from = get_option('administrator_email');
 
-                $subject = $this->_currentUser->username . "shared a poster with you";
+                $subject = $this->_currentUser->username . " shared a poster with you";
 
                 $body = $subject . " on $site_title. \n\n"
                       . "Click here to view the poster:\n"
