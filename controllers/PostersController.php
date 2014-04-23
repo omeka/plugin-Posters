@@ -186,4 +186,17 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $this->view->assign(compact("poster", "emailSent", "emailTo"));
     }
 
+    public function generateAction()
+    {
+        $poster = $this->_helper->db->findById(null, 'Poster');
+        $pdf = new Poster_Pdf();
+        $pdf->generate($poster);
+        $this->_helper->redirector->gotoRoute(
+            array(
+                'action' => 'edit',
+                'id'   => $poster->id
+            ), get_option('poster_page_path')
+        );
+    }
+
 }

@@ -58,16 +58,21 @@ queue_css_file('poster');
                 <?php //echo $this->formSubmit('save_poster',__('Save Poster'), array('class' => 'submit big green button')); ?>
                     <input type="submit" name="save_poster" value="Save Poster" > or 
                     <?php if (is_admin_theme()): ?>
-                        <a href="<?php echo html_escape(url(array('action'=>'discard'), 'default')); ?>">Discard Changes and Return to Poster Administration</a>
+                        <a href="<?php echo html_escape(url(array('action'=>'discard'), get_option('poster_page_path'))); ?>">Discard Changes and Return to Poster Administration</a>
                     <?php else: ?>
-                        <a href="<?php echo html_escape(url(array('action'=> 'discard'), 'default')); ?>">Discard Changes and Return to the Dashboard</a>
+                        <a href="<?php echo html_escape(url(array('action'=> 'discard'), get_option('poster_page_path'))); ?>">Discard Changes and Return to the Dashboard</a>
                     <?php endif ?>
                     <input type="hidden" name="itemCount" value="<?php echo count($poster->Items); ?>" id="itemCount"/>
 
                     <div id="help">
                         <p><a href="<?php echo html_escape(url(array('action'=>'help'), get_option('poster_page_path'))); ?>" class="help-link">Help</a></p>
+                    </div>
+                    <div id="share">
                         <p><a href="<?php echo html_escape(url(array('action'=>'share'), get_option('poster_page_path'))); ?>" class="share-link">Share Poster</a></p>
-                	</div>
+                    </div>
+                    <div id="print">
+                        <p><a href="<?php echo html_escape(url(array('action'=>'generate', 'id'=> $poster->id), get_option('poster_page_path'))); ?>">Save as PDF</a></p>
+                    </div>
 
                 </div>
             
