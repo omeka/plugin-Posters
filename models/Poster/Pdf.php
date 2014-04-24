@@ -41,8 +41,8 @@ class Poster_Pdf //extends Zend_Pdf{
         $this->_posterDesc($poster,$page);
         header("Content-Disposition: inline; filename=$file");
         header("Content-type: application/x-pdf");
-        echo $this->_pdf->render(); exit;
-        $this->_pdf->save($file);
+        echo $this->_pdf->render();  exit;
+        //$this->_pdf->save($file);
     }
     private function _getTempFilename($prefix, $count)
     {
@@ -57,24 +57,56 @@ class Poster_Pdf //extends Zend_Pdf{
      }
     private function _posterDesc($poster, $page)
     {
+        $title = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
         $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
         $page->drawText("Description: ",50, 740);
         $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 12);
         $txtArr = $this->_cleanText($poster->description, 80);
         $i = 0;
+        $yaxis = 725;
         foreach($txtArr as $t){
-            $page->drawText($t,50,(730 - (13*$i)), 'UTF-8');
+            $page->drawText($t,55,(725 - (13*$i)), 'UTF-8');
+            $yaxis = $yaxis - 13;   
             $i++;
         }
+        $page->setFont($title,13);
+        $page->drawText("Poster Items: ",50, $yaxis);
+        $this->_posterItems($page,$poster,$yaxis-10);
+       
         //$page->drawText($this->_cleanText($poster->description),50,730, 'UTF-8');
         //exit;
         //$page->drawLine(50,755,50,755);
         
     }
 
-     private function _posterItems($poster)
+     private function _posterItems($page, $poster, $yaxis)
      {
+        $y1 = 525-5;
+        $y2 = 625-5;
+        $title = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
+        $page->setFont($title, 10);
+        
+                
+        foreach($poster->Items as $item){
+            $page->drawText(metadata($item, array('Dublin Core','Title')),50, $y2);
+            $y1 = $y1 - 13;
+            $y2 = $y2 - 13;
+             if(metadata($item, 'has files')){
+                 $i = 0;
+                 foreach($item->Files as $file){
+                    if($file->hasThumbnail()){
+                        $yaxis = $yaxis - ($i * 100);
+                        $imgSrc = FILES_DIR."/".$file->getStoragePath();                      
+                        $image = Zend_Pdf_Image::imageWithPath($imgSrc);
+                        //                image, x1, y1,    x2, y2
+                        $page->drawImage($image, 50,$y1,200, $y2);
 
+                        $y1 = $y1 - 110;
+                        $y2 = $y2 - 110;
+                    }
+                }
+             }
+         }
      }
     private function _cleanText($txt, $wc)
     {
