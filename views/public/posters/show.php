@@ -2,6 +2,7 @@
 
 $pageTitle = 'Poster: &quot;' . html_escape($poster->title) . '&quot;';
 echo queue_css_file('jquery.bxslider');
+queue_css_file('poster');
 echo queue_js_file('jquery.bxslider');
 echo head(array('title'=>$pageTitle));
 
@@ -54,10 +55,14 @@ echo head(array('title'=>$pageTitle));
 	</div>
 </div> <!-- end primary div -->
 <script type="text/javascript"> 
+             var n = jQuery('.poster-items li').length;
+
+         if (n > 1) {
              jQuery('.poster-items').bxSlider({
                 auto: true,
                 autoControls: true,
              });
+         }
 
 </script>
 <?php echo foot(); ?>
