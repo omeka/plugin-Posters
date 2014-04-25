@@ -36,6 +36,9 @@ queue_css_file('poster');
                 <div id="poster-canvas">
                 <?php if (count($poster->Items)){
                     foreach ($poster->Items as $posterItem){
+                        $noteObj = '';
+                        echo "<h1>".$posterItem->id."</h1>";
+                        //include('spot.php');//look into this.
                         echo common('spot', array('posterItem'=>$posterItem),'posters' );
                     }
                 }

@@ -1,3 +1,5 @@
+<?php $item = get_record('Item',$posterItem);
+?>
 <div class="poster-spot">
 
 	<div class="poster-item-header">
@@ -17,6 +19,7 @@
     </div>
     
     <div class="poster-item-thumbnail">
+     <?php echo "<h1>".$posterItem->id."</h1>"; ?>
         <?php if (metadata($posterItem, 'has files')){
              foreach ($posterItem->Files as $displayFile){
                  if($displayFile->hasThumbnail()){
