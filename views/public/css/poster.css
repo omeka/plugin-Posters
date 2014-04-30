@@ -1,7 +1,7 @@
 .poster-items {
     list-style: none;
     margin: 10px 0;
-    width 580px;
+    width: 580px;
     height: 250px;
     position: relative;
     overflow: hidden;
@@ -26,7 +26,7 @@ ul.poster-meta {
 
 #item-select .pagination {
     position: absolute;
-    top 0;
+    top: 0;
     right: 5px;
     margin-bottom: 0;
 }
@@ -730,7 +730,7 @@ input[type=submit].configure-button {
     transform-origin: 50% 0%; 
 }
 
-@-webkit-keyframes spin {
+/*@-webkit-keyframes spin {
   to {
     -webkit-transform: rotate(360deg); } 
 
