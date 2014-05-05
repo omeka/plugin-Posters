@@ -4,11 +4,12 @@ class Poster_Pdf //extends Zend_Pdf{
 {
     protected $_pdf;
     protected $_template;
-    private $_font;
-    private $_pageCount = 0;
+    protected $_font;
+    protected $_pageCount = 0;
+    protected $_x;
+    protected $_y;
 
-    const PAGE_HEIGHT = 595;
-    const PAGE_WIDTH  = 842;
+
 
     const MARGIN_LEFT   = 13.5;
     const MARGIN_RIGHT  = 36;
@@ -21,64 +22,105 @@ class Poster_Pdf //extends Zend_Pdf{
         // new pdf file will be created
         // everytime this class is called
         // this behaviour might change
-        $tmplt = dirname(__FILE__)."/PdfTemplate.pdf";
+       // $tmplt = dirname(__FILE__)."/PdfTemplate.pdf";
         //var_dump($tmplt);
         $this->_pdf = new Zend_Pdf();
-        if (file_exists($tmplt)){
-            $this->_template = Zend_Pdf::load($tmplt);
-        }
+       // if (file_exists($tmplt)){
+         //   $this->_template = Zend_Pdf::load($tmplt);
+        // }
+        //
+        //Set fonts
+        $this->_font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
+        $this->_bfont = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
+    
     }
     public function generate($poster)
     {
 
        $file = $poster->title . ".pdf";
-       $bfont = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
-       $font  = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
-       $index = 0;
-       $makePages = true;
-       while($makePages){
-           $page = $this->_pdf->newPage(Zend_Pdf_Page::SIZE_A4);
-          // 50 is the margin line
-           $x = 50;//$page->getWidth();
-           //start drawing from th
-           $y = 780;//$page->getHeight();
-           $page->setFont($bfont, 14);
-           $page->drawText($poster->title,$x,$y);
-           $y = $y - 12;// y = 778
-           $page->drawLine($x,$y, $x+495, $y-1);
-           $y = $y-12;//
-           if($index === 0){
-               
-               $this->_posterDesc($poster, $page, $x, $y);
+       $run = true;
+       $i = 0;
+       foreach($poster->Items as $pItem){
+          
+          // $page = $this->_newPage($poster);
+
+          //Only write the description if this is the first page
+           if($i === 0) {
+               $page = $this->_newPage($poster);
+                $this->_posterDesc($poster, $page, $this->_x, $this->_y);
            }
+           //Start printing the items description and images
+           //foreach($poster->Items as $pItem){
+           $this->_y -= 13;
+               //if the title is longer than 90 characters split it into se
+           foreach($this->_cleanText(metadata($pItem, array('Dublin Core', 'Title')), 90) as $t){
+                    $page->setFont($this->_bfont, 12);
+                    $page->drawText($t, $this->_x, $this->_y);
+                    $this->_y -= 12;
+           } 
+               $x = $this->_x;
+               // place  images in rows of 3
+               
+                if (metadata($pItem, 'has files')) {
+                    $j = 0;
+                    foreach($pItem->Files as $piFile) {
+                        if($piFile->hasThumbnail()) {
+                            $imgSrc = FILES_DIR . "/" . $piFile->getStoragePath();
+                            //$page->drawText("$j x: $x, y: {$this->_y}", $x, $this->_y);                           
+                            $image = Zend_Pdf_Image::imageWithPath($imgSrc);
+                            $page->drawImage($image, $x, $this->_y - 150, $x + 150, $this->_y);
+                            $x = ($j >= 2)? 50 : $x + 160;
+                            $this->_y = ($j >= 2)? $this->_y - 155: $this->_y;
+                            $j = $j % 2;
+                         
+                            $j++;                            
+                        }
+                    }
+                }// end of image printing
+               $this->_y = ($i > 0)? $this->_y - 165 : $this->_y;
+              // $page->setFont($this->_font, 12);
+                foreach($this->_cleanText($pItem->annotation, 90) as $t) {
+                    $page->setFont($this->_font, 12);
+                    $page->drawText($t, $this->_x, $this->_y);
+                    $this->_y -= 13;
+                }
+                    if($this->_y < 85 ){
+                        //$page->drawText($this->_y." ".$t, $this->_x, $this->_y-=150);
+                        $this->_y -= 13;
+                        $page = $this->_newPage($poster);
+                        
+                    }
+                    
+                    
+
+                
+           //}
            
-      
-        $this->_pdf->pages[$index] = $page;
-       $makePages = false;
+
+           $run = false;
+               //$this->_pdf->pages[] = $page;
+           $i++;
+
        }
         header("Content-Disposition: inline; filename=$file");
-        header("Content-type: application/x-pdf");
+        header("Content-type: application/pdf");
         echo $this->_pdf->render();  exit;
-        //create the pages object page size = 595:842
-       /* $page = $this->_pdf->newPage(Zend_Pdf_Page::SIZE_A4);
-        $this->_pdf->pages[] = $page;
-        $page->setFont(Zend_Pdf_Font::fontWithName(
-                Zend_Pdf_Font::FONT_HELVETICA_BOLD
-            ),
-            14
-        );
-        $page->drawText($poster->title,50 ,760);
-        $page->drawLine(50,755,545,755);
-        
-        $this->_posterTitle($poster,$page);
-        $this->_posterDesc($poster,$page);
-        header("Content-Disposition: inline; filename=$file");
-        header("Content-type: application/x-pdf");
-        echo $this->_pdf->render();  exit;
-    //    //$this->_pdf->save($file);*/
+      }
+     private function _newPage($poster){
+        $this->_x = 50;
+        $this->_y = 780;
+        $page = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+           $page->setFont($this->_bfont, 14);
+           $page->drawText($poster->title, $this->_x, $this->_y);
+           $this->_y -= 12;
+           $page->drawLine($this->_x, $this->_y, $this->_x + 495, $this->_y - 2);
+           $this->_y -= 12;
     
-    }
+           $this->_pdf->pages[] = $page;
+           return $page;
 
+
+    }
     private function _getTempFilename($prefix, $count)
     {
           return $prefix . '-part' . $count . '.pdf';
@@ -90,7 +132,7 @@ class Poster_Pdf //extends Zend_Pdf{
         $page->drawLine(50,755,545,755);
 
      }
-    private function _posterDesc($poster, $page,$x ,$y)
+    private function _posterDesc($poster, $page,&$x ,&$y)
     {
         $title = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
         $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
@@ -109,7 +151,7 @@ class Poster_Pdf //extends Zend_Pdf{
         $page->setFont($title,13);
         $page->drawText("Poster Items: ",$x, $y);
         $y = $y-20;
-        $this->_posterItems($page,$poster,$x, $y);
+        //$this->_posterItems($page,$poster,$x, $y);
        
         //$page->drawText($this->_cleanText($poster->description),50,730, 'UTF-8');
         //exit;
