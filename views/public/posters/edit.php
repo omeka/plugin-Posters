@@ -69,7 +69,7 @@ queue_css_file('poster');
                         <p><a href="<?php echo html_escape(url(array('action'=>'share'), get_option('poster_page_path'))); ?>" class="share-link">Share Poster</a></p>
                     </div>
                     <div id="print">
-                        <p><a href="<?php echo html_escape(url(array('action'=>'generate', 'id'=> $poster->id), get_option('poster_page_path'))); ?>">Save as PDF</a></p>
+                        <p><a href="<?php echo html_escape(url(array('action'=>'generate', 'id'=> $poster->id), get_option('poster_page_path'))); ?>" target="_blank" type="application/pdf" >Save as PDF</a></p>
                     </div>
 
                 </div>
@@ -106,6 +106,7 @@ queue_css_file('poster');
    
     jQuery(document).ready(function(){
         Omeka.Poster.setUpItemsSelect(<?php echo js_escape(url(get_option('poster_page_path').'/add-poster-item'));?>);
+        Omeka.Poster.wysiwyg('mceAddControl');
          
     });
 //]]>

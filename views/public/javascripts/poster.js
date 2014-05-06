@@ -3,6 +3,7 @@ Omeka.Poster = {};
 
 (function ($) {
     itemCount: 0;
+
     Omeka.Poster.setUpItemsSelect = function (itemOptionsUrl) {
         /*
          * Use Ajax to retrieve the list of items that can be attached.
@@ -10,7 +11,7 @@ Omeka.Poster = {};
         var modalDiv = $('#additem-modal');
         modalDiv.hide();
         
-        this.wysiwyg('mceAddControl');
+        //this.wysiwyg('mceAddControl');
         //Click Handler
         $('#poster-additem button').click(function(){
             //show items in a popup
@@ -137,6 +138,7 @@ Omeka.Poster = {};
     Omeka.Poster.wysiwyg = function(command) {
         $('textarea').each(function (){
             tinyMCE.execCommand(command, true, this.id);
+            
         });
     }
     /**

@@ -18,13 +18,13 @@ echo head(array('title' => $pageTitle)); ?>
                        <th>Title</th>
                        <th>Date Created</th>
                        <th>Description</th>
-                       <th>Created By</th>
+                       <!--th>Created By</th-->
                    </tr>
                </thead>
                <tbody>
                    
                        <?php foreach($posters as $poster): ?>
-                       <tr><td><a href="<?php echo html_escape(url(array('controller' => 'poster', 'action' => 'show', 'id' => $poster->id))); ?>" 
+                       <tr><td><a href="<?php echo html_escape(public_url(get_option('poster_page_path').'/show/'.$poster->id)); ?>" target="_blank" 
                                   class="view-poster-link"><?php echo html_escape($poster->title); ?></a>
                                <ul class="action-links group">
                                    <?php if(is_allowed('Posters_Poster', 'delete')): ?>
@@ -42,9 +42,10 @@ echo head(array('title' => $pageTitle)); ?>
                            </td>
                        <td><?php echo html_escape($poster->date_created); ?></td>
                        <td><?php echo html_escape(snippet($poster->description, 0, 50)); ?></td>
-                       <td><?php echo html_escape($poster->user_id); ?></td>
+                       <!--td><?php // echo html_escape($poster->user_id); ?></td-->
                        </tr>
                        <?php endforeach;?>
+                       
                    
                </tbody>
            </table>

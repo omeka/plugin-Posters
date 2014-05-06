@@ -32,7 +32,7 @@
     <div class="poster-item-annotation">
         <h4>My Annotation:</h4>
         <?php echo get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
-            array(  'id'=>'poster-annotation-' . mt_rand(0, 999999999),
+            array(  'id'=>'poster-form poster-annotation-' . mt_rand(0, 999999999),
                    'rows'=>'6',
                     'cols'=>'10')); ?>
     </div>
@@ -40,8 +40,4 @@
     <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="hidden-item-id" />
     
 </div>
-    <script type="text/javascript">
-             jQuery(document).ready(function(){
-                Omeka.Poster.wysiwyg('mceAddControl');
-             });        
-    </script>
+

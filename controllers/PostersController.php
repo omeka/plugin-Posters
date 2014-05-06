@@ -37,12 +37,10 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         //$this->_verifyAccess($poster,'edit');
         //retrieve public items 
         $items = $this->_helper->db->getTable()->findByUserId($this->_currentUser->id);
-        //var_dump($items); exit;
         $this->view->assign(compact('poster','items'));
     }
     public function showAction() {
         $params = $this->getRequest()->getParams();
-        //var_dump($params); exit;
         $poster = $this->_helper->db->findById(null, 'Poster');        
         $this->view->currentUser = $this->_currentUser;
         $this->view->poster = $poster;
@@ -84,10 +82,7 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $poster->save();
         
         $bp = get_option('poster_page_path');
-        //$this->flashSuccess("\"$poster->title\" was successfully saved.");
-
-        /*if(is_admin_theme()) {*/
-            $this->_helper->redirector->gotoRoute(
+        $this->_helper->redirector->gotoRoute(
                 array(
                     'controller' => 'posters',
                     'module' => 'posters',
@@ -99,7 +94,6 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     
     public function deleteAction()
     {
-        //var_dump($this->getRequest()->getParams()); exit;
         $poster = $this->_helper->db->findById(null, 'Poster');
 
         $poster->delete();
@@ -149,8 +143,6 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     {
         $params = $this->getRequest()->getParams();
         $itemId = $params['id'];
-        //var_dump($itemId); 
-        //var_dump($params); exit;
         $posterItem = $this->_helper->db->getTable('Item')->find((int) $itemId);
         $this->view->posterItem = $posterItem;
         $this->render('spot');
