@@ -15,10 +15,7 @@ echo head(array('title' => $pageTitle));
         <ul class="poster-meta">
             <li class="poster-date"><?php echo html_escape($poster->date_created); ?></li>
             <li class="poster-description"><?php echo html_escape(snippet($poster->description,0, 200)); ?></li>
-            <li><a href="<?php echo html_escape(url(array(
-                                'action' => 'delete-confirm',
-                                'id' => $poster->id),
-                        get_option('poster_page_path'))); ?>">Delete</a>
+            <li><a href="<?php echo html_escape(url(array('action' => 'delete-confirm', 'id' => $poster->id),  get_option('poster_page_path'))); ?>">Delete</a>
             <a href="<?php echo html_escape(url(array('action'=>'edit','id' => $poster->id), get_option('poster_page_path'))); ?>">edit</a>
             <a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share Poster</a>
             </li>

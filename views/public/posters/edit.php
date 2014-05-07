@@ -17,7 +17,7 @@ queue_css_file('poster');
     <h1><?php echo $pageTitle; ?></h1>
     <div id="poster">
 	    <div id="poster-info">
-            <form action="<?php echo html_escape(url(array('action'=>'save', 'id'=>$poster->id), 'posters')); ?>" method="post" accept-charset="utf-8" id="poster-form">
+            <form action="<?php echo html_escape(url(array('action'=>'save', 'id'=>$poster->id), get_option('poster_page_path'))); ?>" method="post" accept-charset="utf-8" id="poster-form">
                 <div class="field">
                     <label for="title">Title of Poster:</label>
                     <?php echo $this->formText('title', $poster->title, array('id'=>'title')); ?>

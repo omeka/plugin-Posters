@@ -30,7 +30,8 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     // Define Filters
     protected $_filters = array(
         'admin_navigation_main',
-         'guest_user_widgets'  
+        'guest_user_widgets',
+        'public_navigation_main',  
     );
 
     /**
@@ -121,6 +122,15 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         $acl->addResource('Posters_Poster');
         $acl->allow(null, 'Posters_Poster', array('edit', 'add', 'delete'));
         
+    }
+    public function filterPublicNavigationMain($nav)
+    {
+        $nav[] = array(
+            'label' => __('Browse Posters'),
+            'uri'   => url(array('action'=>'browse'),get_option('poster_page_path')),
+            //'resource' =>'Posters',
+        );
+        return $nav;
     }
     public function hookDefineRoutes($args)
     {
