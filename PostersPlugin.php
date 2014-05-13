@@ -7,7 +7,7 @@
  * @package Posters
  */
 require_once dirname(__FILE__) . '/helpers/PosterFunctions.php';
-define('POSTER_PAGE_PATH','posters/');
+define('POSTER_PAGE_PATH','posters');
 define('POSTER_PAGE_TITLE', 'Posters');
 define('POSTER_DISCLAIMER','This page contains user generated content and does not necessarily reflect the opinions of this website. For more information please refer to our terms of service and conditions. If you would like to report the content of this as objectionable, Please contact us.');
  /**
@@ -120,7 +120,9 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         $acl = $args['acl'];
         
         $acl->addResource('Posters_Poster');
-        $acl->allow(null, 'Posters_Poster', array('edit', 'add', 'delete'));
+        $acl->allow(null, 'Posters_Poster', array('show','browse'));
+        $acl->allow('guest', 'Posters_Poster', array('browse','show','edit', 'add', 'delete'), new Omeka_Acl_Assert_Ownership);
+        $acl->allow('guest','Posters_Poster', array('browse','show'));
         
     }
     public function filterPublicNavigationMain($nav)
@@ -128,7 +130,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         $nav[] = array(
             'label' => __('Browse Posters'),
             'uri'   => url(array('action'=>'browse'),get_option('poster_page_path')),
-            //'resource' =>'Posters',
+            'visible' => true,
         );
         return $nav;
     }

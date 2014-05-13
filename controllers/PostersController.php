@@ -27,7 +27,7 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     
     public function browseAction() 
     {
-           $posters = $this->_helper->db->findBy(array('user_id' => $this->_currentUser->id), 'Poster');
+           $posters = $this->_helper->db->findBy(array(), 'Poster');
            $this->view->posters = $posters;
     }
     
