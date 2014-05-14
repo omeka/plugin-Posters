@@ -20,6 +20,7 @@ echo head(array('title'=>$pageTitle));
         <ul class="poster-items">
         <?php foreach($poster->Items as $posterItem): ?>
         <?php    echo "<li>";
+                echo "<h3>".metadata($posterItem, array('Dublin Core','Title'))."</h3>";
             if(metadata($posterItem, 'has files')){
                 foreach($posterItem->Files as $itemFile) {
                     if($itemFile->hasThumbnail()){
