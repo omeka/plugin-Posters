@@ -2,7 +2,7 @@
 
 $pageTitle = 'Poster: &quot;' . html_escape($poster->title) . '&quot;';
 echo queue_css_file('jquery.bxslider');
-queue_css_file('poster');
+echo queue_css_file('poster');
 echo queue_js_file('jquery.bxslider');
 echo head(array('title'=>$pageTitle));
 

@@ -1,44 +1,39 @@
-<?php
-
-$pageTitle = 'Poster: &quot;' . html_escape($poster->title) . '&quot;';
-//echo queue_css_file('jquery.bxslider');
-//echo queue_css_file('print');
-//echo queue_js_file('jquery.bxslider');
-//echo head(array('title'=>$pageTitle));
-
-?>
-<style>
-@media print and (color) {
-  * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-}
-</style>
+<!DOCTYPE html>
+<head>
+<link href="<?php echo css_src('print'); ?>" media="all" rel="stylesheet" type="text/css" />
+</head>
+</body>
 <div id="primary">
+<?php $pageTitle = 'Poster: &quot;' . html_escape($poster->title). '&quot;'; ?>
     <h1><?php echo $pageTitle; ?></h1>
-
+    <hr>
 	<div id="poster">
-		<div id="poster-info">
+        <div id="poster-info">
+        <h2>Description:</h2>
 		<?php echo $poster->description; ?>
 		</div>
 
-        <?php //set_items_for_loop($poster->Items); ?>
+            <h2>Items:</h2>
         <ul class="poster-items">
         <?php foreach($poster->Items as $posterItem): ?>
-        <?php    echo "<li>";
+<?php    echo "<li>";
+echo "<h2>Title: ".metadata($posterItem, array('Dublin Core', 'Title'))."</h2>";
+echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$posterItem->id}"))."</h3>";
             if(metadata($posterItem, 'has files')){
                 foreach($posterItem->Files as $itemFile) {
                     if($itemFile->hasThumbnail()){
                         echo "<div class='item-file'>"
                             .link_to_item(file_image('square_thumbnail', array(),  $itemFile), array('class' =>'item-thumbnail'), 'show', $posterItem)
-                            ."</div>"
-                            ."<div class='poster-item-annotation'>"
-                            .$posterItem->annotation
                             ."</div>";
-                        break;
+                            //."<div class='poster-item-annotation'>"
+                            //.$posterItem->annotation
+                            //."</div>";
+                        //break;
                     }
                 }
+                echo "<div class='poster-item-annotation'>"
+                     .$posterItem->annotation
+                     ."</div>";
             }
             echo "</li>"
 ?>
@@ -50,26 +45,18 @@ $pageTitle = 'Poster: &quot;' . html_escape($poster->title) . '&quot;';
 		 if (!empty($disclaimer)): 
 		?>
 		<div id="poster-disclaimer">
-			<h2 id="poster-disclaimer-title">Disclaimer</h2>
+			<h2 id="poster-disclaimer-title">Disclaimer:</h2>
 			<?php echo html_escape($disclaimer); ?>
 		</div>
         <?php endif; ?>
-        <?php if ($this->currentUser): ?>
-            <div class="edit-link">
-                <a href="<?php echo html_escape(url(array('action' => 'edit','id' => $poster->id), get_option('poster_page_path'))); ?>" class="edit-poster-link">Edit</a>
-            </div>
-        <?php endif; ?>
-	</div>
+
+       	</div>
 </div> <!-- end primary div -->
-<script type="text/javascript"> 
-             var n = jQuery('.poster-items li').length;
+</body>
+<script> 
+     window.print();
+    window.history.back();         
+ </script>
 
-         if (n > 1) {
-             jQuery('.poster-items').bxSlider({
-                auto: true,
-                autoControls: true,
-             });
-         }
 
-</script>
-<?php //echo foot(); ?>
+</html>

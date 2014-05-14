@@ -1,3 +1,40 @@
-@media print{
-    
+body {
+    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 18px;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    font-family: 'Gill Sans', sans-serif;
+    color: #015581;
+}
+p, ul, ol, dl{
+    margin-bottom: 18px;
+}
+h1 {
+    font-size: 30px;
+    line-height: 36px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+hr {
+    height: 2px;
+    color: black;
+}
+
+.poster-items {
+    list-style: none;
+    margin: 10px;
+    //width: 580px;
+    //height: 400px;
+
+}
+.item-file {
+    display: inline-block;
+    margin: 1px 10px 1px 1px;
+}
+@media print {
+    @page {
+        margin: 0.5cm;
+    }
 }

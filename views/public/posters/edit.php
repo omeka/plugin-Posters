@@ -1,10 +1,10 @@
 <?php
     $pageTitle = 'Edit Poster: &quot;' . html_escape($poster->title) . '&quot;';
 //queue_js_file(array('tiny_mce/tiny_mce', 'poster'));
-queue_js_file('poster');
-queue_js_file('vendor/tiny_mce/tiny_mce');
-queue_css_file('jquery-ui');
-queue_css_file('poster');
+echo queue_js_file('poster');
+echo queue_js_file('vendor/tiny_mce/tiny_mce');
+echo queue_css_file('jquery-ui');
+echo queue_css_file('poster');
    echo  head(array('title'=>$pageTitle));
 ?>
 <script type="text/javascript">
@@ -68,10 +68,10 @@ queue_css_file('poster');
                     <div id="share">
                         <p><a href="<?php echo html_escape(url(array('action'=>'share'), get_option('poster_page_path'))); ?>" class="share-link">Share Poster</a></p>
                     </div>
-                    <div id="print">
-                        <p><a href="<?php echo html_escape(url(array('action'=>'generate', 'id'=> $poster->id), get_option('poster_page_path'))); ?>" target="_blank" type="application/pdf" >Save as PDF</a></p>
-                    </div>
-
+                     <div id="print">
+                        <p><a href="<?php echo html_escape(url(array('action'=>'print'), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a></p>
+                        
+                     </div>
                 </div>
             
             </form>
@@ -109,6 +109,7 @@ queue_css_file('poster');
         Omeka.Poster.wysiwyg('mceAddControl');
          
     });
+
 //]]>
 </script>            
 <?php echo foot(); ?>

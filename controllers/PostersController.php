@@ -27,8 +27,16 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     
     public function browseAction() 
     {
-           $posters = $this->_helper->db->findBy(array(), 'Poster');
-           $this->view->posters = $posters;
+        //var_dump($this->_currentUser);
+        // get only your posters if you are logged in
+        if($this->_currentUser) {
+            $posters = $this->_helper->db->findBy(array('user_id' => $this->_currentUser->id), 'Poster');
+
+        } else {
+            $posters = $this->_helper->db->findBy(array(), 'Poster');
+        }
+        $this->view->posters = $posters;
+        $this->view->user = $this->_currentUser;
     }
     
     public function editAction() {
@@ -178,18 +186,12 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $this->view->assign(compact("poster", "emailSent", "emailTo"));
     }
 
-    public function generateAction()
+    public function printAction()
     {
         $poster = $this->_helper->db->findById(null, 'Poster');
-        $pdf = new Poster_Pdf();
-        $pdf->generate($poster);
-        /*$this->_helper->redirector->gotoRoute(
-            array(
-                'action' => 'edit',
-                'id'   => $poster->id
-            ), get_option('poster_page_path')
-        );*/
-        $this->_helper->viewRenderer->setNoRender();
+
+        $this->view->poster = $poster;
+ 
     }
 
 }
