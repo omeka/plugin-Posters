@@ -35,6 +35,11 @@ hr {
 }
 @media print {
     @page {
-        margin: 0.5cm;
+        size: 8.5in 11in;
+        margin-top:    0.50in;
+        margin-right:  0.26in;
+        margin-left:   0.26in;
+        margin-bottom: 1.50in;
+    
     }
 }

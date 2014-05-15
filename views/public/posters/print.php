@@ -39,7 +39,7 @@ echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$pos
 ?>
         <?php endforeach; ?>
          </ul>
-
+        <div class="pagebreak"></div>
 		<?php 
          $disclaimer = get_option('poster_disclaimer');
 		 if (!empty($disclaimer)): 
@@ -49,7 +49,6 @@ echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$pos
 			<?php echo html_escape($disclaimer); ?>
 		</div>
         <?php endif; ?>
-
        	</div>
 </div> <!-- end primary div -->
 </body>
