@@ -81,7 +81,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     public function hookConfig($args)
     {
         $post = $args['post'];
-        set_option('poster_page_path', $post['poster_page_path']);
+        set_option('poster_page_path', preg_replace('/\/+/','',$post['poster_page_path']));
         set_option('poster_page_title',$post['poster_page_title']);
         set_option('poster_disclaimer', $post['poster_disclaimer']);
     }
