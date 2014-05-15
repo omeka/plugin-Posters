@@ -106,8 +106,7 @@ echo queue_css_file('poster');
    
     jQuery(document).ready(function(){
         Omeka.Poster.setUpItemsSelect(<?php echo js_escape(url(get_option('poster_page_path').'/add-poster-item'));?>);
-        Omeka.Poster.wysiwyg('mceAddControl');
-         
+        Omeka.Poster.wysiwyg();
     });
 
 //]]>
