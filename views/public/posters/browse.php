@@ -16,11 +16,13 @@ echo head(array('title' => $pageTitle));
             <li class="poster-date"><?php echo html_escape($poster->date_created); ?></li>
             <li class="poster-description"><?php echo html_escape(snippet($poster->description,0, 200)); ?></li>
             <?php if($this->user) : ?>
-            <li><a href="<?php echo html_escape(url(array('action' => 'delete-confirm', 'id' => $poster->id),  get_option('poster_page_path'))); ?>">Delete</a>
-            <a href="<?php echo html_escape(url(array('action'=>'edit','id' => $poster->id), get_option('poster_page_path'))); ?>">edit</a>
-            <a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share Poster</a>
-            </li>
+                <li>
+                    <a href="<?php echo html_escape(url(array('action'=>'edit','id' => $poster->id), get_option('poster_page_path'))); ?>">edit</a>
+                    <a href="<?php echo html_escape(url(array('action' => 'delete-confirm', 'id' => $poster->id),  get_option('poster_page_path'))); ?>">Delete</a>            
+                    <a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share Poster</a>            
             <?php endif; ?>
+                    <a href="<?php echo html_escape(url(array('action'=>'print'), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a>
+                </li>
         </ul>
     </div>
 <?php endforeach; ?>

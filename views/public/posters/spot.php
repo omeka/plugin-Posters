@@ -30,7 +30,7 @@
     </div>
 
     <div class="poster-item-annotation">
-        <h4>My Annotation:</h4>
+        <h4>Caption:</h4>
         <?php echo get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
             array(  'id'=>'poster-form poster-annotation-' . mt_rand(0, 999999999),
                    'rows'=>'6',

@@ -44,7 +44,6 @@ echo queue_css_file('poster');
                 <div id="poster-additem">
                    
                     <?php if (count($items)): ?>
-                    <?php //echo $_REQUEST['item_id']; ?>
 		            <button type="button">Add an Item &rarr;</button>
                     <?php else: ?>
                         <button type="button" disabled="disabled">Add an item &rarr;</button>
@@ -53,7 +52,6 @@ echo queue_css_file('poster');
                 </div>
         
                 <div id="submit-poster">
-                <?php //echo $this->formSubmit('save_poster',__('Save Poster'), array('class' => 'submit big green button')); ?>
                     <input type="submit" name="save_poster" value="Save Poster" > or 
                     <?php if (is_admin_theme()): ?>
                         <a href="<?php echo html_escape(url(array('action'=>'discard'), get_option('poster_page_path'))); ?>">Discard Changes and Return to Poster Administration</a>

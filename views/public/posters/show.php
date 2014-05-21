@@ -51,6 +51,7 @@ echo head(array('title'=>$pageTitle));
         <?php if ($this->currentUser): ?>
             <div class="edit-link">
                 <a href="<?php echo html_escape(url(array('action' => 'edit','id' => $poster->id), get_option('poster_page_path'))); ?>" class="edit-poster-link">Edit</a>
+                <a href="<?php echo html_escape(url(array('action'=>'print'), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a>
             </div>
         <?php endif; ?>
 	</div>
