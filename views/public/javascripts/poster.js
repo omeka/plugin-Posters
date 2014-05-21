@@ -172,6 +172,11 @@ Omeka.Poster = {};
     /**
      * bind functions to items controls
      */
+    Omeka.Poster.mceExecCommand = function(command){
+        $('#poster-canvas textarea').each(function(){
+            tinyMCE.execCommand(command,false,this.id);
+        });
+    }
 
     Omeka.Poster.bindControls = function(){
         //Remove all previous binding for controls
@@ -181,44 +186,45 @@ Omeka.Poster = {};
         $('.poster-move-up').click(function (event) {
             var element = $(this).parents('.poster-spot');
             event.preventDefault();
-            Omeka.Poster.wysiwyg('mceRemoveControl');
+            Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.insertBefore(element.prev());
             Omeka.Poster.hideExtraControls();
-            Omeka.Poster.wysiwyg('mceAddControl');
+            Omeka.Poster.mceExecCommand('mceAddControl');
         });
         $('.poster-move-down').click(function (event) {
-            var element = $(this).parents('.poster-spot');
+            var element = $(this).parents('#poster-canvas');
             event.preventDefault();
-            Omeka.Poster.wysiwyg('mceRemoveControl');
+            Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.insertBefore(element.next());
             Omeka.Poster.hideExtraControls();
-            Omeka.Poster.wysiwyg('mceAddControl');
+            Omeka.Poster.mceExecCommand('mceAddControl');
         });
 
         $('.poster-move-top').click(function (event) {
             var element = $(this).parents('.poster-spot');
             event.preventDefault();
-            Omeka.Poster.wysiwyg('mceRemoveControl');
+            Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.prependTo('#poster-canvas');
             Omeka.Poster.hideExtraControls();
-            Omeka.Poster.wysiwyg('mceAddControl');
+            Omeka.Poster.mceExecCommand('mceAddControl');
         });
         $('.poster-move-bottom').click(function (event) {
             var element = $(this).parents('.poster-spot');
+            //alert(element.next());
             event.preventDefault();
-            Omeka.Poster.wysiwyg('mceRemoveControl');
-            element.apendTo('#poster-canvas');
+            Omeka.Poster.mceExecCommand('mceRemoveControl');
+            element.appendTo('#poster-canvas');
             Omeka.Poster.hideExtraControls();
-            Omeka.Poster.wysiwyg('mceAddControl');
+            Omeka.Poster.mceExecCommand('mceAddControl');
         });
 
         $('.poster-delete').click(function (event) {
             var element = $(this).parents('.poster-spot');
             event.preventDefault();
-            Omeka.Poster.wysiwyg('mceRemoveControl');
+            Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.remove();
             Omeka.Poster.hideExtraControls();
-            Omeka.Poster.wysiwyg('mceAddControl');
+            Omeka.Poster.mceExecCommand('mceAddControl');
         });
 
     }

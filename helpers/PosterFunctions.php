@@ -10,9 +10,8 @@ function poster_icon_html($item)
     return $html;
 }
 
-function poster_get_note_for_item($item) 
+function poster_get_caption_for_item($item) 
 {
-    $user = current_user();
-
-    return ''; 
+   return get_db()->getTable('PosterItems')->findBy(array('item_id' => $item->id)); 
+    //return $item->id; 
 }

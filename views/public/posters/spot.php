@@ -31,13 +31,14 @@
 
     <div class="poster-item-annotation">
         <h4>Caption:</h4>
-        <?php echo get_view()->formTextarea('annotation-' . $posterItem->ordernum, $posterItem->annotation,
+        <?php $caption = poster_get_caption_for_item($posterItem)[0];?>
+        <?php echo get_view()->formTextarea('annotation-' . $caption->ordernum, $caption->annotation,
             array(  'id'=>'poster-form poster-annotation-' . mt_rand(0, 999999999),
                    'rows'=>'6',
                     'cols'=>'10')); ?>
     </div>
 
-    <input type="hidden" name="itemID-<?php echo html_escape($posterItem->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="hidden-item-id" />
+    <input type="hidden" name="itemID-<?php echo html_escape($caption->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="hidden-item-id" />
     
 </div>
 
