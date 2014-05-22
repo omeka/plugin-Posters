@@ -191,15 +191,16 @@ Omeka.Poster = {};
             Omeka.Poster.hideExtraControls();
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
+        //Bind move down  buttons
         $('.poster-move-down').click(function (event) {
-            var element = $(this).parents('#poster-canvas');
+            var element = $(this).parents('.poster-spot');
             event.preventDefault();
             Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.insertBefore(element.next());
+            element.insertAfter(element.next());
             Omeka.Poster.hideExtraControls();
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
-
+        //Bind move to top buttons
         $('.poster-move-top').click(function (event) {
             var element = $(this).parents('.poster-spot');
             event.preventDefault();
@@ -208,6 +209,7 @@ Omeka.Poster = {};
             Omeka.Poster.hideExtraControls();
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
+        //Bind move to bottom button
         $('.poster-move-bottom').click(function (event) {
             var element = $(this).parents('.poster-spot');
             //alert(element.next());
@@ -217,7 +219,7 @@ Omeka.Poster = {};
             Omeka.Poster.hideExtraControls();
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
-
+        //Bind delete buttons
         $('.poster-delete').click(function (event) {
             var element = $(this).parents('.poster-spot');
             event.preventDefault();

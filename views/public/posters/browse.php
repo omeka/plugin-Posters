@@ -21,7 +21,7 @@ echo head(array('title' => $pageTitle));
                     <a href="<?php echo html_escape(url(array('action' => 'delete-confirm', 'id' => $poster->id),  get_option('poster_page_path'))); ?>">Delete</a>            
                     <a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share Poster</a>            
             <?php endif; ?>
-                    <a href="<?php echo html_escape(url(array('action'=>'print'), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a>
+                    <a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a>
                 </li>
         </ul>
     </div>
