@@ -57,7 +57,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
 
         $db->query("CREATE TABLE IF NOT EXISTS {$db->prefix}poster_items (
                 `id` BIGINT UNSIGNED NOT NULL auto_increment PRIMARY KEY,
-                `annotation` TEXT,
+                `caption` TEXT,
                 `poster_id` BIGINT UNSIGNED NOT NULL,
                 `item_id` BIGINT UNSIGNED NOT NULL,
                 `ordernum` INT NOT NULL

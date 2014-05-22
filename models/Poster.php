@@ -41,7 +41,7 @@ class Poster extends Omeka_Record_AbstractRecord
             if($params['itemCount'] > 0) {
                 foreach(range(1, $params['itemCount']) as $ordernum) {
                     $item = new PosterItems();
-                    $item->annotation = $params['annotation-' . $ordernum];
+                    $item->caption = $params['annotation-' . $ordernum];
                     $item->poster_id = $this->id;
                     $item->item_id = $params['itemID-'. $ordernum];
                     $item->ordernum = $ordernum;
@@ -71,7 +71,7 @@ class Poster extends Omeka_Record_AbstractRecord
     {
         if (is_numeric($posterId)){
             $db = get_db();
-            $items = $db->getTable('Item')->fetchObjects(" select i.*, pi.annotation, p.user_id
+            $items = $db->getTable('Item')->fetchObjects(" select i.*, pi.caption, p.user_id
                 FROM {$db->prefix}poster_items pi
                 JOIN {$db->prefix}items i on i.id = pi.item_id
                 JOIN {$db->prefix}posters p on pi.poster_id = p.id

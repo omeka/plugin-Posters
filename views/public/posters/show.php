@@ -28,7 +28,7 @@ echo head(array('title'=>$pageTitle));
                             .link_to_item(file_image('square_thumbnail', array(),  $itemFile), array('class' =>'item-thumbnail'), 'show', $posterItem)
                             ."</div>"
                             ."<div class='poster-item-annotation'>"
-                            .$posterItem->annotation
+                            .$posterItem->caption
                             ."</div>";
                         break;
                     }

@@ -13,7 +13,7 @@
  */
 class PosterItems extends Omeka_Record_AbstractRecord
 {
-    public $annotation;
+    public $caption;
     public $poster_id;
     public $item_id;
     public $ordernum;
