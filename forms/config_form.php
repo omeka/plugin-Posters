@@ -40,4 +40,16 @@
         </div>
 
     </div>
+<div class="field">
+    <div class="two columns alpha">
+        <label><?php echo __('Poster Page Help'); ?></label>    
+    </div>
+    <div class="inputs five columns omega" >
+        <p class='explanation'><?php echo __("Replace default Poster Help."); ?>
+        </p>
+        <div class="input-block">
+            <textarea name="poster_help" rows="8" cols="40"><?php echo get_option('poster_help'); ?></textarea>
+        </div>
+
+    </div>
 </div>

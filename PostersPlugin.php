@@ -10,6 +10,11 @@ require_once dirname(__FILE__) . '/helpers/PosterFunctions.php';
 define('POSTER_PAGE_PATH','posters');
 define('POSTER_PAGE_TITLE', 'Posters');
 define('POSTER_DISCLAIMER','This page contains user generated content and does not necessarily reflect the opinions of this website. For more information please refer to our terms of service and conditions. If you would like to report the content of this as objectionable, Please contact us.');
+define('POSTER_HELP','<h2>Your Posters</h2>'
+    .'<p>To build a poster, you may use any public item in in this website and add a caption,</p>'
+                    .'<p>Click the button that says &quot;New Poster&quot;. Assign a title to your poster,'
+                    .'add a short description. Cick the tab that says &quot;Add an Item&quot; and select any item that you wish to include in your poster.'
+    .'Continue adding items and captions.</p><p> Be sure to save your poster. You may return to edit your poster at any time.</p> <p>You may print this poster, or share it by email.</p>');
  /**
   * Posters plugin class
   *
@@ -62,6 +67,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         set_option('poster_page_path', POSTER_PAGE_PATH);
         set_option('poster_page_title',POSTER_PAGE_TITLE);
         set_option('poster_disclaimer', POSTER_DISCLAIMER);
+        set_option('poster_help', POSTER_HELP);
     } 
 
     /**
@@ -71,11 +77,12 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     {
         $db = get_db();
         $db->query("DROP TABLE IF EXISTS `{$db->prefix}posters`");
-        $db->query("DROP TABLE IF EXISTS `{$db->prefix}posters_items`"); 
+        $db->query("DROP TABLE IF EXISTS `{$db->prefix}poster_items`"); 
         
         delete_option('poster_page_path');
         delete_option('poster_page_title');
         delete_option('poster_disclaimer');
+        delete_option('poster_help');
     }
 
     public function hookConfig($args)
@@ -84,6 +91,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         set_option('poster_page_path', preg_replace('/\/+/','',$post['poster_page_path']));
         set_option('poster_page_title',$post['poster_page_title']);
         set_option('poster_disclaimer', $post['poster_disclaimer']);
+        set_option('poster_help', $post['poster_help']);
     }
     public function hookConfigForm()
     {

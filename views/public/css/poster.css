@@ -730,19 +730,3 @@ input[type=submit].configure-button {
     transform-origin: 50% 0%; 
 }
 
-/*@-webkit-keyframes spin {
-  to {
-    -webkit-transform: rotate(360deg); } 
-
-
-@-moz-keyframes spin {
-  to {
-    -moz-transform: rotate(360deg); } 
-
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg); } 
-
-/* Slider css */
-

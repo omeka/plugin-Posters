@@ -17,8 +17,8 @@ Omeka.Poster = {};
             //show items in a popup
             modalDiv.dialog({
                 modal: true,
-                width: "572",
-                height: "500",
+                width: "100%",
+                height: "100%",
                 title: "Add Item"
             });
             //Hide unneccesarry buttons 

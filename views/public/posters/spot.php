@@ -31,7 +31,7 @@
 
     <div class="poster-item-annotation">
         <h4>Caption:</h4>
-        <?php $caption = poster_get_caption_for_item($posterItem)[0];?>
+        <?php $caption = (poster_get_caption_for_item($posterItem))? poster_get_caption_for_item($posterItem)[0]:$posterItem;?>
         <?php echo get_view()->formTextarea('annotation-' . $caption->ordernum, $caption->annotation,
             array(  'id'=>'poster-form poster-annotation-' . mt_rand(0, 999999999),
                    'rows'=>'6',

@@ -53,8 +53,8 @@ echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$pos
 </div> <!-- end primary div -->
 </body>
 <script> 
-     window.print();
-    window.history.back();         
+ //    window.print();
+ //   window.history.back();         
  </script>
 
 

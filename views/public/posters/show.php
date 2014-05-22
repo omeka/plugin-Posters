@@ -63,6 +63,7 @@ echo head(array('title'=>$pageTitle));
              jQuery('.poster-items').bxSlider({
                 auto: true,
                 autoControls: true,
+                height: "100%",
              });
          }
 
