@@ -10,7 +10,7 @@ echo head(array('title' => $pageTitle));
 if (count($posters) == 0) {
     if($this->user){
         echo __("There are no posters yet.");
-        echo '<a href="'.html_escape(url(array('action'=> 'new'),get_option('poster_page_path'))).'">Add a Poster</a>';
+        echo '<br /><a href="'.html_escape(url(array('action'=> 'new'),get_option('poster_page_path'))).'">Add a Poster</a>';
     } else {
         echo __("There are no posters yet.");
 

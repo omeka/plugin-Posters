@@ -31,7 +31,7 @@
 
     <div class="poster-item-annotation">
         <h4>Caption:</h4>
-        <?php $caption = (poster_get_caption_for_item($posterItem))? poster_get_caption_for_item($posterItem)[0]:$posterItem;?>
+        <?php $caption = (poster_get_caption_for_item($posterItem, $posterItem->posterId))? poster_get_caption_for_item($posterItem, $posterItem->posterId)[0]:$posterItem;?>
         <?php echo get_view()->formTextarea('annotation-' . $caption->ordernum, $caption->caption,
             array(  'id'=>'poster-form poster-annotation-' . mt_rand(0, 999999999),
                    'rows'=>'6',
@@ -41,4 +41,7 @@
     <input type="hidden" name="itemID-<?php echo html_escape($caption->ordernum); ?>" value="<?php echo html_escape($posterItem->id); ?>" class="hidden-item-id" />
     
 </div>
+<script type="text/javascript" charset="utf-8">
+    Omeka.Poster.wysiwyg();
+</script>
 
