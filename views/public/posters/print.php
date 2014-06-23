@@ -45,8 +45,10 @@ echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$pos
 		 if (!empty($disclaimer)): 
 		?>
 		<div id="poster-disclaimer">
-			<h2 id="poster-disclaimer-title">Disclaimer:</h2>
-			<?php echo html_escape($disclaimer); ?>
+            <h3 id="poster-disclaimer-title">Disclaimer:</h3>
+            <p id="disclaimer-text">
+            <?php echo html_escape($disclaimer); ?>
+            </p>
 		</div>
         <?php endif; ?>
        	</div>
