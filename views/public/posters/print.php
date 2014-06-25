@@ -24,16 +24,17 @@ echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$pos
                     if($itemFile->hasThumbnail()){
                         echo "<div class='item-file'>"
                             .link_to_item(file_image('square_thumbnail', array(),  $itemFile), array('class' =>'item-thumbnail'), 'show', $posterItem)
+                            ."</div>"
+                            ."<div class='poster-item-annotation'>"
+                            .$posterItem->caption
                             ."</div>";
-                            //."<div class='poster-item-annotation'>"
-                            //.$posterItem->annotation
-                            //."</div>";
                         //break;
                     }
                 }
+            } else {
                 echo "<div class='poster-item-annotation'>"
-                     .$posterItem->annotation
-                     ."</div>";
+                    .$posterItem->caption
+                    ."</div>";
             }
             echo "</li>"
 ?>

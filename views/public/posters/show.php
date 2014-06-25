@@ -33,6 +33,10 @@ echo head(array('title'=>$pageTitle));
                         break;
                     }
                 }
+            }else {
+                echo "<div class='poster-item-annotation'>"
+                    .$posterItem->caption
+                    ."</div>";
             }
             echo "</li>"
 ?>
@@ -64,6 +68,7 @@ echo head(array('title'=>$pageTitle));
                 auto: true,
                 autoControls: true,
                 height: "100%",
+                width: "100%",
              });
          }
 
