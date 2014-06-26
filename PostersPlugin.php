@@ -137,7 +137,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     {
         $nav[] = array(
             'label' => __('Browse Posters'),
-            'uri'   => url(array('action'=>'browse'),get_option('poster_page_path')),
+            'uri'   => public_url(array('controller'=>'posters','action'=>'browse')),
             'visible' => true,
         );
         return $nav;
