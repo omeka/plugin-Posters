@@ -2,9 +2,10 @@
 echo queue_css_file('poster');
 
 $pageTitle = html_escape(get_option('poster_page_title'));
-echo head(array('title' => $pageTitle));
+echo head(array('title' => $pageTitle, 'bodyclass' => 'posters browse'));
 ?>
 <div id="primary">
+<h1><?php echo __('Browse Posters'); ?></h1>
 <?php $posters = $this->posters; ?>
 <?php 
 if (count($posters) == 0) {
@@ -17,25 +18,31 @@ if (count($posters) == 0) {
     }
 }
 ?>
+<table id="posters">
+    <thead>
+        <th id="poster-titles"><?php echo __('Title'); ?></th>
+        <th id="poster-dates"><?php echo __('Date Added'); ?></th>
+        <th id="poster-descriptions"><?php echo __('Description'); ?></th>
+    </thead>
 <?php foreach($posters as $poster): ?>
-    <div class="poster">
-        <h3 class="poster-title">
-            <a href="<?php echo html_escape(url(array('action' => 'show','id'=>$poster->id), get_option('poster_page_path'))); ?>"
-            class="view-poster-link"><?php echo html_escape($poster->title); ?></a>
-        </h3>
-        <ul class="poster-meta">
-            <li class="poster-date"><?php echo html_escape($poster->date_created); ?></li>
-            <li class="poster-description"><?php echo html_escape(snippet($poster->description,0, 200)); ?></li>
+    <tr class="poster">
+        <td class="poster-title">
+            <h3><a href="<?php echo html_escape(url(array('action' => 'show','id'=>$poster->id), get_option('poster_page_path'))); ?>"
+            class="view-poster-link"><?php echo html_escape($poster->title); ?></a></h3>
+            <ul class="poster-actions">
             <?php if($this->user) : ?>
-                <li id="admin-links">
-                    <a href="<?php echo html_escape(url(array('action'=>'edit','id' => $poster->id), get_option('poster_page_path'))); ?>">Edit</a>|
-                    <a href="<?php echo html_escape(url(array('action' => 'delete-confirm', 'id' => $poster->id),  get_option('poster_page_path'))); ?>">Delete</a>|            
-                    <a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share Poster</a>|            
+                <li><a href="<?php echo html_escape(url(array('action'=>'edit','id' => $poster->id), get_option('poster_page_path'))); ?>">Edit</a></li>
+                <li><a href="<?php echo html_escape(url(array('action' => 'delete-confirm', 'id' => $poster->id),  get_option('poster_page_path'))); ?>">Delete</a></li>
+                <li><a href="<?php echo html_escape(url(array('action'=>'share','id' => $poster->id), get_option('poster_page_path'))); ?>">Share Poster</a></li>
             <?php endif; ?>
-                    <a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a>
-                </li>
+                <li><a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a></li>  
+            </ul>
+        </td>
+        <td class="poster-date"><?php echo html_escape($poster->date_created); ?></td>
+        <td><?php echo html_escape(snippet($poster->description,0, 200)); ?></td>
         </ul>
-    </div>
+    </tr>
 <?php endforeach; ?>
+</table>
 </div>
 <?php echo foot(); ?>

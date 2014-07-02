@@ -116,8 +116,7 @@ Omeka.Poster = {};
             var d = itemOptionsUrl+'/'+$('#item-select .item-selected').data('itemId');
             //alert(itemOptionsUrl);
             $.get(d, function(data){
-                $('#poster-canvas').append(data);
-                Omeka.Poster.hideExtraControls();
+                $('#poster-items').append(data);
                 Omeka.Poster.bindControls();
                 modalDiv.dialog('close');
             });
@@ -126,7 +125,6 @@ Omeka.Poster = {};
 
         if (Omeka.Poster.itemCount > 0) {
             //When the form loads, hide up and down controls that can't be used
-            Omeka.Poster.hideExtraControls();
             Omeka.Poster.bindControls();
         }
 
@@ -158,16 +156,6 @@ Omeka.Poster = {};
 
         tinyMCE.init($.extend(initParams, params));
     }
-    /**
-     * Hides the move up and down options on the top and bottom items
-     */
-    Omeka.Poster.hideExtraControls = function(){
-        $('.poster-control').show();
-        $('.poster-move-up').first().hide();
-        $('.poster-move-top').first().hide();
-        $('.poster-move-down').last().hide();
-        $('.poster-move-bottom').last().hide();
-    }
 
     /**
      * bind functions to items controls
@@ -188,7 +176,6 @@ Omeka.Poster = {};
             event.preventDefault();
             Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.insertBefore(element.prev());
-            Omeka.Poster.hideExtraControls();
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
         //Bind move down  buttons
@@ -197,7 +184,6 @@ Omeka.Poster = {};
             event.preventDefault();
             Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.insertAfter(element.next());
-            Omeka.Poster.hideExtraControls();
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
         //Bind move to top buttons
@@ -205,18 +191,15 @@ Omeka.Poster = {};
             var element = $(this).parents('.poster-spot');
             event.preventDefault();
             Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.prependTo('#poster-canvas');
-            Omeka.Poster.hideExtraControls();
+            element.prependTo('#poster-items');
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
         //Bind move to bottom button
         $('.poster-move-bottom').click(function (event) {
             var element = $(this).parents('.poster-spot');
-            //alert(element.next());
             event.preventDefault();
             Omeka.Poster.mceExecCommand('mceRemoveControl');
-            element.appendTo('#poster-canvas');
-            Omeka.Poster.hideExtraControls();
+            element.appendTo('#poster-items');
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
         //Bind delete buttons
@@ -225,7 +208,6 @@ Omeka.Poster = {};
             event.preventDefault();
             Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.remove();
-            Omeka.Poster.hideExtraControls();
             Omeka.Poster.mceExecCommand('mceAddControl');
         });
 

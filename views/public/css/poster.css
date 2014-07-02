@@ -6,18 +6,344 @@
     position: relative;
     overflow: hidden;
 }
+
 .poster-items li {
-    /*display: none;*/
     list-style:  none;
     position: absolute;
     top: 0;
     left: 0;
-}/* Item select */
+}
+
+/* Form styles (from Admin Theme) */
+
+form, fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+    
+legend {
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 16px;
+    padding: 0;
+}
+
+input, select, textarea, button, a.button {
+    font-family: inherit;
+    font-size: 100%;
+}
+
+input.color {
+    font-family: monospace;
+}
+    
+input[type=text], input[type=password] {
+    height: 30px;
+    border: 1px solid #d8d8d8;
+    -webkit-border-radius: 0;
+    -moz-box-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
+    -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
+    box-shadow: 0 0 .375em #d6d6d6 inset;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #666666;
+    line-height: 20px;
+    margin: 0 0 10px 0;
+    padding: 5px 10px;
+}
+    
+    input[type=text].big {
+        padding: .375em;
+    }
+        
+    input[type=text].small {
+        padding: 0;
+    }
+
+.field {
+    clear: both;
+}
+        
+    .field label {
+        clear: left;
+        font-weight: bold;
+        float: left;
+        line-height: 1.5em;
+        margin: 0 0 10px 0;
+        min-width: 120px;
+    }
+        
+    .field select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+.inputs {
+    margin: 0 0 20px 0;
+}
+    
+    .inputs .input-block {
+        margin: 0 0 20px 0;
+        float: left;
+    }
+
+    .inputs select {
+        margin-top: 0;
+    }
+    
+    
+    .inputs input[type=text], .inputs input[type=password], .inputs textarea {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+        
+    .inputs inputs a.button, .inputs input[type="submit"], .inputs button {
+        margin-bottom: 10px;
+    }
+    
+.required:after {
+    content: "*";
+}
+    
+textarea {
+    width: 100%;
+    border: 1px solid #d8d8d8;
+    overflow: auto;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
+    -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
+    box-shadow: 0 0 .375em #d6d6d6 inset;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #666666;
+    padding: 5px 10px;
+}
+            
+        /* Buttons 
+        ================================================== */
+            
+        #additem-modal a.button, #additem-modal input[type=submit], #additem-modal button {
+            background: #a4c637;
+            background: -webkit-linear-gradient(top, #A4C637, #75940A);
+            background: -moz-linear-gradient(top, #A4C637, #75940A);
+            background: -o-linear-gradient(top, #A4C637, #75940A);
+            background: linear-gradient(to bottom, #A4C637, #75940A);
+            -webkit-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            border: 1px solid #749308;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;            
+            margin: 0 5px 20px 0;
+            min-height: 25px;
+            padding: 3px 10px;            
+            text-align: center;
+            text-shadow: -1px -1px 1px rgba(0,0,0,.5);
+            white-space: normal;
+        }
+        
+            #additem-modal a.button[disabled], 
+            #additem-modal input[type=submit][disabled], 
+            #additem-modal button[disabled] { 
+                -moz-box-shadow: none !important;
+                -webkit-box-shadow: none !important;
+                box-shadow: none !important;
+                cursor: default;
+                opacity: .35; 
+            }
+            
+        #additem-modal a.button.big, 
+        #additem-modal input[type=submit].big, 
+        #additem-modal button.big {
+            display: block;
+            line-height: 1.75em;
+            font-family: "Arvo",serif;
+            margin: 10px auto;
+            padding: .3125em;
+        }
+            
+        #additem-modal a.button.small, 
+        #additem-modal input[type=submit].small, 
+        #additem-modal button.small {
+            height: 23px;
+            display: inline-block;
+            margin: 0 5px 20px 0;
+            padding: 3px 10px;
+        }
+            
+        #additem-modal a.button.blue, 
+        #additem-modal input[type=submit].blue, 
+        #additem-modal button.blue {
+            background: #22546b;
+            background: -webkit-linear-gradient(top, #22546b, #102d3b);
+            background: -moz-linear-gradient(top, #22546b, #102d3b);
+            background: -o-linear-gradient(top, #22546b, #102d3b);
+            background: linear-gradient(to bottom, #22546b, #102d3b);
+            -webkit-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
+            -moz-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
+            border: 1px solid #11303F;
+        }
+            
+        #additem-modal a.button.red, 
+        #additem-modal input[type=submit].red, 
+        #additem-modal button.red {
+            background: #ad6345;
+            background: -webkit-linear-gradient(top, #ad6345, #7d422a);
+            background: -moz-linear-gradient(top, #ad6345, #7d422a);
+            background: -o-linear-gradient(top, #ad6345, #7d422a);
+            background: linear-gradient(to bottom, #ad6345, #7d422a);
+            -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+            -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+            border: 1px solid #7E432C;
+        }
+            
+        #additem-modal a.button.green, 
+        #additem-modal input[type=submit].green, 
+        #additem-modal button.green {
+            background: #A4C637;
+            background: -webkit-linear-gradient(top, #A4C637, #75940A);
+            background: -moz-linear-gradient(top, #A4C637, #75940A);
+            background: -o-linear-gradient(top, #A4C637, #75940A);
+            background: linear-gradient(to bottom, #A4C637, #75940A);
+            -webkit-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            border: 1px solid #749308;
+        }
+        
+        #additem-modal button:active, 
+        #additem-modal input[type=submit]:active, 
+        #additem-modal a.button:active  {
+            -moz-box-shadow: 0px 1px 1px 0px #D4D4D4 !important;
+            -webkit-box-shadow: 0px 1px 1px 0px #D4D4D4 !important;
+            box-shadow: 0px 1px 1px 0px #D4D4D4 !important;
+            color: #E7E7E7 !important;
+        }
+        
+        #additem-modal button:hover, 
+        #additem-modal input[type=submit]:hover, 
+        #additem-modal a.button:hover, 
+        #additem-modal .green:hover {
+            -moz-box-shadow: 0px 1px 0px 0px #BDD662 inset, 0px -1px 0px 0px #6A821A inset, 0px 0px 10px 0px #A4C637, 0px 2px 2px 0px #D4D4D4;
+            -webkit-box-shadow: 0px 1px 0px 0px #BDD662 inset, 0px -1px 0px 0px #6A821A inset, 0px 0px 10px 0px #A4C637, 0px 2px 2px 0px #D4D4D4;
+            box-shadow: 0px 1px 0px 0px #BDD662 inset, 0px -1px 0px 0px #6A821A inset, 0px 0px 10px 0px #A4C637, 0px 2px 2px 0px #D4D4D4;
+            color: #fff;
+        }
+        
+        #additem-modal button.blue:hover, 
+        #additem-modal input[type=submit].blue:hover, 
+        #additem-modal a.button.blue:hover {
+            -moz-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 0px 10px 0px #102d3b, 0px 2px 2px 0px #d4d4d4;
+            -webkit-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 0px 10px 0px #102d3b, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 0px 10px 0px #102d3b, 0px 2px 2px 0px #d4d4d4;
+        }
+        
+        #additem-modal button.red:hover, 
+        #additem-modal input[type=submit].red:hover, 
+        #additem-modal a.button.red:hover {
+            -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;
+            -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;        
+        }
+
+        /* jQuery UI overrides 
+        ================================================== */
+        
+        button.ui-state-default {
+            background: #A4C637;
+            background: -webkit-linear-gradient(top, #A4C637, #75940A) !important;
+            background: -moz-linear-gradient(top, #A4C637, #75940A) !important;
+            background: -o-linear-gradient(top, #A4C637, #75940A) !important;
+            background: linear-gradient(to bottom, #A4C637, #75940A) !important;
+            color: #fff !important;
+            border: 1px solid #749308 !important;
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+        }
+        
+        button.ui-dialog-titlebar-close {
+            top: 40% !important;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            border: 0 !important;
+            background-image: none !important;
+            background-color: transparent !important;
+        }
+        
+    /* Checkboxes 
+    ================================================== */
+    
+    input[type="checkbox"] {
+        margin: 0;
+    }
+
+
+    /* Alerts
+    ================================================== */
+    
+    #content #flash ul {
+        list-style-type: none;
+        margin-top: 0;
+        padding: 0;
+    }
+    
+        ul.error {
+            list-style-type: none;
+            margin-top: 20px;
+            padding: 0;
+        }
+        
+            .inputs ul.error { margin-top: 0; }
+        
+        #content #flash li, ul.error li, #im-result, .flash {
+            background-color: rgba(255, 255, 255, .5);
+            border: 1px solid #E7E7E7;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            padding: .5em;            
+        }
+        
+            #im-result:empty { display: none; }
+            
+    li .flash {
+        display: block;
+        margin: 10px 0 10px -.5em;
+    }
+    
+    .success {
+        color: #729108;
+    }
+        
+    .error, .alert {
+        color: #914E33;
+    }
+
+/* Item select */
+    
 #poster-additem {
     margin-top: 10px;
-}
-ul.poster-meta {
-    list-style-type: none;
 }
 
 #item-select {
@@ -180,9 +506,9 @@ ul.poster-meta {
 
 #show-or-hide-search, #view-all-items {
     float: left;
-    color: #000000;
+    color: #FFF;
     margin-bottom: 10px;
-    margin-left: 10px;
+    text-decoration: none;
 }
 
 #show-or-hide-search.show-form .hide-search-label {
@@ -223,6 +549,10 @@ ul.poster-meta {
 }
 
 /* Item select: Attachment options */
+
+#additem-modal {
+    padding: 10px 5px 40px;
+}
 
 #change-selected-item:before {
     content: "\25c0";
@@ -730,3 +1060,106 @@ input[type=submit].configure-button {
     transform-origin: 50% 0%; 
 }
 
+/* Browse Posters */
+
+.posters td, 
+.posters th {
+    vertical-align: top;
+}
+
+#poster-titles {
+    width: 35%;
+}
+
+#poster-dates {
+    width: 15%;
+}
+
+#poster-descriptions {
+    width: 50%;
+}
+
+.poster-title h3 {
+    margin: 0;
+    padding: 0;
+}
+
+ul.poster-meta,
+ul.poster-actions {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+ul.poster-actions {
+    margin-bottom: 0; 
+}
+
+ul.poster-actions li {
+    display: inline-block;
+}
+
+ul.poster-actions li:not(:last-of-type):after {
+    content: "|";
+    display: inline-block;
+    margin: 0 3px 0 6px;
+    opacity: .25;
+}
+
+ul.poster-actions a {
+    text-decoration: none;
+}
+
+/* Edit Poster */
+
+.posters.edit h1 {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.posters.edit h1 + .poster-actions {
+    margin-bottom: 3em;
+}
+
+#poster-items-title {
+    margin-bottom: 0;
+    clear: both;
+}
+
+#poster-items {
+    margin: 0 0 1.5em 0;
+}
+
+.poster-item-header {
+    width: 40%;
+    padding-right: 1em;
+}
+
+.poster-item-header .image {
+    float: left;
+    margin-left: 0;
+    max-width: 25%;
+    margin-right: 1em;
+}
+
+.poster-item-header .image img {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+}
+
+.poster-item-title {
+    margin: 0;
+    padding: 0;
+}
+
+.poster-spot:first-of-type .poster-move-top,
+.poster-spot:first-of-type .poster-move-up,
+.poster-spot:last-of-type .poster-move-bottom,
+.poster-spot:last-of-type .poster-move-down {
+    display: none;
+}
+
+#add-item-button {
+    margin-bottom: 3em;
+}
