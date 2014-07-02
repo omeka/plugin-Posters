@@ -135,11 +135,28 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     }
     public function filterPublicNavigationMain($nav)
     {
-        $nav[] = array(
-            'label' => __('Browse Posters'),
-            'uri'   => public_url(array('controller'=>'posters','action'=>'browse')),
-            'visible' => true,
-        );
+        $url = public_url(array('controller' => 'posters','action' => 'browse'));
+        if (current_user()){
+            $nav[] = array(
+                'label' => __('Posters'),
+                'uri'   => $url,
+                'visible' => true,
+            );
+        } else {
+             $nav[] = array(
+                'label' => __('Posters'),
+                'uri'   => $url,
+                'pages' => array(array(
+                        'label' => __('Login'),
+                        'uri'   => url("users/login")
+                    ),
+                    array(
+                        'label' => __('Register'),
+                        'uri'   => url('guest-user/user/register')
+                    )),
+                'visible' => true,
+            );
+        }
         return $nav;
     }
     public function hookDefineRoutes($args)
