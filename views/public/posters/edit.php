@@ -61,7 +61,7 @@ echo queue_css_file('poster');
               </div>
               <?php endif; ?>
 
-              <div id="add-item">
+              <div id="poster-additem">
               <?php if (count($items)): ?>
                   <button type="button" id="add-item-button">Add an Item</button>
               <?php else: ?>

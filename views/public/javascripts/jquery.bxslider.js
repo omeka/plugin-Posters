@@ -697,10 +697,16 @@
 			slider.children.each(function(index){
 				// get the image title attribute
 				var title = $(this).find('img:first').attr('title');
+				var description = $(this).find('img:first').attr('alt');
 				// append the caption
-				if (title != undefined && ('' + title).length) {
-                    $(this).append('<div class="bx-caption"><span>' + title + '</span></div>');
-                }
+				if ((title != undefined && ('' + title).length) || (description != undefined && ('' + description).length)) {
+                    $(this).append('<div class="bx-caption"></div>');
+                    if (title != undefined) {
+                        $(this).find('.bx-caption').append('<h3>' + title + '</h3>');
+                    }
+                    if (description != undefined) {
+                        $(this).find('.bx-caption').append(description);
+                    }                }
 			});
 		}
 

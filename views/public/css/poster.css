@@ -1,17 +1,53 @@
 .poster-items {
-    list-style: none;
-    margin: 10px 0;
-    width: 580px;
-    height: 400px;
-    position: relative;
-    overflow: hidden;
+    margin: 0;
 }
 
-.poster-items li {
-    list-style:  none;
-    position: absolute;
-    top: 0;
-    left: 0;
+.poster-items img {
+    width: 100%;
+}
+
+.bx-caption {
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+}
+
+.bx-caption h3 {
+    color: #fff;
+    margin: 0;
+    padding: 0 0 10px;
+}
+
+.bx-caption *:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.bx-wrapper {
+    margin-bottom: 20px;
+}
+
+.text-only {
+    background-color: #333;
+    -moz-box-shadow: 0 0 140px #000 inset;
+    -webkit-box-shadow: 0 0 140px #000 inset;
+    box-shadow: 0 0 140px #000 inset;
+    height: 100%;
+}
+
+.text-only h3 {
+    text-align: center;
+    line-height: 100%;
+    font-size: 30px;
+    line-height: 9em;
+}
+
+.text-only a:link {
+    color: #e7e7e7;
+}
+
+.text-only a:hover {
+    color: #fff;
 }
 
 /* Form styles (from Admin Theme) */
