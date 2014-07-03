@@ -1,3 +1,12 @@
+.screen-reader-text {
+    position: absolute;
+    left: -9999px;
+}
+
+#poster .inputs {
+    width: 100%;
+}
+
 .poster-items {
     margin: 0;
 }
@@ -1194,6 +1203,48 @@ ul.poster-actions a {
 .poster-spot:last-of-type .poster-move-bottom,
 .poster-spot:last-of-type .poster-move-down {
     display: none;
+}
+
+.poster-spot ul.poster-actions li:not(:last-of-type):after {
+    margin: 0;
+}
+
+.poster-spot ul.poster-actions {
+    margin: 1em 0 0 0;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    background-color: #FFF;
+    padding: 0 .5em;
+}
+
+.poster-spot ul.poster-actions li a {
+    border-bottom: 0;
+    display: inline-block;
+    padding: 0 .5em;
+}
+
+.poster-spot ul.poster-actions li a:after {
+    font-family: "FontAwesome";
+}
+
+.poster-move-top a:after {
+    content: "\f102";
+}
+
+.poster-move-bottom a:after {
+    content: "\f103";
+}
+
+.poster-move-up a:after {
+    content: "\f106";
+}
+
+.poster-move-down a:after {
+    content: "\f107";
+}
+
+.poster-delete a:after {
+    content: "\f00d";
 }
 
 #add-item-button {

@@ -14,19 +14,19 @@
         <h3 class="poster-item-title"><?php echo metadata($posterItem , array('Dublin Core', 'Title')); ?></h3>
         <ul class="poster-actions">
             <li class="poster-move-top poster-control">
-                <a href="#"><?php echo __('Move to top'); ?></a>
+                <a href="#"><span class="screen-reader-text"><?php echo __('Move to top'); ?></span></a>
             </li>
             <li class="poster-move-up poster-control">
-                <a href="#"><?php echo __('Move up'); ?></a>
+                <a href="#"><span class="screen-reader-text"><?php echo __('Move up'); ?></span></a>
             </li>
             <li class="poster-move-down poster-control">
-                <a href="#"><?php echo __('Move down'); ?></a>
+                <a href="#"><span class="screen-reader-text"><?php echo __('Move down'); ?></span></a>
             </li>
             <li class="poster-move-bottom poster-control">
-                <a href="#"><?php echo __('Move to bottom'); ?></a>
+                <a href="#"><span class="screen-reader-text"><?php echo __('Move to bottom'); ?></span></a>
             </li>
             <li class="poster-delete poster-control">
-                <a href="#"><?php echo __('Delete'); ?></a>
+                <a href="#"><span class="screen-reader-text"><?php echo __('Delete'); ?></span></a>
             </li>
         </ul>
     </td>
