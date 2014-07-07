@@ -70,29 +70,34 @@
 
 /* Form styles (from Admin Theme) */
 
-form, fieldset {
+#poster form, #poster fieldset {
     border: 0;
     margin: 0;
     padding: 0;
 }
     
-legend {
+#poster legend {
     font-size: 21px;
     font-weight: normal;
     margin-bottom: 16px;
     padding: 0;
 }
 
-input, select, textarea, button, a.button {
+#poster input, 
+#poster select, 
+#poster textarea, 
+#poster button, 
+#poster a.button {
     font-family: inherit;
     font-size: 100%;
 }
 
-input.color {
+#poster input.color {
     font-family: monospace;
 }
     
-input[type=text], input[type=password] {
+#poster input[type=text], 
+#poster input[type=password] {
     height: 30px;
     border: 1px solid #d8d8d8;
     -webkit-border-radius: 0;
@@ -110,19 +115,19 @@ input[type=text], input[type=password] {
     padding: 5px 10px;
 }
     
-    input[type=text].big {
+    #poster input[type=text].big {
         padding: .375em;
     }
         
-    input[type=text].small {
+    #poster input[type=text].small {
         padding: 0;
     }
 
-.field {
+#poster .field {
     clear: both;
 }
         
-    .field label {
+    #poster .field label {
         clear: left;
         font-weight: bold;
         float: left;
@@ -131,12 +136,12 @@ input[type=text], input[type=password] {
         min-width: 120px;
     }
         
-    .field select {
+    #poster .field select {
         width: 100%;
         margin-bottom: 10px;
     }
     
-.inputs {
+#poster .inputs {
     margin: 0 0 20px 0;
 }
     
@@ -161,11 +166,11 @@ input[type=text], input[type=password] {
         margin-bottom: 10px;
     }
     
-.required:after {
+#poster .required:after {
     content: "*";
 }
     
-textarea {
+#poster textarea {
     width: 100%;
     border: 1px solid #d8d8d8;
     overflow: auto;
@@ -347,7 +352,7 @@ textarea {
     /* Checkboxes 
     ================================================== */
     
-    input[type="checkbox"] {
+    #poster input[type="checkbox"] {
         margin: 0;
     }
 
