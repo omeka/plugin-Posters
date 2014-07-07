@@ -11,6 +11,10 @@
     margin: 0;
 }
 
+.poster-items li {
+    left: 0;
+}
+
 .poster-items img {
     width: 100%;
 }
@@ -19,6 +23,10 @@
     color: #fff;
     padding: 10px;
     margin: 0;
+}
+
+.bx-caption p:first-of-type {
+    margin-top: 0;
 }
 
 .bx-caption h3 {
@@ -49,6 +57,7 @@
     line-height: 100%;
     font-size: 30px;
     line-height: 9em;
+    margin: 0;
 }
 
 .text-only a:link {
