@@ -9,6 +9,9 @@
 require_once dirname(__FILE__) . '/helpers/PosterFunctions.php';
 define('POSTER_PAGE_PATH','posters');
 define('POSTER_PAGE_TITLE', 'Posters');
+define('POSTER_SHOW_OPTION', TRUE);
+define('POSTER_DEFAULT_FILE_TYPE', 'original');
+define('POSTER_DEFAULT_FILE_TYPE_PRINT', 'original');
 define('POSTER_DISCLAIMER','This page contains user generated content and does not necessarily reflect the opinions of this website. For more information please refer to our terms of service and conditions. If you would like to report the content of this as objectionable, Please contact us.');
 define('POSTER_HELP','<h2>Your Posters</h2>'
     .'<p>To build a poster, you may use any public item in in this website and add a caption,</p>'
@@ -68,6 +71,9 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         set_option('poster_page_title',POSTER_PAGE_TITLE);
         set_option('poster_disclaimer', POSTER_DISCLAIMER);
         set_option('poster_help', POSTER_HELP);
+        set_option('poster_default_file_type', POSTER_DEFAULT_FILE_TYPE);
+        set_option('poster_default_file_type_print', POSTER_DEFAULT_FILE_TYPE_PRINT);
+        set_option('poster_show_option', POSTER_SHOW_OPTION);
     } 
 
     /**
@@ -83,6 +89,9 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         delete_option('poster_page_title');
         delete_option('poster_disclaimer');
         delete_option('poster_help');
+        delete_option('poster_default_file_type');
+        delete_option('poster_show_option');
+        delete_option('poster_default_file_type_print');
     }
 
     public function hookConfig($args)
@@ -92,6 +101,10 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
         set_option('poster_page_title',$post['poster_page_title']);
         set_option('poster_disclaimer', $post['poster_disclaimer']);
         set_option('poster_help', $post['poster_help']);
+        set_option('poster_default_file_type', $post['poster_default_file_type']);
+        set_option('poster_default_file_type_print', $post['poster_default_file_type_print']);
+        set_option('poster_show_option', $post['poster_show_option']);
+
     }
     public function hookConfigForm()
     {

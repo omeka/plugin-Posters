@@ -53,3 +53,57 @@
 
     </div>
 </div>
+<div class="field">
+    <div class="two columns alpha">
+        <label><?php echo __('Poster File Size'); ?></label>    
+    </div>
+    <div class="inputs five columns omega" >
+        <p class='explanation'><?php echo __("Select image size for item show page."); ?>
+        </p>
+
+        <div class="input-block">
+        <select name="poster_default_file_type" >
+        <?php foreach(array('original','fullsize','thumbnail','square_thumbnail') as $ftype): ?>
+                <?php if($ftype == get_option('poster_default_file_type')): ?>
+                    <option  value="<?php echo $ftype; ?>" selected ><?php echo $ftype; ?></option>
+                <?php else: ?>
+                    <option  value="<?php echo $ftype; ?>"><?php echo $ftype; ?></option>
+                <?php endif; ?>
+        <?php endforeach; ?>
+        </select>
+  
+        <p class='explanation'><?php echo __("Select image size for print page."); ?>
+        </p>
+        <div class="input-block">
+        <select name="poster_default_file_type_print">
+        <?php foreach(array('original','fullsize','thumbnail','square_thumbnail') as $ftype): ?>
+                <?php if($ftype == get_option('poster_default_file_type_print')): ?>
+                    <option  value="<?php echo $ftype; ?>" selected ><?php echo $ftype; ?></option>
+                <?php else: ?>
+                    <option  value="<?php echo $ftype; ?>"><?php echo $ftype; ?></option>
+                <?php endif; ?>
+        <?php endforeach; ?>
+        </select>
+        </div>
+
+    </div>
+</div>
+<div class="field">
+    <div class="two columns alpha">
+        <label><?php echo __('Poster Display Show Page'); ?></label>    
+    </div>
+    <div class="inputs five columns omega" >
+        <p class='explanation'><?php echo __("Select carousel or grid."); ?>
+        </p>
+        <?php
+             echo $view->formCheckbox(
+                        'poster_show_option', 
+                        true, 
+                        array(
+                            'checked' => (boolean) get_option('poster_show_option')
+                        )
+                    ); 
+        ?>
+    </div>
+</div>
+

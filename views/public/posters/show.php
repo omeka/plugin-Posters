@@ -23,7 +23,29 @@ echo head(array('title'=>$pageTitle));
             <?php 
                 foreach($posterItem->Files as $itemFile) {
                     if($itemFile->hasThumbnail()){
-                        echo link_to_item(item_image('original', array('title' => metadata($posterItem, array('Dublin Core', 'Title')), 'alt' => strip_formatting($posterItem->caption)), 0, $posterItem), array(), 'show', $posterItem);
+                        echo link_to_item(
+                            item_image(
+                                get_option('poster_default_file_type'), 
+                                array(
+                                    'title' => metadata($posterItem, 
+                                    array(
+                                        'Dublin Core', 
+                                        'Title'
+                                    )
+                                ), 
+                                'alt' => strip_formatting($posterItem->caption)), 
+                                0, 
+                                $posterItem
+                            ), 
+                            array(), 
+                            'show', 
+                            $posterItem
+                        );
+                        if(!get_option('poster_show_option')){
+                            echo "<div class='bx-caption'>"
+                                . $posterItem->caption
+                                . "</div>";
+                        }
                         break;
                     }
                 }
@@ -58,14 +80,23 @@ echo head(array('title'=>$pageTitle));
 </div>
 <script type="text/javascript"> 
     var n = jQuery('.poster-items li').length;
-    
-    if (n > 1) {
+<?php echo "var showOption = ".get_option('poster_show_option').";"; ?>
+<?php echo "var fileSize = '".get_option('poster_default_file_type')."';"; ?>
+    if (n > 1 && showOption) {
        jQuery('.poster-items').bxSlider({
           auto: false,
           adaptiveHeight: true,
           mode: 'fade',
           captions: true
        });
+    } else {
+        jQuery('.poster-items').addClass('poster-items-grid');
+        jQuery('.bx-caption').addClass('bx-caption-grid');
+     if( fileSize === 'original' || fileSize === 'fulsize') {
+         jQuery('.poster-items').addClass('poster-items-max');
+         //jQuery('.bx-caption').addCss('float','none');
+    }
+    
     }
 </script>
 <?php echo foot(); ?>
