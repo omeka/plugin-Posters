@@ -93,7 +93,7 @@ echo head(array('title'=>$pageTitle));
            fitImage = jQuery('.bx-wrapper .bx-caption');
            fitImage.css('height','100%');
            fitImage.css('margin-left','203px');
-           fitImage.css('width','76%');
+           fitImage.css('width','82%');
        }
     } else {
         jQuery('.poster-items').addClass('poster-items-grid');
