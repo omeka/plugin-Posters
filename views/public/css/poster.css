@@ -15,9 +15,9 @@
     left: 0;
 }
 
-.poster-items img {
+/*.poster-items img {
     width: 100%;
-}
+}*/
 
 .bx-caption {
     color: #fff;
@@ -1263,4 +1263,16 @@ ul.poster-actions a {
 
 #add-item-button {
     margin-bottom: 3em;
+}
+ul .poster-items-max {
+    list-style-type: none;
+}
+.poster-items-max img{
+    width: 100%;
+}
+ul.poster-items-grid {
+    list-style-type:none; 
+}
+.bx-caption-grid {
+    color: #333;
 }
