@@ -149,10 +149,17 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     public function filterPublicNavigationMain($nav)
     {
         $url = public_url(array('controller' => 'posters','action' => 'browse'));
+        $bp = get_option('poster_page_path');
         if (current_user()){
             $nav[] = array(
                 'label' => __('Posters'),
                 'uri'   => $url,
+                'pages' => array(
+                    array(
+                        'label' => __('Add A Poster'),
+                        'uri'  => url("$bp/new"),
+                    ),       
+                 ),
                 'visible' => true,
             );
         } else {
