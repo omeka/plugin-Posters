@@ -23,21 +23,20 @@ echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$pos
                 foreach($posterItem->Files as $itemFile) {
                     if($itemFile->hasThumbnail()){
                         echo "<div class='item-file'>"
-                            .link_to_item(file_image('square_thumbnail', array(),  $itemFile), array('class' =>'item-thumbnail'), 'show', $posterItem)
-                            ."</div>"
-                            ."<div class='poster-item-annotation'>"
-                            .$posterItem->caption
+                            .link_to_item(file_image(get_option('poster_default_file_type_print'), array(),  $itemFile), array('class' =>'item-thumbnail'), 'show', $posterItem)
                             ."</div>";
+                            //."<div class='poster-item-annotation'>"
+                            //.$posterItem->caption
+                            //."</div>";
                         //break;
                     }
                 }
-            } else {
+            } 
                 echo "<div class='poster-item-annotation'>"
                     .$posterItem->caption
                     ."</div>";
-            }
-            echo "</li>"
-?>
+?>           
+               </li>
         <?php endforeach; ?>
          </ul>
         <div class="pagebreak"></div>
@@ -55,10 +54,4 @@ echo  '<h3>Url: http://'.$_SERVER['HTTP_HOST'].html_escape(url("items/show/{$pos
        	</div>
 </div> <!-- end primary div -->
 </body>
-<script> 
- //    window.print();
- //   window.history.back();         
- </script>
-
-
 </html>
