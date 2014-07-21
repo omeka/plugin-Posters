@@ -7,6 +7,13 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'posters browse'));
 <div id="primary">
 <h1><?php echo __('Browse Posters'); ?></h1>
 <?php $posters = $this->posters; ?>
+<ul class="navigation">
+    <?php if(current_user()): ?>
+        <li> <a href="<?php echo public_url(array('controller'=> 'posters', 'action' => 'new')); ?>">Add a Poster</a> </li>
+    <?php else: ?>
+        <li><a href="<?php echo url('users/login'); ?>">Login</a></li>
+    <?php endif; ?>
+</ul>
 <?php 
 if (count($posters) == 0) {
     if($this->user){

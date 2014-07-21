@@ -148,35 +148,12 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
     }
     public function filterPublicNavigationMain($nav)
     {
-        $url = public_url(array('controller' => 'posters','action' => 'browse'));
         $bp = get_option('poster_page_path');
-        if (current_user()){
-            $nav[] = array(
-                'label' => __('Posters'),
-                'uri'   => $url,
-                'pages' => array(
-                    array(
-                        'label' => __('Add A Poster'),
-                        'uri'  => url("$bp/new"),
-                    ),       
-                 ),
-                'visible' => true,
-            );
-        } else {
-             $nav[] = array(
-                'label' => __('Posters'),
-                'uri'   => $url,
-                'pages' => array(array(
-                        'label' => __('Login'),
-                        'uri'   => url("users/login")
-                    ),
-                    array(
-                        'label' => __('Register'),
-                        'uri'   => url('guest-user/user/register')
-                    )),
-                'visible' => true,
-            );
-        }
+        $nav[] = array(
+             'label' => __('Posters'),
+             'uri'   => url($bp."/browse"),
+             'visible' => true,
+        );
         return $nav;
     }
     public function hookDefineRoutes($args)
@@ -188,6 +165,17 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractP
        $bp = get_option('poster_page_path');
        $router = $args['router'];
        //browse
+       $router->addRoute(
+          $bp,
+          new Zend_Controller_Router_Route(
+            "$bp/:browse",
+            array(
+                'module'  => 'posters',
+                'controller' => 'posters',
+                'action'     => 'browse',
+            )
+          )
+       );
        $router->addRoute(
            $bp,
            new Zend_Controller_Router_Route(
