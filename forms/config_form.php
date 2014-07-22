@@ -63,7 +63,7 @@
 
         <div class="input-block">
         <select name="poster_default_file_type" >
-        <?php foreach(array('original','fullsize','thumbnail','square_thumbnail') as $ftype): ?>
+        <?php foreach(array('fullsize','thumbnail') as $ftype): ?>
                 <?php if($ftype == get_option('poster_default_file_type')): ?>
                     <option  value="<?php echo $ftype; ?>" selected ><?php echo $ftype; ?></option>
                 <?php else: ?>
@@ -76,7 +76,7 @@
         </p>
         <div class="input-block">
         <select name="poster_default_file_type_print">
-        <?php foreach(array('original','fullsize','thumbnail','square_thumbnail') as $ftype): ?>
+        <?php foreach(array('fullsize','thumbnail') as $ftype): ?>
                 <?php if($ftype == get_option('poster_default_file_type_print')): ?>
                     <option  value="<?php echo $ftype; ?>" selected ><?php echo $ftype; ?></option>
                 <?php else: ?>

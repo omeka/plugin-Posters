@@ -89,20 +89,17 @@ echo head(array('title'=>$pageTitle));
           mode: 'fade',
           captions: true
        });
-       if(fileSize ==='thumbnail' || fileSize === 'square_thumbnail'){
+       if(fileSize ==='thumbnail'){
            fitImage = jQuery('.bx-wrapper .bx-caption');
            fitImage.css('height','100%');
            fitImage.css('margin-left','203px');
            fitImage.css('width','82%');
+       }else {
+        jQuery('.poster-items').addClass('poster-items-max');
        }
     } else {
         jQuery('.poster-items').addClass('poster-items-grid');
         jQuery('.bx-caption').addClass('bx-caption-grid');
-
-     if( fileSize === 'original' || fileSize === 'fulsize') {
-         jQuery('.poster-items').addClass('poster-items-max');
-     } 
-    
     }
 </script>
 <?php echo foot(); ?>
