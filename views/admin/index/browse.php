@@ -9,16 +9,14 @@ echo head(array('title' => $pageTitle)); ?>
 <div id="primary">
     <h1><?php echo $pageTitle; ?></h1>
     <?php echo flash(); ?>
-    <h2>Your Posters</h2>
     <!-- Begin Slideshow -->
        <div id="posters">
            <table>
                <thead>
                    <tr>
-                       <th>Title</th>
-                       <th>Date Created</th>
-                       <th>Description</th>
-                       <!--th>Created By</th-->
+                       <th><?php echo __('Title'); ?></th>
+                       <th><?php echo __('Date Created'); ?></th>
+                       <th><?php echo __('Description'); ?></th>
                    </tr>
                </thead>
                <tbody>
