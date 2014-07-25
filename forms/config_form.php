@@ -93,17 +93,15 @@
         <label><?php echo __('Poster Display Show Page'); ?></label>    
     </div>
     <div class="inputs five columns omega" >
-        <p class='explanation'><?php echo __("Select carousel or grid."); ?>
-        </p>
-        <?php
-             echo $view->formCheckbox(
-                        'poster_show_option', 
-                        true, 
-                        array(
-                            'checked' => (boolean) get_option('poster_show_option')
-                        )
-                    ); 
+        <?php 
+        $layout = get_option('poster_show_option');
+        $carousel = ($layout == 'carousel') ? 'selected' : '';
+        $static = ($layout == 'static') ? 'selected' : '';
         ?>
+        <select name="poster_show_option">
+            <option value="carousel" <?php echo $carousel; ?>>Carousel</option>
+            <option value="static" <?php echo $static; ?>>Static</option>
+        </select>
     </div>
 </div>
 

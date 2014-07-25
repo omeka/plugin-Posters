@@ -41,10 +41,11 @@ echo queue_css_file('poster');
     
               <h2 id="poster-items-title">Poster Items</h2>
 
-              <?php if (!count($poster->Items)): ?>
-                  <p id="poster-no-items-yet">You have not added any items to this poster yet.</p>
-              <?php else: ?>
-              <div id="poster-canvas">
+              <?php $noItems = (count($poster->Items) < 1) ? 'class="no-items"' : ''; ?>
+
+              <p id="poster-no-items-yet" <?php echo $noItems; ?>>You have not added any items to this poster yet.</p>
+              
+              <div id="poster-canvas" <?php echo $noItems; ?>>
                   <table id="poster-items">
                       <thead>
                           <th id="poster-item-title-col"><?php echo __('Title'); ?></th>
@@ -59,7 +60,6 @@ echo queue_css_file('poster');
                       </tbody>
                   </table>
               </div>
-              <?php endif; ?>
 
               <div id="poster-additem">
               <?php if (count($items)): ?>

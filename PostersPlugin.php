@@ -9,7 +9,7 @@
 require_once dirname(__FILE__) . '/helpers/PosterFunctions.php';
 define('POSTER_PAGE_PATH','posters');
 define('POSTER_PAGE_TITLE', 'Posters');
-define('POSTER_SHOW_OPTION', TRUE);
+define('POSTER_SHOW_OPTION', 'carousel');
 define('POSTER_DEFAULT_FILE_TYPE', 'original');
 define('POSTER_DEFAULT_FILE_TYPE_PRINT', 'original');
 define('POSTER_DISCLAIMER','This page contains user generated content and does not necessarily reflect the opinions of this website. For more information please refer to our terms of service and conditions. If you would like to report the content of this as objectionable, Please contact us.');

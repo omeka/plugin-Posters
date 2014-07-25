@@ -44,6 +44,10 @@
     margin-bottom: 20px;
 }
 
+.bx-wrapper img {
+    width: 100%;
+}
+
 .text-only {
     background-color: #333;
     -moz-box-shadow: 0 0 140px #000 inset;
@@ -1185,8 +1189,22 @@ ul.poster-actions a {
     clear: both;
 }
 
+#poster-canvas {
+    text-align: left;
+}
+
+#poster-canvas.no-items,
+#poster-no-items-yet {
+    display: none;
+}
+
+#poster-no-items-yet.no-items {
+    display: block;
+}
+
 #poster-items {
-    margin: 0 0 1.5em 0;
+    margin: 1.5em 0;
+    width: 100%;
 }
 
 .poster-item-header {
@@ -1270,9 +1288,35 @@ ul .poster-items-max {
 .poster-items-max img{
     width: 100%;
 }
+
 ul.poster-items-grid {
     list-style-type:none; 
+    padding: 0;
 }
+
 .bx-caption-grid {
     color: #333;
+}
+
+.static img {
+    float: left;
+    margin: 0 1em 1em 0;
+}
+
+#poster-disclaimer {
+    clear: both;
+}
+
+.thumbnail .has-image .bx-caption {
+    top: 0;
+    width: intrinsic;
+    background-color: #333;
+    -moz-box-shadow: 0 0 140px #000 inset;
+    -webkit-box-shadow: 0 0 140px #000 inset;
+    box-shadow: 0 0 140px #000 inset;
+    padding-right: 32px;
+}
+
+.thumbnail .has-image .bx-caption h3 {
+    margin-bottom: 1em;
 }

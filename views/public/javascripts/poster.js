@@ -116,6 +116,7 @@ Omeka.Poster = {};
             var d = itemOptionsUrl+'/'+$('#item-select .item-selected').data('itemId');
             //alert(itemOptionsUrl);
             $.get(d, function(data){
+                if ($('.no-items').length > 0) { $('.no-items').removeClass('no-items'); }
                 $('#poster-items').append(data);
                 Omeka.Poster.bindControls();
                 modalDiv.dialog('close');
@@ -209,6 +210,9 @@ Omeka.Poster = {};
             Omeka.Poster.mceExecCommand('mceRemoveControl');
             element.remove();
             Omeka.Poster.mceExecCommand('mceAddControl');
+            if ($('.poster-spot').length < 1) {
+                $('#poster-no-items-yet, #poster-canvas').addClass('no-items');
+            }
         });
 
     }

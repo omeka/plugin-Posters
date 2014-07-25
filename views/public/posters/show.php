@@ -1,6 +1,8 @@
 <?php
 
 $pageTitle = 'Poster: &quot;' . html_escape($poster->title) . '&quot;';
+$pageLayout = get_option('poster_show_option');
+$defaultType = get_option('poster_default_file_type');
 echo queue_css_file('jquery.bxslider');
 echo queue_css_file('poster');
 echo queue_js_file('jquery.bxslider');
@@ -9,23 +11,28 @@ echo head(array('title'=>$pageTitle));
 ?>
 
 <h1><?php echo $pageTitle; ?></h1>
-
 <div id="poster">
     <div id="poster-info">
     <?php echo $poster->description; ?>
     </div>
 
+    <div class="<?php echo $pageLayout . ' ' . $defaultType; ?>">
     <?php //set_items_for_loop($poster->Items); ?>
+    <?php if ($pageLayout == 'carousel'): ?>
     <ul class="poster-items">
+    <?php endif; ?>
     <?php foreach($poster->Items as $posterItem): ?>
-    <li>
-        <?php if(metadata($posterItem, 'has files')): ?>
+    <?php $hasFiles = metadata($posterItem, 'has files'); ?>
+    <?php if ($pageLayout == 'carousel'): ?>
+    <li <?php if ($hasFiles) { echo 'class="has-image"'; } ?>>
+    <?php endif; ?>
+        <?php if($hasFiles): ?>
             <?php 
                 foreach($posterItem->Files as $itemFile) {
                     if($itemFile->hasThumbnail()){
                         echo link_to_item(
                             item_image(
-                                get_option('poster_default_file_type'), 
+                                $defaultType,
                                 array(
                                     'title' => metadata($posterItem, 
                                     array(
@@ -50,17 +57,35 @@ echo head(array('title'=>$pageTitle));
                     }
                 }
             ?>
-        <?php else: ?>
-            <div class="text-only">
-                <h3 style="height: 9em;"><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), array(), 'show', $posterItem); ?></h3>
-                <div class='bx-caption'>
+            <?php if ($pageLayout == 'static'): ?>
+                <h3><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), array(), 'show', $posterItem); ?></h3>
+                <div class='grid-caption'>
                     <?php echo $posterItem->caption; ?>
                 </div>
-            </div>
+            <?php endif; ?>
+        <?php else: ?>
+            <?php if ($pageLayout == 'carousel'): ?>
+                <div class="text-only">
+                    <h3><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), array(), 'show', $posterItem); ?></h3>
+                    <div class='bx-caption'>
+                        <?php echo $posterItem->caption; ?>
+                    </div>
+                </div>
+            <?php else: ?>
+                <h3><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), array(), 'show', $posterItem); ?></h3>
+                <div class='grid-caption'>
+                    <?php echo $posterItem->caption; ?>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
+    <?php if ($pageLayout == 'carousel'): ?>
     </li>
+    <?php endif; ?>
     <?php endforeach; ?>
+    <?php if ($pageLayout == 'carousel'): ?>
      </ul>
+     <?php endif; ?>
+    </div>
 
     <?php 
      $disclaimer = get_option('poster_disclaimer');
@@ -80,23 +105,22 @@ echo head(array('title'=>$pageTitle));
 </div>
 <script type="text/javascript"> 
     var n = jQuery('.poster-items li').length;
-<?php echo "var showOption = ".get_option('poster_show_option').";"; ?>
-<?php echo "var fileSize = '".get_option('poster_default_file_type')."';"; ?>
-    if (n > 1 && showOption) {
+    var showOption = '<?php echo ($showOption = get_option('poster_show_option')) ? $showOption : 'carousel'; ?>';
+    var fileSize = '<?php echo ($fileSize = get_option('poster_default_file_type')) ? $fileSize : 'fullsize'; ?>';
+    if (n > 1 && (showOption == 'carousel')) {
        jQuery('.poster-items').bxSlider({
           auto: false,
           adaptiveHeight: true,
           mode: 'fade',
           captions: true
        });
-       if(fileSize ==='thumbnail'){
-           fitImage = jQuery('.bx-wrapper .bx-caption');
-           fitImage.css('height','100%');
-           fitImage.css('margin-left','203px');
-           fitImage.css('width','82%');
-       }else {
-        jQuery('.poster-items').addClass('poster-items-max');
-       }
+       <?php if ($defaultType == 'thumbnail'): ?>
+       jQuery('.thumbnail .bx-caption').each(function() {
+          var imageWidth = jQuery(this).prev().find('img').prop('width');
+          var caption = jQuery(this);
+          caption.css('left', imageWidth);
+       });
+       <?php endif; ?>
     } else {
         jQuery('.poster-items').addClass('poster-items-grid');
         jQuery('.bx-caption').addClass('bx-caption-grid');
