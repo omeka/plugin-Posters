@@ -5,6 +5,7 @@
 
 #poster .inputs {
     width: 100%;
+    clear: both;
 }
 
 .poster-items {
@@ -212,10 +213,13 @@
             box-sizing: border-box;
             color: #ffffff;
             cursor: pointer;
-            display: inline-block;            
+            display: inline-block;
+            font-family: "Cabin", sans-serif;
+            font-size: 14px;
             margin: 0 5px 20px 0;
-            min-height: 25px;
-            padding: 3px 10px;            
+            height: 26px;
+            line-height: 26px;
+            padding: 0 10px;            
             text-align: center;
             text-shadow: -1px -1px 1px rgba(0,0,0,.5);
             white-space: normal;
@@ -326,6 +330,130 @@
             -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;        
         }
+        
+        /* Pagination
+        ================================================== */
+        
+        #additem-modal .pagination-nav {
+            clear: none;
+        }
+        
+        #additem-modal .pagination {
+            clear: right;
+            float: right;
+        }
+            
+            #additem-modal .pagination {
+                margin: 0 0 20px 0;
+                padding: 0;
+            }
+            
+            #additem-modal .pagination li {
+                height: 26px;
+                min-width: 26px;
+                color: #666666;
+                font-family: "Cabin", sans-serif;
+                float: left;
+                line-height: 22px;
+                list-style-type: none;
+                text-align: center;
+                background-color: transparent;
+            }
+                
+                #additem-modal .pagination li:last-child {
+                    margin-right: 0;
+                }
+                    
+                #additem-modal .pagination li a {
+                    height: 100%;
+                    background: #f8f8f8;
+                    background: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
+                    background: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
+                    background: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
+                    background: linear-gradient(to bottom, #f8f8f8, #e2e2e2);
+                    border: 1px solid #D8D8D8;
+                    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+                    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+                    box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+                    display: block;
+                    padding: 3px 7px;
+                }
+                
+                #additem-modal .pagination_next a,
+                #additem-modal .pagination_previous a {
+                    text-indent: -9999px;
+                    position: relative;
+                    height: 24px;
+                    width: 24px;
+                }
+                
+                #additem-modal .pagination_next a:after,
+                #additem-modal .pagination_previous a:after {
+                    font-family: "FontAwesome";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    height: 24px;
+                    width: 24px;
+                    text-align: center;
+                }
+                
+                #additem-modal .pagination_next a:after {
+                    text-indent: 0;
+                    content: "\f105";
+                }
+                
+                #additem-modal .pagination_previous a:after {
+                    text-indent: -3px;
+                    content: "\f104";
+                }
+                
+                #additem-modal .pagination_next { margin: 0 0 0 10px; }
+        
+                #additem-modal .pagination_previous { margin: 0 10px 0 0; }
+            
+            #additem-modal .pagination form {
+                padding: 0;
+            }
+            
+            #additem-modal .field {
+                margin-bottom: 1.5em;
+            }
+            
+            #additem-modal label,
+            #additem-modal .label {
+                margin-bottom: 0;
+            }
+            
+            #additem-modal button.add_search {
+                margin-top: .75em;
+            }
+            
+            #additem-modal input[type="text"] {
+                height: 26px;
+                line-height: 26px;
+                -webkit-border-radius: 0px;
+                -moz-border-radius: 0px;
+                border-radius: 0px;
+                border: 1px solid #D8D8D8;
+                -webkit-box-shadow: 0 0 .375em #D6D6D6 inset;
+                -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
+                box-shadow: 0 0 .375em #D6D6D6 inset;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                padding: 0 5px;
+                margin-bottom: 0;
+            }
+            
+            #additem-modal .pagination .page-input input[type=text] {
+                width: 40px;
+                margin: 0 5px 0 0;
+                text-align: center;
+            }
 
         /* jQuery UI overrides 
         ================================================== */
@@ -413,14 +541,14 @@
     padding: 0;
 }
 
-#item-select .pagination {
+#item-select #additem-modal .pagination {
     position: absolute;
     top: 0;
     right: 5px;
     margin-bottom: 0;
 }
 
-#item-select .pagination li, #item-select .pagination input[type="text"] {
+#item-select #additem-modal .pagination li, #item-select #additem-modal .pagination input[type="text"] {
     height: 26px;
     line-height: 26px;
 }
@@ -530,6 +658,13 @@
     -webkit-box-shadow: none;
     box-shadow: none;
     padding: 0 20px;
+    height: auto;
+}
+
+#item-list .select-item:hover {
+    -webkit-box-shadow: 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 transparent;
 }
 
 #item-list .select-item:after {
@@ -550,6 +685,7 @@
 #item-list .item-file img {
     float: left;
     width: 5%;
+    height: auto;
     margin: 0 10px 0 0;
     line-height: 1em;
     border: 1px solid #D6D5C2;
@@ -615,6 +751,10 @@
 
 #additem-modal {
     padding: 10px 5px 40px;
+}
+
+#additem-modal h4 {
+    color: #4C3939;
 }
 
 #change-selected-item:before {
@@ -1301,6 +1441,7 @@ ul.poster-items-grid {
 .static img {
     float: left;
     margin: 0 1em 1em 0;
+    clear: left;
 }
 
 #poster-disclaimer {
@@ -1309,6 +1450,7 @@ ul.poster-items-grid {
 
 .thumbnail .has-image .bx-caption {
     top: 0;
+    right: 0;
     width: intrinsic;
     background-color: #333;
     -moz-box-shadow: 0 0 140px #000 inset;
