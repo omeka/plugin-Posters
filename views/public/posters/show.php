@@ -22,7 +22,7 @@ echo head(array('title'=>$pageTitle));
     <ul class="poster-items">
     <?php endif; ?>
     <?php foreach($poster->Items as $posterItem): ?>
-    <?php $hasFiles = metadata($posterItem, 'has files'); ?>
+    <?php $hasFiles = metadata($posterItem, 'has thumbnail'); ?>
     <?php if ($pageLayout == 'carousel'): ?>
     <li <?php if ($hasFiles) { echo 'class="has-image"'; } ?>>
     <?php else: ?>
