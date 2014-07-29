@@ -25,6 +25,8 @@ echo head(array('title'=>$pageTitle));
     <?php $hasFiles = metadata($posterItem, 'has files'); ?>
     <?php if ($pageLayout == 'carousel'): ?>
     <li <?php if ($hasFiles) { echo 'class="has-image"'; } ?>>
+    <?php else: ?>
+    <div class="poster-item">
     <?php endif; ?>
         <?php if($hasFiles): ?>
             <?php 
@@ -58,9 +60,11 @@ echo head(array('title'=>$pageTitle));
                 }
             ?>
             <?php if ($pageLayout == 'static'): ?>
-                <h3><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), array(), 'show', $posterItem); ?></h3>
-                <div class='grid-caption'>
-                    <?php echo $posterItem->caption; ?>
+                <div class="poster-item">
+                    <h3><?php echo link_to_item(metadata($posterItem, array('Dublin Core', 'Title')), array(), 'show', $posterItem); ?></h3>
+                    <div class='grid-caption'>
+                        <?php echo $posterItem->caption; ?>
+                    </div>
                 </div>
             <?php endif; ?>
         <?php else: ?>
@@ -80,6 +84,8 @@ echo head(array('title'=>$pageTitle));
         <?php endif; ?>
     <?php if ($pageLayout == 'carousel'): ?>
     </li>
+    <?php else: ?>
+    </div>
     <?php endif; ?>
     <?php endforeach; ?>
     <?php if ($pageLayout == 'carousel'): ?>
@@ -115,11 +121,13 @@ echo head(array('title'=>$pageTitle));
           captions: true
        });
        <?php if ($defaultType == 'thumbnail'): ?>
-       jQuery('.thumbnail .bx-caption').each(function() {
-          var imageWidth = jQuery(this).prev().find('img').prop('width');
-          var caption = jQuery(this);
-          caption.css('left', imageWidth);
-       });
+       jQuery(window).load(function() {
+           jQuery('.thumbnail .bx-caption').each(function() {
+              var imageWidth = jQuery(this).prev().find('img').prop('width');
+              var caption = jQuery(this);
+              caption.css('left', imageWidth);
+           });
+        });
        <?php endif; ?>
     } else {
         jQuery('.poster-items').addClass('poster-items-grid');

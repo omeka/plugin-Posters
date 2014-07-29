@@ -1444,6 +1444,10 @@ ul.poster-items-grid {
     clear: left;
 }
 
+.static .poster-item {
+    overflow: hidden;
+}
+
 #poster-disclaimer {
     clear: both;
 }
