@@ -118,6 +118,7 @@ Omeka.Poster = {};
             $.get(d, function(data){
                 if ($('.no-items').length > 0) { $('.no-items').removeClass('no-items'); }
                 $('#poster-items').append(data);
+                Omeka.Poster.wysiwyg();
                 Omeka.Poster.bindControls();
                 modalDiv.dialog('close');
             });
