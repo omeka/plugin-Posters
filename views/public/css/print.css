@@ -3,6 +3,12 @@ body {
     line-height: 18px;
 }
 
+hr {
+    background-color: #000;
+    border: 1px solid #000;
+}
+    
+
 h1, h2, h3 {
     font-weight: normal;
     font-family: 'Gill Sans', sans-serif;
@@ -24,14 +30,21 @@ hr {
 
 .poster-items {
     list-style: none;
-    margin: 10px;
-    //width: 580px;
-    //height: 400px;
-
+    margin: 10px 0;
+    padding: 0;
+}
+.poster-items h2 {
+    margin-top: 0;
+}
+.poster-items li {
+    overflow: hidden;
+    clear: both;
+    margin-bottom: 18px;
 }
 .item-file {
-    display: inline-block;
-    margin: 1px 10px 1px 1px;
+    display: block;
+    float: left;
+    margin: 0 18px 0 0;
 }
 #disclaimer-text {
     font-size: 0.75em;
