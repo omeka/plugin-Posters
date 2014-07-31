@@ -1,10 +1,12 @@
+<?php $pageTitle = 'Poster: &quot;' . html_escape($poster->title). '&quot;'; ?>
 <!DOCTYPE html>
+<html lang="en">
 <head>
-<link href="<?php echo css_src('print'); ?>" media="all" rel="stylesheet" type="text/css" />
+    <title><?php echo $pageTitle; ?></title>
+    <link href="<?php echo css_src('print'); ?>" media="all" rel="stylesheet" type="text/css" />
 </head>
 </body>
 <div id="primary">
-<?php $pageTitle = 'Poster: &quot;' . html_escape($poster->title). '&quot;'; ?>
     <h1><?php echo $pageTitle; ?></h1>
     <hr>
     <div id="poster">
