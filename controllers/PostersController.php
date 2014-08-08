@@ -40,6 +40,9 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     }
     
     public function editAction() {
+        if(!$this->_currentUser){
+            return $this->_helper->redirector->gotoUrl('/');
+        }
        //get the poster object
         $poster = $this->_helper->db->findById(null, 'Poster');
         //$this->_verifyAccess($poster,'edit');
@@ -53,8 +56,11 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         $this->view->currentUser = $this->_currentUser;
         $this->view->poster = $poster;
     }
-    public function newAction(){
 
+    public function newAction(){
+        if(!$this->_currentUser){
+            return $this->_helper->redirector->gotoUrl('/');
+        }
         $poster = new Poster();
         $poster->title = self::UNTITLED_POSTER;
         $poster->user_id = $this->_currentUser->id;
@@ -79,6 +85,9 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     }
     public function saveAction()
     {
+        if(!$this->_currentUser){
+            return $this->_helper->redirector->gotoUrl('/');
+        }
         // clear the new poster id for didscard
         unset($_SESSION['new_poster_id']);
         $poster = $this->_helper->db->findById(null, 'Poster');
@@ -102,6 +111,9 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
     
     public function deleteAction()
     {
+        if(!$this->_currentUser){
+            return $this->_helper->redirector->gotoUrl('/');
+        }
         $poster = $this->_helper->db->findById(null, 'Poster');
 
         $poster->delete();
