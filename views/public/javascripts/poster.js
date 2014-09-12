@@ -38,6 +38,7 @@ Omeka.Poster = {};
                 index++;
             })
             $('#itemCount').val(index-1);
+
         });
 
         function getItems(uri, params) {
@@ -129,7 +130,6 @@ Omeka.Poster = {};
             //When the form loads, hide up and down controls that can't be used
             Omeka.Poster.bindControls();
         }
-
     }
 
     /*
@@ -138,7 +138,6 @@ Omeka.Poster = {};
     Omeka.Poster.wysiwyg = function(params) {
         //$('textarea').each(function (){
         //    tinyMCE.execCommand(command, true, this.id);
-            
         //});
         //Default Params
         initParams = {
@@ -158,8 +157,7 @@ Omeka.Poster = {};
 
         tinyMCE.init($.extend(initParams, params));
     }
-
-    /**
+   /**
      * bind functions to items controls
      */
     Omeka.Poster.mceExecCommand = function(command){
@@ -217,5 +215,4 @@ Omeka.Poster = {};
         });
 
     }
-    
   })(jQuery);

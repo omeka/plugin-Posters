@@ -8,21 +8,13 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'posters browse'));
 <h1><?php echo __('Browse Posters'); ?></h1>
 <?php $posters = $this->posters; ?>
 <?php if(current_user()): ?>
+    <?php if(count($posters) == 0): ?>
+        <?php echo __("There are no posters yet."); ?>
+    <?php endif; ?>
     <a href="<?php echo public_url(array('controller'=> 'posters', 'action' => 'new')); ?>" class="button">Add a Poster</a>
 <?php else: ?>
     <a href="<?php echo url('users/login'); ?>">Login</a>
 <?php endif; ?>
-<?php 
-if (count($posters) == 0) {
-    if($this->user){
-        echo __("There are no posters yet.");
-        echo '<br /><a href="'.html_escape(url(array('action'=> 'new'),get_option('poster_page_path'))).'">Add a Poster</a>';
-    } else {
-        echo __("There are no posters yet.");
-
-    }
-}
-?>
 <table id="posters">
     <thead>
         <th id="poster-titles"><?php echo __('Title'); ?></th>
