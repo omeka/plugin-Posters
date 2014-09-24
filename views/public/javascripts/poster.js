@@ -10,8 +10,7 @@ Omeka.Poster = {};
          */
         var modalDiv = $('#additem-modal');
         modalDiv.hide();
-        
-        //this.wysiwyg('mceAddControl');
+               
         //Click Handler
         $('#poster-additem button').click(function(){
             //show items in a popup
@@ -26,7 +25,6 @@ Omeka.Poster = {};
              
             
         });
-
         $('#poster-form').submit(function(){
             var index = 1;
             $('.poster-item-annotation').each(function() {
@@ -40,6 +38,8 @@ Omeka.Poster = {};
             $('#itemCount').val(index-1);
 
         });
+
+              
 
         function getItems(uri, params) {
             modalDiv.addClass('loading');
@@ -124,8 +124,8 @@ Omeka.Poster = {};
                 modalDiv.dialog('close');
             });
         });
-        
-
+       
+       
         if (Omeka.Poster.itemCount > 0) {
             //When the form loads, hide up and down controls that can't be used
             Omeka.Poster.bindControls();
@@ -136,26 +136,28 @@ Omeka.Poster = {};
      * wraps tinyMCE.execCommand.
      */
     Omeka.Poster.wysiwyg = function(params) {
-        //$('textarea').each(function (){
-        //    tinyMCE.execCommand(command, true, this.id);
-        //});
-        //Default Params
-        initParams = {
-            convert_urls: false,
-            mode: "textareas", //All textAreas
-            theme: "advanced",
-            theme_advanced_toolbar_location: "top",
-            theme_advanced_statusbar_location: "none",
-            theme_advanced_toolbar_align: "left",
-            theme_advanced_buttons1: "bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,bullist,numlist,|,link,formatselect,code",
-            theme_advanced_buttons2: "",
-            theme_advanced_buttons3: "",
-            plugins: "paste,media",
-            media_strict: false,
-            width: "100%"
-        };
-
-        tinyMCE.init($.extend(initParams, params));
+            $(function(params){
+            tinymce.init({
+                selector: "textarea",
+                statusar: false,
+                setup: function(editor) {
+                   editor.onChange.add(function() {
+                        tinymce.triggerSave();
+                    })
+               },
+               theme: "advanced",
+               theme_advanced_toolbar_location: "top",
+               theme_advanced_statusbar_locaion: "none",
+               theme_advanced_toolbar_align: "left",
+               theme_advanced_buttons1: "bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,bullist,numlist,|,link,formatselect,code",
+               theme_advanced_buttons2: "",
+               theme_advanced_buttons3: "",
+               plugins: "paste,media",
+               media_strict: false,
+               width: "100%"
+               
+            },params);
+        });
     }
    /**
      * bind functions to items controls
