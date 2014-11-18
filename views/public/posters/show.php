@@ -118,7 +118,8 @@ echo head(array('title'=>$pageTitle));
           auto: false,
           adaptiveHeight: true,
           mode: 'fade',
-          captions: true
+          captions: true,
+          pager: n > 1,
        });
        <?php if ($defaultType == 'thumbnail'): ?>
        jQuery(window).load(function() {
