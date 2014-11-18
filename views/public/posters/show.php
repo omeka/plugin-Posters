@@ -113,7 +113,7 @@ echo head(array('title'=>$pageTitle));
     var n = jQuery('.poster-items li').length;
     var showOption = '<?php echo ($showOption = get_option('poster_show_option')) ? $showOption : 'carousel'; ?>';
     var fileSize = '<?php echo ($fileSize = get_option('poster_default_file_type')) ? $fileSize : 'fullsize'; ?>';
-    if (n > 1 && (showOption == 'carousel')) {
+    if (showOption == 'carousel') {
        jQuery('.poster-items').bxSlider({
           auto: false,
           adaptiveHeight: true,
