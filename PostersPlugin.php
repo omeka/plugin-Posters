@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @version $Id$
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2013-2015
  * @package Posters
  */
 require_once dirname(__FILE__) . '/helpers/PosterFunctions.php';
@@ -21,10 +20,9 @@ define('POSTER_HELP','<h2>Your Posters</h2>'
  /**
   * Posters plugin class
   *
-  * @copyright Center for History and New Media, 2013
   * @package Posters
   */
-class PostersPlugin extends Omeka_Plugin_AbstractPlugin //Omeka_Plugin_AbstractPlubin
+class PostersPlugin extends Omeka_Plugin_AbstractPlugin
 {   
     // Define Hooks
     protected $_hooks = array(
