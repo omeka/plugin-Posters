@@ -7,7 +7,6 @@ echo head(array('title' => $pageTitle)); ?>
 
 </script>
 <div id="primary">
-    <h1><?php echo $pageTitle; ?></h1>
     <?php echo flash(); ?>
     <!-- Begin Slideshow -->
        <div id="posters">
