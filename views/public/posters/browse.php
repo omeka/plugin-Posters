@@ -35,7 +35,7 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'posters browse'));
                 <li><a href="<?php echo html_escape(url(array('action'=>'print','id' => $poster->id), get_option('poster_page_path'))); ?>" class="print" media="print" >Print</a></li>  
             </ul>
         </td>
-        <td class="poster-date"><?php echo html_escape($poster->date_created); ?></td>
+        <td class="poster-date"><?php echo html_escape(format_date($poster->date_created)); ?></td>
         <td><?php echo html_escape(snippet($poster->description,0, 200)); ?></td>
         </ul>
     </tr>

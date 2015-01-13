@@ -37,7 +37,7 @@ echo head(array('title' => $pageTitle)); ?>
                                    <?php endif; ?>
                                </ul>
                            </td>
-                       <td><?php echo html_escape($poster->date_created); ?></td>
+                       <td><?php echo html_escape(format_date($poster->date_created)); ?></td>
                        <td><?php echo html_escape(snippet($poster->description, 0, 50)); ?></td>
                        <!--td><?php // echo html_escape($poster->user_id); ?></td-->
                        </tr>
