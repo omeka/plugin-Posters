@@ -98,7 +98,15 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin
         set_option('poster_page_path', preg_replace('/\/+/','',$post['poster_page_path']));
         set_option('poster_page_title',$post['poster_page_title']);
         set_option('poster_disclaimer', $post['poster_disclaimer']);
-        set_option('poster_help', $post['poster_help']);
+        
+        if (get_option('html_purifier_is_enabled')) {
+            $filter = new Omeka_Filter_HtmlPurifier;
+            $helpText = $filter->filter($post['poster_help']);
+        } else {
+            $helpText = $post['poster_help'];
+        }
+        set_option('poster_help', $helpText);
+        
         set_option('poster_default_file_type', $post['poster_default_file_type']);
         set_option('poster_default_file_type_print', $post['poster_default_file_type_print']);
         set_option('poster_show_option', $post['poster_show_option']);
