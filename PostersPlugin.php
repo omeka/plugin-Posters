@@ -135,7 +135,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin
         $create = url("{$bp}/new");
         $html = "<ul>"
               . "<li><a href='{$browse}'>".__("Browse Posters")."</a></li>"
-              . "<li><a href='{$create}'>".__("New Poster")."</li>"            
+              . "<li><a href='{$create}'>".__("New Poster")."</a></li>"            
               . "</ul>";
         $widget['content'] = $html;
         $widgets[] = $widget;
