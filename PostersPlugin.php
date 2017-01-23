@@ -28,6 +28,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+        'upgrade',
         'config',
         'config_form',
         'define_acl',
@@ -51,7 +52,7 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin
                 `title` VARCHAR(255) NOT NULL,
                 `description` TEXT,
                 `user_id` BIGINT UNSIGNED NOT NULL,
-                `date_created` TIMESTAMP NOT NULL default '0000-00-00 00:00:00',
+                `date_created` TIMESTAMP NOT NULL default '2000-01-01 00:00:00',
                 `date_modified` TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
             ) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         );
@@ -90,6 +91,17 @@ class PostersPlugin extends Omeka_Plugin_AbstractPlugin
         delete_option('poster_default_file_type');
         delete_option('poster_show_option');
         delete_option('poster_default_file_type_print');
+    }
+
+    public function hookUpgrade($args)
+    {
+        $oldVersion = $args['old_version'];
+        $newVersion = $args['new_version'];
+        $db = $this->_db;
+
+        if ($oldVersion < '1.0.1') {
+            $db->query("ALTER TABLE `$db->Poster` ALTER `date_created` SET DEFAULT '2000-01-01 00:00:00'");
+        }
     }
 
     public function hookConfig($args)

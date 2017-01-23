@@ -23,7 +23,12 @@ class Poster extends Omeka_Record_AbstractRecord
         'Items' => 'getItems', 
         'user' => 'getUser'
     );
-    
+
+    protected function _initializeMixins()
+    {
+        $this->_mixins[] = new Mixin_Timestamp($this, 'date_created', 'date_modified');
+    }
+
     public function getItems()
     {
         return $this->getPosterItems($this->id);
