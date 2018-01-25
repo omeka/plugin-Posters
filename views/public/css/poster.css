@@ -170,7 +170,17 @@
     .inputs inputs a.button, .inputs input[type="submit"], .inputs button {
         margin-bottom: 10px;
     }
+
     
+    #poster .mce-tinymce button {
+        background: none;
+        margin: 0;
+    }
+
+    #poster .mce-tinymce [aria-haspopup="true"]:after {
+        content: none;
+    }
+
 #poster .required:after {
     content: "*";
 }

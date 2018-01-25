@@ -1,12 +1,11 @@
 <?php
 $view = get_view();
-echo js_tag('vendor/tiny_mce/tiny_mce');
+echo js_tag('vendor/tinymce/tinymce.min');
 ?>
 <script type="text/javascript">
-jQuery(window).load(function () {
+jQuery(document).ready(function () {
     Omeka.wysiwyg({
-        mode: 'specific_textareas',
-        editor_selector: 'wysiwyg'
+        selector: '.wysiwyg'
     });
 });
 </script>

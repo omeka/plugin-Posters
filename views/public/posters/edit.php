@@ -2,7 +2,7 @@
     $pageTitle = 'Edit Poster: &quot;' . html_escape($poster->title) . '&quot;';
 //queue_js_file(array('tiny_mce/tiny_mce', 'poster'));
 echo queue_js_file('poster');
-echo queue_js_file('vendor/tiny_mce/tiny_mce');
+echo queue_js_file('vendor/tinymce/tinymce.min');
 echo queue_css_file('jquery-ui');
 echo queue_css_file('poster');
    echo  head(array('title'=>$pageTitle, 'bodyclass' => 'posters edit'));
