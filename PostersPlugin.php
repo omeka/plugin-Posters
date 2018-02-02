@@ -14,8 +14,8 @@ define('POSTER_DEFAULT_FILE_TYPE_PRINT', 'original');
 define('POSTER_DISCLAIMER','This page contains user generated content and does not necessarily reflect the opinions of this website. For more information please refer to our terms of service and conditions. If you would like to report the content of this as objectionable, Please contact us.');
 define('POSTER_HELP','<h2>Your Posters</h2>'
     .'<p>To build a poster, you may use any public item in in this website and add a caption,</p>'
-                    .'<p>Click the button that says &quot;New Poster&quot;. Assign a title to your poster,'
-                    .'add a short description. Cick the tab that says &quot;Add an Item&quot; and select any item that you wish to include in your poster.'
+                    .'<p>Click the button that says &quot;New Poster&quot;. Assign a title to your poster, '
+                    .'add a short description. Cick the tab that says &quot;Add an Item&quot; and select any item that you wish to include in your poster. '
     .'Continue adding items and captions.</p><p> Be sure to save your poster. You may return to edit your poster at any time.</p> <p>You may print this poster, or share it by email.</p>');
  /**
   * Posters plugin class
