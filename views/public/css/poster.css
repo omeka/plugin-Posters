@@ -175,6 +175,7 @@
     #poster .mce-tinymce button {
         background: none;
         margin: 0;
+        text-transform: none;
     }
 
     #poster .mce-tinymce [aria-haspopup="true"]:after {

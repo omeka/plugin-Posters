@@ -39,14 +39,18 @@ class Poster extends Omeka_Record_AbstractRecord
         return $this->_helper->db->getTable('User')->find($this->user_id);
     }
 
-    public function updateItems(&$params)
+    public function updateItems(&$params, $filter)
     { 
         if(is_numeric($params['itemCount'])) {
             $this->deletePosterItems();
             if($params['itemCount'] > 0) {
                 foreach(range(1, $params['itemCount']) as $ordernum) {
                     $item = new PosterItems();
-                    $item->caption = $params['annotation-' . $ordernum];
+                    if ($filter) {
+                        $item->caption = $filter->filter($params['annotation-' . $ordernum]);
+                    } else {
+                        $item->caption = $params['annotation-' . $ordernum];
+                    }
                     $item->poster_id = $this->id;
                     $item->item_id = $params['itemID-'. $ordernum];
                     $item->ordernum = $ordernum;

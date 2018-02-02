@@ -88,14 +88,26 @@ class Posters_PostersController extends Omeka_Controller_AbstractActionControlle
         if(!$this->_currentUser){
             return $this->_helper->redirector->gotoUrl('/');
         }
+
+        if (get_option('html_purifier_is_enabled')) {
+            $filter = new Omeka_Filter_HtmlPurifier;
+        } else {
+            $filter = null;
+        }
+
         // clear the new poster id for didscard
         unset($_SESSION['new_poster_id']);
         $poster = $this->_helper->db->findById(null, 'Poster');
 
         $params = $this->getRequest()->getParams();
         $poster->title = !empty($params['title']) ? $params['title'] : self::UNTITLED_POSTER;
-        $poster->description = $params['description'];
-        $poster->updateItems($params);
+        if ($filter) {
+            $poster->description = $filter->filter($params['description']);
+        } else {
+            $poster->description = $params['description'];
+        }
+
+        $poster->updateItems($params, $filter);
         $poster->save();
         
         $bp = get_option('poster_page_path');
